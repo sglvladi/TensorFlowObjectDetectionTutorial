@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Common issues &mdash; TensorFlow Object Detection API tutorial  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="TensorFlow Object Detection API tutorial  documentation" href="index.html"/>
+        <link rel="prev" title="Training Custom Object Detector" href="training.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> TensorFlow Object Detection API tutorial
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera.html">Detect Objects Using Your Webcam</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training.html">Training Custom Object Detector</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Common issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#python-crashes-tensorflow-gpu">Python crashes - TensorFlow GPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cleaning-up-nvidia-containers-tensorflow-gpu">Cleaning up Nvidia containers (TensorFlow GPU)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#labelimg-saves-annotation-files-with-xml-xml-extension">labelImg saves annotation files with <code class="docutils literal notranslate"><span class="pre">.xml.xml</span></code> extension</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TensorFlow Object Detection API tutorial</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Common issues</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/issues.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="common-issues">
+<span id="issues"></span><h1>Common issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h1>
+<p>Below is a list of common issues encountered while using TensorFlow for objects detection.</p>
+<div class="section" id="python-crashes-tensorflow-gpu">
+<h2>Python crashes - TensorFlow GPU<a class="headerlink" href="#python-crashes-tensorflow-gpu" title="Permalink to this headline">¶</a></h2>
+<p>If you are using <a class="reference internal" href="install.html#tensorflow-gpu"><span class="std std-ref">TensorFlow GPU</span></a> and when you try to run some Python object detection script (e.g. <a class="reference internal" href="install.html#test-tf-models"><span class="std std-ref">Test your Installation</span></a>), after a few seconds, Windows reports that Python has crashed then have a look at the <cite>Anaconda/Command Prompt</cite> window you used to run the script and check for a line similar (maybe identical) to the one below:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">22</span> <span class="mo">03</span><span class="p">:</span><span class="mo">07</span><span class="p">:</span><span class="mf">54.623130</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">378</span><span class="p">]</span> <span class="n">Loaded</span> <span class="n">runtime</span> <span class="n">CuDNN</span> <span class="n">library</span><span class="p">:</span> <span class="mi">7101</span> <span class="p">(</span><span class="n">compatibility</span> <span class="n">version</span> <span class="mi">7100</span><span class="p">)</span> <span class="n">but</span> <span class="n">source</span> <span class="n">was</span> <span class="n">compiled</span> <span class="k">with</span> <span class="mi">7003</span> <span class="p">(</span><span class="n">compatibility</span> <span class="n">version</span> <span class="mi">7000</span><span class="p">)</span><span class="o">.</span>  <span class="n">If</span> <span class="n">using</span> <span class="n">a</span> <span class="n">binary</span> <span class="n">install</span><span class="p">,</span> <span class="n">upgrade</span> <span class="n">your</span> <span class="n">CuDNN</span> <span class="n">library</span> <span class="n">to</span> <span class="n">match</span><span class="o">.</span>  <span class="n">If</span> <span class="n">building</span> <span class="kn">from</span> <span class="nn">sources</span><span class="p">,</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">library</span> <span class="n">loaded</span> <span class="n">at</span> <span class="n">runtime</span> <span class="n">matches</span> <span class="n">a</span> <span class="n">compatible</span> <span class="n">version</span> <span class="n">specified</span> <span class="n">during</span> <span class="nb">compile</span> <span class="n">configuration</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If the above line is present in the printed debugging, it means that you have not installed the correct version of the cuDNN libraries. In this case make sure you re-do the <a class="reference internal" href="install.html#cudnn-install"><span class="std std-ref">Install CUDNN</span></a> step, making sure you instal cuDNN v7.0.5.</p>
+</div>
+<div class="section" id="cleaning-up-nvidia-containers-tensorflow-gpu">
+<h2>Cleaning up Nvidia containers (TensorFlow GPU)<a class="headerlink" href="#cleaning-up-nvidia-containers-tensorflow-gpu" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, when terminating a TensorFlow training process, the Nvidia containers associated to the process are not cleanly terminated. This can lead to bogus errors when we try to run a new TensorFlow process.</p>
+<p>Some known issues caused by the above are presented below:</p>
+<ul>
+<li><p class="first">Failure to restart training of a model. Look for the following errors in the debugging:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.326902</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">385</span><span class="p">]</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">create</span> <span class="n">cudnn</span> <span class="n">handle</span><span class="p">:</span> <span class="n">CUDNN_STATUS_ALLOC_FAILED</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.330475</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">352</span><span class="p">]</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">destroy</span> <span class="n">cudnn</span> <span class="n">handle</span><span class="p">:</span> <span class="n">CUDNN_STATUS_BAD_PARAM</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.333797</span><span class="p">:</span> <span class="n">W</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">stream</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">1983</span><span class="p">]</span> <span class="n">attempting</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">DNN</span> <span class="n">operation</span> <span class="n">using</span> <span class="n">StreamExecutor</span> <span class="n">without</span> <span class="n">DNN</span> <span class="n">support</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.333807</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">stream</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1851</span><span class="p">]</span> <span class="n">stream</span> <span class="mo">00000216</span><span class="n">F05CB660</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">stream</span><span class="p">:</span> <span class="mo">00000216</span><span class="n">F05CA6E0</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.340765</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">stream</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">4637</span><span class="p">]</span> <span class="n">stream</span> <span class="mo">00000216</span><span class="n">F05CB660</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">memcpy</span> <span class="n">host</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">device</span><span class="p">;</span> <span class="n">source</span><span class="p">:</span> <span class="mo">000000020</span><span class="n">DB37B00</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.343752</span><span class="p">:</span> <span class="n">F</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_util</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">343</span><span class="p">]</span> <span class="n">CPU</span><span class="o">-&gt;</span><span class="n">GPU</span> <span class="n">Memcpy</span> <span class="n">failed</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>To solve such issues in Windows, open a <cite>Task Manager</cite> windows, look for Tasks with name <code class="docutils literal notranslate"><span class="pre">NVIDIA</span> <span class="pre">Container</span></code> and kill them by selecting them and clicking the <cite>End Task</cite> button at the bottom left corner of the window.</p>
+<p>If the issue persists, then you’re probably running out of memory. Try closing down anything else that might be eating up your GPU memory (e.g. Youtube videos, webpages etc.)</p>
+</div>
+<div class="section" id="labelimg-saves-annotation-files-with-xml-xml-extension">
+<h2>labelImg saves annotation files with <code class="docutils literal notranslate"><span class="pre">.xml.xml</span></code> extension<a class="headerlink" href="#labelimg-saves-annotation-files-with-xml-xml-extension" title="Permalink to this headline">¶</a></h2>
+<p>At the time of writing up this document, I haven’t managed to identify why this might be happening. I have joined a <a class="reference external" href="https://github.com/tzutalin/labelImg/issues/252">GitHub issue</a>, at which you can refer in case there are any updates.</p>
+<p>One way I managed to fix the issue was by clicking on the “Change Save Dir” button and selecting the directory where the annotations files should be stores. By doing so, you should not longer get a pop-up dialog when you click “Save” (or Ctrl+s), but you can always check if the file was saved by looking at the bottom left corner of <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="training.html" class="btn btn-neutral" title="Training Custom Object Detector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Lyudmil Vladimirov.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

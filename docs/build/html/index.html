@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TensorFlow Object Detection API tutorial &mdash; TensorFlow Object Detection API tutorial  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="TensorFlow Object Detection API tutorial  documentation" href="#"/>
+        <link rel="next" title="Installation" href="install.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> TensorFlow Object Detection API tutorial
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera.html">Detect Objects Using Your Webcam</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training.html">Training Custom Object Detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Common issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">TensorFlow Object Detection API tutorial</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>TensorFlow Object Detection API tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tensorflow-object-detection-api-tutorial">
+<h1>TensorFlow Object Detection API tutorial<a class="headerlink" href="#tensorflow-object-detection-api-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This is a step-by-step tutorial/guide to setting up and using TensorFlow’s Object Detection API to perform, namely, object detection in images/video.</p>
+<p>The software tools which we shall use throughout this tutorial are listed in the table below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Target Software versions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>OS</td>
+<td>Windows 10, Ubuntu16.04 <a class="footnote-reference" href="#id2" id="id1">[*]</a></td>
+</tr>
+<tr class="row-odd"><td>Python</td>
+<td>3.6</td>
+</tr>
+<tr class="row-even"><td>TensorFlow</td>
+<td>1.6</td>
+</tr>
+<tr class="row-odd"><td>CUDA Toolkit</td>
+<td>v9.0</td>
+</tr>
+<tr class="row-even"><td>CuDNN</td>
+<td>v7.0.5</td>
+</tr>
+<tr class="row-odd"><td>Anaconda</td>
+<td>Python 3.6 (Optional)</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[*]</a></td><td>Even though this tutorial is based on Windows 10, most steps (excluding the setting of environmental variables) should apply for Ubuntu 16.04, too.</td></tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#general-remarks">General Remarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install-anaconda-python-3-6-optional">Install Anaconda Python 3.6 (Optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#tensorflow-installation">TensorFlow Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#tensorflow-cpu">TensorFlow CPU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="install.html#create-a-new-conda-virtual-environment-optional">Create a new Conda virtual environment (Optional)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#install-tensorflow-cpu-for-python">Install TensorFlow CPU for Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#test-your-installation">Test your Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#tensorflow-gpu">TensorFlow GPU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="install.html#install-cuda-toolkit">Install CUDA Toolkit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#install-cudnn">Install CUDNN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#set-your-environment-variables">Set Your Environment Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#update-your-gpu-drivers">Update your GPU drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#create-a-new-conda-virtual-environment">Create a new Conda virtual environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#install-tensorflow-gpu-for-python">Install TensorFlow GPU for Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html#id4">Test your Installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#tensorflow-models-installation">TensorFlow Models Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#install-prerequisites">Install Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#downloading-the-tensorflow-models">Downloading the TensorFlow Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#adding-necessary-environment-variables">Adding necessary Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#protobuf-installation-compilation">Protobuf Installation/Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#test-tf-models">Test your Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#labelimg-installation">LabelImg Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#id11">Create a new Conda virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#downloading-labelimg">Downloading labelImg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#installing-dependencies-and-compiling-package">Installing dependencies and compiling package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#id16">Test your installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="camera.html">Detect Objects Using Your Webcam</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training.html">Training Custom Object Detector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="training.html#preparing-workspace">Preparing workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html#annotating-images">Annotating images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html#creating-label-map">Creating Label Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html#creating-tensorflow-records">Creating TensorFlow Records</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="training.html#converting-xml-to-csv">Converting <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> to <code class="docutils literal notranslate"><span class="pre">*.csv</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="training.html#converting-from-csv-to-record">Converting from <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> to <code class="docutils literal notranslate"><span class="pre">*.record</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="training.html#configuring-a-training-pipeline">Configuring a Training Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html#training-the-model">Training the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html#monitor-training-job-progress-using-tensorboard">Monitor Training Job Progress using TensorBoard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training.html#exporting-a-trained-inference-graph">Exporting a Trained Inference Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Common issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#python-crashes-tensorflow-gpu">Python crashes - TensorFlow GPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#cleaning-up-nvidia-containers-tensorflow-gpu">Cleaning up Nvidia containers (TensorFlow GPU)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#labelimg-saves-annotation-files-with-xml-xml-extension">labelImg saves annotation files with <code class="docutils literal notranslate"><span class="pre">.xml.xml</span></code> extension</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Lyudmil Vladimirov.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
