@@ -236,7 +236,7 @@ Test your Installation
 TensorFlow Models Installation 
 ------------------------------
 
-Now that you have installed TensorFlow, it is time to install the models used b TesnorFlow to do it's magic.
+Now that you have installed TensorFlow, it is time to install the models used by TensorFlow to do its magic.
 
 Install Prerequisites
 ~~~~~~~~~~~~~~~~~~~~~
@@ -254,7 +254,7 @@ Building on the assumption that you have just created your new virtual environme
 +--------------+------------------------------+
 | jupyter      | 1.0.0-py36_4                 |
 +--------------+------------------------------+
-| matlplotlib  | 2.2.2-py36h153e9ff_0         |
+| matplotlib   | 2.2.2-py36h153e9ff_0         |
 +--------------+------------------------------+
 | opencv       | 3.3.1-py36h20b85fd_1         |
 +--------------+------------------------------+
@@ -273,6 +273,7 @@ Alternatively, if you don't want to use Anaconda you can install the packages us
 
     pip install <package_name>(=<version>)
 
+but you will need to install ``opencv-python`` instead of ``opencv``.
 
 Downloading the TensorFlow Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
