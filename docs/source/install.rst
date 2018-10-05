@@ -350,6 +350,13 @@ This should be done as follows:
         # From TensorFlow/models/research/
         protoc object_detection/protos/*.proto --python_out=.
 
+If you are on Windows and using version 3.5 or later, the wildcard will not work and you have to run this in the command prompt:
+
+.. code-block:: python
+
+        # From TensorFlow/models/research/
+        for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
+
 .. [#] NOTE: You MUST open a new `Anaconda/Command Prompt` for the changes in the environment variables to take effect.
 
 .. _test_tf_models:
