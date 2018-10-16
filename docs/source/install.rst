@@ -236,7 +236,7 @@ Test your Installation
 TensorFlow Models Installation 
 ------------------------------
 
-Now that you have installed TensorFlow, it is time to install the models used b TesnorFlow to do it's magic.
+Now that you have installed TensorFlow, it is time to install the models used by TensorFlow to do its magic.
 
 Install Prerequisites
 ~~~~~~~~~~~~~~~~~~~~~
@@ -254,7 +254,7 @@ Building on the assumption that you have just created your new virtual environme
 +--------------+------------------------------+
 | jupyter      | 1.0.0-py36_4                 |
 +--------------+------------------------------+
-| matlplotlib  | 2.2.2-py36h153e9ff_0         |
+| matplotlib   | 2.2.2-py36h153e9ff_0         |
 +--------------+------------------------------+
 | opencv       | 3.3.1-py36h20b85fd_1         |
 +--------------+------------------------------+
@@ -273,6 +273,7 @@ Alternatively, if you don't want to use Anaconda you can install the packages us
 
     pip install <package_name>(=<version>)
 
+but you will need to install ``opencv-python`` instead of ``opencv``.
 
 Downloading the TensorFlow Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -349,6 +350,13 @@ This should be done as follows:
         # From TensorFlow/models/research/
         protoc object_detection/protos/*.proto --python_out=.
 
+If you are on Windows and using version 3.5 or later, the wildcard will not work and you have to run this in the command prompt:
+
+.. code-block:: python
+
+        # From TensorFlow/models/research/
+        for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
+
 .. [#] NOTE: You MUST open a new `Anaconda/Command Prompt` for the changes in the environment variables to take effect.
 
 .. _test_tf_models:
@@ -398,7 +406,7 @@ To deal with the fact that ``labelImg`` (on Windows) requires the use of ``pyqt4
 
         activate labelImg
 
-Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beggining of your cmd path specifier, e.g.:
+Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beginning of your cmd path specifier, e.g.:
 
 .. code-block:: ps1con
 
@@ -407,7 +415,7 @@ Once you have activated your virtual environment, the name of the environment sh
 Downloading labelImg
 ~~~~~~~~~~~~~~~~~~~~
 
-- Inside you ``TesnorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
+- Inside you ``TensorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
 - To download the package you can either use `Git <https://git-scm.com/downloads>`_ to clone the `labelImg repo <https://github.com/tzutalin/labelImg>`_ inside the ``TensorFlow\addons`` folder, or you can simply download it as a `ZIP <https://github.com/tzutalin/labelImg/archive/master.zip>`_ and extract it's contents inside the ``TensorFlow\addons`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``labelImg-master`` to ``labelImg``. [#]_
 - You should now have a single folder named ``addons\labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
