@@ -406,7 +406,7 @@ To deal with the fact that ``labelImg`` (on Windows) requires the use of ``pyqt4
 
         activate labelImg
 
-Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beggining of your cmd path specifier, e.g.:
+Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beginning of your cmd path specifier, e.g.:
 
 .. code-block:: ps1con
 
@@ -415,7 +415,7 @@ Once you have activated your virtual environment, the name of the environment sh
 Downloading labelImg
 ~~~~~~~~~~~~~~~~~~~~
 
-- Inside you ``TesnorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
+- Inside you ``TensorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
 - To download the package you can either use `Git <https://git-scm.com/downloads>`_ to clone the `labelImg repo <https://github.com/tzutalin/labelImg>`_ inside the ``TensorFlow\addons`` folder, or you can simply download it as a `ZIP <https://github.com/tzutalin/labelImg/archive/master.zip>`_ and extract it's contents inside the ``TensorFlow\addons`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``labelImg-master`` to ``labelImg``. [#]_
 - You should now have a single folder named ``addons\labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
