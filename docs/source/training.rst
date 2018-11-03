@@ -19,7 +19,7 @@ Now that we have done all the above, we can start doing some cool stuff. Here we
 Preparing workspace
 ~~~~~~~~~~~~~~~~~~~
 
-If you have followed the tutorial, you shhould by now have a folder ``Tensorflow``, placed under ``<PATH_TO_TF>`` (e.g. ``C:\Users\sglvladi\Documents``), with the following directory tree:
+If you have followed the tutorial, you should by now have a folder ``Tensorflow``, placed under ``<PATH_TO_TF>`` (e.g. ``C:\Users\sglvladi\Documents``), with the following directory tree:
 
 | TensorFlow
 | ├─ addons
