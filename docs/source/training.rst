@@ -612,7 +612,7 @@ Once the above changes have been applied to our config file, go ahead and save i
 Training the Model
 ~~~~~~~~~~~~~~~~~~
 
-Before we begin training our model, let's go and copy the ``TensorFlow/models/research/object_detection/train.py`` script and paste it straight into our ``training_demo`` folder. We will need this script in order to train our model.
+Before we begin training our model, let's go and copy the ``TensorFlow/models/research/object_detection/legacy/train.py`` script and paste it straight into our ``training_demo`` folder. We will need this script in order to train our model.
 
 Now, to initiate a new training job, ``cd`` inside the ``training_demo`` folder and type the following: 
 
@@ -715,10 +715,10 @@ Once your training job is complete, you need to extract the newly trained infere
 
         activate tensorflow_gpu
 
-- Copy the ``TensorFlow/models/research/object_detection/extract_inference_graph.py`` script and paste it straight into your ``training_demo`` folder.
+- Copy the ``TensorFlow/models/research/object_detection/export_inference_graph.py`` script and paste it straight into your ``training_demo`` folder.
 - Check inside your ``training_demo/training`` folder for the ``model.ckpt-*`` checkpoint file with the highest number following the name of the dash e.g. ``model.ckpt-34350``). This number represents the training step index at which the file was created.
 - Alternatively, simply sort all the files inside ``training_demo/training`` by descending time and pick the ``model.ckpt-*`` file that comes first in the list.
-- Make a note of the file's name, as it will be passed as an argument when we call the ``extract_inference_graph.py`` script.
+- Make a note of the file's name, as it will be passed as an argument when we call the ``export_inference_graph.py`` script.
 - Now, ``cd`` inside your ``training_demo`` folder, and run the following command:
 
 .. code-block:: posh
