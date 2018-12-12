@@ -387,6 +387,9 @@ Test your Installation
 LabelImg Installation
 ---------------------
 
+For Windows and Linux you can download the precompiled binary at http://tzutalin.github.io/labelImg/.
+The steps for installing from source follow below.
+
 Create a new Conda virtual environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
