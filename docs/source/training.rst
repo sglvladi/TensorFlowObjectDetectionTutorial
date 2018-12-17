@@ -296,7 +296,9 @@ Now that we have obtained our ``*.csv`` annotation files, we will need to conver
     import io
     import pandas as pd
     import tensorflow as tf
-
+    import sys
+    sys.path.append("../../models/research")
+    
     from PIL import Image
     from object_detection.utils import dataset_util
     from collections import namedtuple, OrderedDict
@@ -305,13 +307,24 @@ Now that we have obtained our ``*.csv`` annotation files, we will need to conver
     flags.DEFINE_string('csv_input', '', 'Path to the CSV input')
     flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
     flags.DEFINE_string('label', '', 'Name of class label')
+    # if your image has more labels input them as 
+    # flags.DEFINE_string('label0', '', 'Name of class[0] label')
+    # flags.DEFINE_string('label1', '', 'Name of class[1] label')
+    # and so on. 
+    flags.DEFINE_string('img_path', '', 'Path to images')
     FLAGS = flags.FLAGS
 
 
     # TO-DO replace this with label map
+    # for multiple labels add more else if statements
     def class_text_to_int(row_label):
         if row_label == FLAGS.label:  # 'ship':
             return 1
+        # comment upper if statement and uncomment these statements for multiple labelling
+        # if row_label == FLAGS.label0:
+        #   return 1
+        # elif row_label == FLAGS.label1:
+        #   return 0
         else:
             None
 
@@ -331,6 +344,7 @@ Now that we have obtained our ``*.csv`` annotation files, we will need to conver
 
         filename = group.filename.encode('utf8')
         image_format = b'jpg'
+        # check if the image format is matching with your images.
         xmins = []
         xmaxs = []
         ymins = []
@@ -365,7 +379,7 @@ Now that we have obtained our ``*.csv`` annotation files, we will need to conver
 
     def main(_):
         writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
-        path = os.path.join(os.getcwd(), 'images')
+        path = os.path.join(os.getcwd(), FLAGS.img_path)
         examples = pd.read_csv(FLAGS.csv_input)
         grouped = split(examples, 'filename')
         for group in grouped:
@@ -387,11 +401,11 @@ Now that we have obtained our ``*.csv`` annotation files, we will need to conver
         
         # Create train data:
         python generate_tfrecord.py --label=<LABEL> --csv_input=<PATH_TO_ANNOTATIONS_FOLDER>/train_labels.csv
-        --img_path=<PATH_TO_IMAGES_FOLDER>  --output_path=<PATH_TO_ANNOTATIONS_FOLDER>/train.record
+        --img_path=<PATH_TO_IMAGES_FOLDER>/train  --output_path=<PATH_TO_ANNOTATIONS_FOLDER>/train.record
 
         # Create test data:
         python generate_tfrecord.py --label=<LABEL> --csv_input=<PATH_TO_ANNOTATIONS_FOLDER>/test_labels.csv
-        --img_path=<PATH_TO_IMAGES_FOLDER>  
+        --img_path=<PATH_TO_IMAGES_FOLDER>/test  
         --output_path=<PATH_TO_ANNOTATIONS_FOLDER>/test.record 
 
         # For example
