@@ -57,7 +57,7 @@ Once you have activated your virtual environment, the name of the environment sh
 
 Install TensorFlow CPU for Python
 *********************************
-- Open a new `Anaconda/Command Prompt` window and activate the `tensorflow_gpu` environment (if you have not done so already)
+- Open a new `Anaconda/Command Prompt` window and activate the `tensorflow_cpu` environment (if you have not done so already)
 - Once open, type the following on the command line:
 
     .. code-block:: posh
@@ -81,7 +81,7 @@ Test your Installation
 
         >>> import tensorflow as tf
 
-- If the above code shows an error, then check to make sure you have activated the `tensorflow_gpu` environment and that tensorflow_gpu was successfully installed within it in the previous step.
+- If the above code shows an error, then check to make sure you have activated the `tensorflow_cpu` environment and that tensorflow_cpu was successfully installed within it in the previous step.
 - Then run the following:
 
     .. code-block:: python
