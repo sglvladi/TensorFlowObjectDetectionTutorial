@@ -105,16 +105,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#tensorflow-models-installation">TensorFlow Models Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#install-prerequisites">Install Prerequisites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#downloading-the-tensorflow-models">Downloading the TensorFlow Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#adding-necessary-environment-variables">Adding necessary Environment Variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#protobuf-installation-compilation">Protobuf Installation/Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-necessary-environment-variables">Adding necessary Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coco-api-installation-optional">COCO API installation (Optional)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-tf-models">Test your Installation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#labelimg-installation">LabelImg Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id11">Create a new Conda virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Create a new Conda virtual environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#downloading-labelimg">Downloading labelImg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-dependencies-and-compiling-package">Installing dependencies and compiling package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id16">Test your installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Test your installation</a></li>
 </ul>
 </li>
 </ul>
@@ -403,7 +404,7 @@
 </li>
 <li><p class="first">Once open, type the following on the command line:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow-gpu</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">0</span>
+<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow-gpu</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">8</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -443,12 +444,16 @@
 </li>
 <li><p class="first">Once the above is run, you should see a print-out similar (but not identical) to the one bellow:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">21</span> <span class="mi">21</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mf">18.962971</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1212</span><span class="p">]</span> <span class="n">Found</span> <span class="n">device</span> <span class="mi">0</span> <span class="k">with</span> <span class="n">properties</span><span class="p">:</span>
-<span class="n">name</span><span class="p">:</span> <span class="n">GeForce</span> <span class="n">GTX</span> <span class="mi">770</span> <span class="n">major</span><span class="p">:</span> <span class="mi">3</span> <span class="n">minor</span><span class="p">:</span> <span class="mi">0</span> <span class="n">memoryClockRate</span><span class="p">(</span><span class="n">GHz</span><span class="p">):</span> <span class="mf">1.163</span>
-<span class="n">pciBusID</span><span class="p">:</span> <span class="mo">0000</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mf">00.0</span>
-<span class="n">totalMemory</span><span class="p">:</span> <span class="mf">2.00</span><span class="n">GiB</span> <span class="n">freeMemory</span><span class="p">:</span> <span class="mf">1.63</span><span class="n">GiB</span>
-<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">21</span> <span class="mi">21</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mf">18.978254</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1312</span><span class="p">]</span> <span class="n">Adding</span> <span class="n">visible</span> <span class="n">gpu</span> <span class="n">devices</span><span class="p">:</span> <span class="mi">0</span>
-<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">21</span> <span class="mi">21</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mf">19.295152</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">993</span><span class="p">]</span> <span class="n">Creating</span> <span class="n">TensorFlow</span> <span class="n">device</span> <span class="p">(</span><span class="o">/</span><span class="n">job</span><span class="p">:</span><span class="n">localhost</span><span class="o">/</span><span class="n">replica</span><span class="p">:</span><span class="mi">0</span><span class="o">/</span><span class="n">task</span><span class="p">:</span><span class="mi">0</span><span class="o">/</span><span class="n">device</span><span class="p">:</span><span class="n">GPU</span><span class="p">:</span><span class="mi">0</span> <span class="k">with</span> <span class="mi">1414</span> <span class="n">MB</span> <span class="n">memory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">physical</span> <span class="n">GPU</span> <span class="p">(</span><span class="n">device</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">GeForce</span> <span class="n">GTX</span> <span class="mi">770</span><span class="p">,</span> <span class="n">pci</span> <span class="n">bus</span> <span class="nb">id</span><span class="p">:</span> <span class="mo">0000</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mf">00.0</span><span class="p">,</span> <span class="n">compute</span> <span class="n">capability</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">)</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mo">06</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mf">43.617192</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">platform</span>\<span class="n">cpu_feature_guard</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">140</span><span class="p">]</span> <span class="n">Your</span> <span class="n">CPU</span> <span class="n">supports</span> <span class="n">instructions</span> <span class="n">that</span> <span class="n">this</span> <span class="n">TensorFlow</span> <span class="n">binary</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span><span class="p">:</span> <span class="n">AVX2</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mo">06</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mf">43.792865</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1356</span><span class="p">]</span> <span class="n">Found</span> <span class="n">device</span> <span class="mi">0</span> <span class="k">with</span> <span class="n">properties</span><span class="p">:</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">GeForce</span> <span class="n">GTX</span> <span class="mi">1080</span> <span class="n">major</span><span class="p">:</span> <span class="mi">6</span> <span class="n">minor</span><span class="p">:</span> <span class="mi">1</span> <span class="n">memoryClockRate</span><span class="p">(</span><span class="n">GHz</span><span class="p">):</span> <span class="mf">1.7335</span>
+<span class="n">pciBusID</span><span class="p">:</span> <span class="mo">0000</span><span class="p">:</span><span class="mo">01</span><span class="p">:</span><span class="mf">00.0</span>
+<span class="n">totalMemory</span><span class="p">:</span> <span class="mf">8.00</span><span class="n">GiB</span> <span class="n">freeMemory</span><span class="p">:</span> <span class="mf">6.61</span><span class="n">GiB</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mo">06</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mf">43.799610</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1435</span><span class="p">]</span> <span class="n">Adding</span> <span class="n">visible</span> <span class="n">gpu</span> <span class="n">devices</span><span class="p">:</span> <span class="mi">0</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mo">06</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mf">44.338771</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">923</span><span class="p">]</span> <span class="n">Device</span> <span class="n">interconnect</span> <span class="n">StreamExecutor</span> <span class="k">with</span> <span class="n">strength</span> <span class="mi">1</span> <span class="n">edge</span> <span class="n">matrix</span><span class="p">:</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mo">06</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mf">44.348418</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">929</span><span class="p">]</span>      <span class="mi">0</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mo">06</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mf">44.351039</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">942</span><span class="p">]</span> <span class="mi">0</span><span class="p">:</span>   <span class="n">N</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mo">06</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mf">44.352873</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_device</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1053</span><span class="p">]</span> <span class="n">Created</span> <span class="n">TensorFlow</span> <span class="n">device</span> <span class="p">(</span><span class="o">/</span><span class="n">job</span><span class="p">:</span><span class="n">localhost</span><span class="o">/</span><span class="n">replica</span><span class="p">:</span><span class="mi">0</span><span class="o">/</span><span class="n">task</span><span class="p">:</span><span class="mi">0</span><span class="o">/</span><span class="n">device</span><span class="p">:</span><span class="n">GPU</span><span class="p">:</span><span class="mi">0</span> <span class="k">with</span> <span class="mi">6387</span> <span class="n">MB</span> <span class="n">memory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">physical</span> <span class="n">GPU</span> <span class="p">(</span><span class="n">device</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">GeForce</span> <span class="n">GTX</span> <span class="mi">1080</span><span class="p">,</span> <span class="n">pci</span> <span class="n">bus</span> <span class="nb">id</span><span class="p">:</span> <span class="mo">0000</span><span class="p">:</span><span class="mo">01</span><span class="p">:</span><span class="mf">00.0</span><span class="p">,</span> <span class="n">compute</span> <span class="n">capability</span><span class="p">:</span> <span class="mf">6.1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -501,13 +506,16 @@
 </tr>
 </tbody>
 </table>
-<p>The packages can be install by running:</p>
-<div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(=&lt;</span><span class="n">version</span><span class="p">&gt;)</span>
+<p>The packages can be installed using <code class="docutils literal notranslate"><span class="pre">conda</span></code> by running:</p>
+<div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(=&lt;</span><span class="n">version</span><span class="p">&gt;),</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(=&lt;</span><span class="n">version</span><span class="p">&gt;),</span> <span class="p">...,</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(=&lt;</span><span class="n">version</span><span class="p">&gt;)</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;</span></code> can be replaced with the name of the package, and optionally the package version can be specified by adding the optional specifier <code class="docutils literal notranslate"><span class="pre">=&lt;version&gt;</span></code> after <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;</span></code>.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;</span></code> can be replaced with the name of the package, and optionally the package version can be specified by adding the optional specifier <code class="docutils literal notranslate"><span class="pre">=&lt;version&gt;</span></code> after <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;</span></code>. For example, to simply install all packages at their latest versions you can run:</p>
+<div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">pillow</span><span class="p">,</span> <span class="n">lxml</span><span class="p">,</span> <span class="n">jupyter</span><span class="p">,</span> <span class="n">matplotlib</span><span class="p">,</span> <span class="n">opencv</span>
+</pre></div>
+</div>
 <p>Alternatively, if you don’t want to use Anaconda you can install the packages using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
-<div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(=&lt;</span><span class="n">version</span><span class="p">&gt;)</span>
+<div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(==&lt;</span><span class="n">version</span><span class="p">&gt;)</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(==&lt;</span><span class="n">version</span><span class="p">&gt;)</span> <span class="p">...</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(==&lt;</span><span class="n">version</span><span class="p">&gt;)</span>
 </pre></div>
 </div>
 <p>but you will need to install <code class="docutils literal notranslate"><span class="pre">opencv-python</span></code> instead of <code class="docutils literal notranslate"><span class="pre">opencv</span></code>.</p>
@@ -539,34 +547,6 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="adding-necessary-environment-variables">
-<h3>Adding necessary Environment Variables<a class="headerlink" href="#adding-necessary-environment-variables" title="Permalink to this headline">¶</a></h3>
-<p>Since a lot of the scripts we will use require packages from <code class="docutils literal notranslate"><span class="pre">Tensorflow\models\research\object_detection</span></code> to be run, I have found that it’s convenient to add the specific folder to our environmental variables.</p>
-<p>For Linux users, this can be done by either adding to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or running the following code:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:&lt;PATH_TO_TF&gt;/TensorFlow/models/research/object_detection
-</pre></div>
-</div>
-<p>For Windows users, the following folder must be added to your <code class="docutils literal notranslate"><span class="pre">Path</span></code> environment variable (See <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\object_detection</span></code></li>
-</ul>
-<p>For whatever reason, some of the TensorFlow packages that we will need to use to do object detection, do not come pre-installed with our tensorflow installation.</p>
-<p>For Linux users ONLY, the <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md">Installation docs</a> suggest that you either run, or add to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file, the following command, which adds these packages to your PYTHONPATH:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From tensorflow/models/research/</span>
-<span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/slim
-</pre></div>
-</div>
-<p>For Windows, the only way that I found works best, is to simply add the following folders to your <code class="docutils literal notranslate"><span class="pre">Path</span></code> environment variable (See also <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim\datasets</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim\deployment</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim\nets</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim\preprocessing</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim\scripts</span></code></li>
-</ul>
-<p>where <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> replaces the absolute path to your <code class="docutils literal notranslate"><span class="pre">TesnorFlow</span></code> folder. (e.g. <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> = <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code> if <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> resides within your <code class="docutils literal notranslate"><span class="pre">Documents</span></code> folder)</p>
-</div>
 <div class="section" id="protobuf-installation-compilation">
 <h3>Protobuf Installation/Compilation<a class="headerlink" href="#protobuf-installation-compilation" title="Permalink to this headline">¶</a></h3>
 <p>The Tensorflow Object Detection API uses Protobufs to configure model and
@@ -586,18 +566,28 @@ must be downloaded and compiled.</p>
 </li>
 <li><p class="first">In a new <cite>Anaconda/Command Prompt</cite> <a class="footnote-reference" href="#id9" id="id8">[2]</a>, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/</span></code> directory and run the following command:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From TensorFlow/models/research/</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within TensorFlow/models/research/</span>
 <span class="n">protoc</span> <span class="n">object_detection</span><span class="o">/</span><span class="n">protos</span><span class="o">/*.</span><span class="n">proto</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span>
+</pre></div>
+</div>
+<p>If you are on Windows and using Protobuf 3.5 or later, the multi-file selection wildcard (i.e <code class="docutils literal notranslate"><span class="pre">*.proto</span></code>) will not work but you can do one of the following:</p>
+<ol class="arabic simple">
+<li>If you are using <cite>Windows Powershell</cite>:</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within TensorFlow/models/research/</span>
+<span class="n">Get</span><span class="o">-</span><span class="n">ChildItem</span> <span class="n">object_detection</span><span class="o">/</span><span class="n">protos</span><span class="o">/*.</span><span class="n">proto</span> <span class="o">|</span> <span class="n">foreach</span> <span class="p">{</span><span class="n">protoc</span> <span class="s2">&quot;object_detection/protos/$($_.Name)&quot;</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span><span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Alternatively, if you are using <cite>Command Prompt</cite></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within TensorFlow/models/research/</span>
+<span class="k">for</span> <span class="o">/</span><span class="n">f</span> <span class="o">%</span><span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;dir /b object_detection\protos\*.proto&#39;</span><span class="p">)</span> <span class="n">do</span> <span class="n">protoc</span> <span class="n">object_detection</span>\<span class="n">protos</span>\<span class="o">%</span><span class="n">i</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 </ul>
-<p>If you are on Windows and using version 3.5 or later, the wildcard will not work and you have to run this in the command prompt:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From TensorFlow/models/research/</span>
-<span class="k">for</span> <span class="o">/</span><span class="n">f</span> <span class="o">%</span><span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;dir /b object_detection\protos\*.proto&#39;</span><span class="p">)</span> <span class="n">do</span> <span class="n">protoc</span> <span class="n">object_detection</span>\<span class="n">protos</span>\<span class="o">%</span><span class="n">i</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span>
-</pre></div>
-</div>
 <table class="docutils footnote" frame="void" id="id9" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -605,14 +595,102 @@ must be downloaded and compiled.</p>
 </tbody>
 </table>
 </div>
+<div class="section" id="adding-necessary-environment-variables">
+<h3>Adding necessary Environment Variables<a class="headerlink" href="#adding-necessary-environment-variables" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">As <code class="docutils literal notranslate"><span class="pre">Tensorflow\models\research\object_detection</span></code> is the core package for object detection, it’s convenient to add the specific folder to our environmental variables.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Linux: This can be done by either adding to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or running the following:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:&lt;PATH_TO_TF&gt;/TensorFlow/models/research/object_detection
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Windows: The following folder must be added to your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment variable (See <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\object_detection</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The above can also be achieved, in both Linux and Windows environments, by running the following from <code class="docutils literal notranslate"><span class="pre">Tensorflow\models\research</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within TensorFlow/models/research/</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>The above commands essentially build and install the <code class="docutils literal notranslate"><span class="pre">object_detection</span></code> Python package.</p>
+<p class="last"><strong>DRAWBACK</strong>: The above commands need to be run everytime there is a change/update of the <code class="docutils literal notranslate"><span class="pre">object_detection</span></code> package.</p>
+</div>
+<ol class="arabic" start="2">
+<li><p class="first">For whatever reason, some of the TensorFlow packages that are required to perform object detection, do not come pre-installed with our tensorflow installation.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Linux: The <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md">Installation docs</a> suggest that you either run, or add to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file, the following command, which adds these packages to your PYTHONPATH:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within tensorflow/models/research/</span>
+<span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:&lt;PATH_TO_TF&gt;/TensorFlow/models/research:&lt;PATH_TO_TF&gt;/TensorFlow/models/research/slim
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Windows: The only way that I found works best, is to simply add the following folders to your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment variable (See also <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>where, in both cases, <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> replaces the absolute path to your <code class="docutils literal notranslate"><span class="pre">TesnorFlow</span></code> folder. (e.g. <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> = <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code> if <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> resides within your <code class="docutils literal notranslate"><span class="pre">Documents</span></code> folder)</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="coco-api-installation-optional">
+<h3>COCO API installation (Optional)<a class="headerlink" href="#coco-api-installation-optional" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> package should be installed if you are interested in using COCO evaluation metrics.</p>
+<ol class="arabic">
+<li><p class="first">Windows:</p>
+<blockquote>
+<div><p>Run the following command to install <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> with Windows support:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/philferriere/cocoapi.git#subdirectory<span class="o">=</span>PythonAPI
+</pre></div>
+</div>
+<p>Note that, according to the <a class="reference external" href="https://github.com/philferriere/cocoapi#this-clones-readme">package’s instructions</a>, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from <a class="reference external" href="https://go.microsoft.com/fwlink/?LinkId=691126">here</a>.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Linux:</p>
+<blockquote>
+<div><p>Download <a class="reference external" href="https://github.com/cocodataset/cocoapi">cocoapi</a> to a directory of your choice, then <code class="docutils literal notranslate"><span class="pre">make</span></code> and copy the pycocotools subfolder to the <code class="docutils literal notranslate"><span class="pre">Tensorflow/models/research</span></code> directory, as such:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/cocodataset/cocoapi.git
+<span class="nb">cd</span> cocoapi/PythonAPI
+make
+cp -r pycocotools &lt;PATH_TO_TF&gt;/TensorFlow/models/research/
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>The default metrics are based on those used in Pascal VOC evaluation. To use the COCO object detection metrics add <cite>metrics_set: “coco_detection_metrics”</cite> to the <cite>eval_config</cite> message in the config file. To use the COCO instance segmentation metrics add <cite>metrics_set: “coco_mask_metrics”</cite> to the <cite>eval_config</cite> message in the config file.</p>
+</div>
 <div class="section" id="test-tf-models">
-<span id="id10"></span><h3>Test your Installation<a class="headerlink" href="#test-tf-models" title="Permalink to this headline">¶</a></h3>
+<span id="id11"></span><h3>Test your Installation<a class="headerlink" href="#test-tf-models" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window and activate the <cite>tensorflow_gpu</cite> environment (if you have not done so already)</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">TensorFlow\models\research\object_detection</span></code> and run the following command:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="c"># From TensorFlow/models/research/object_detection</span>
+<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="c"># From within TensorFlow/models/research/object_detection</span>
 <span class="n">jupyter</span> <span class="n">notebook</span>
 </pre></div>
 </div>
@@ -638,8 +716,8 @@ must be downloaded and compiled.</p>
 <span id="labelimg-install"></span><h2>LabelImg Installation<a class="headerlink" href="#labelimg-installation" title="Permalink to this headline">¶</a></h2>
 <p>For Windows and Linux you can download the precompiled binary at <a class="reference external" href="http://tzutalin.github.io/labelImg/">http://tzutalin.github.io/labelImg/</a>.
 The steps for installing from source follow below.</p>
-<div class="section" id="id11">
-<h3>Create a new Conda virtual environment<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Create a new Conda virtual environment<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>To deal with the fact that <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> (on Windows) requires the use of <code class="docutils literal notranslate"><span class="pre">pyqt4</span></code>, while <code class="docutils literal notranslate"><span class="pre">tensorflow</span> <span class="pre">1.6</span></code> (and possibly other packages) require <code class="docutils literal notranslate"><span class="pre">pyqt5</span></code>, we will create a new virtual environment in which to run <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>.</p>
 <ul>
 <li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window</p>
@@ -670,7 +748,7 @@ The steps for installing from source follow below.</p>
 <h3>Downloading labelImg<a class="headerlink" href="#downloading-labelimg" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Inside you <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, create a new directory, name it <code class="docutils literal notranslate"><span class="pre">addons</span></code> and then <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it.</li>
-<li>To download the package you can either use <a class="reference external" href="https://git-scm.com/downloads">Git</a> to clone the <a class="reference external" href="https://github.com/tzutalin/labelImg">labelImg repo</a> inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder, or you can simply download it as a <a class="reference external" href="https://github.com/tzutalin/labelImg/archive/master.zip">ZIP</a> and extract it’s contents inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder. To keep things consistent, in the latter case you will have to rename the extracted folder <code class="docutils literal notranslate"><span class="pre">labelImg-master</span></code> to <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>. <a class="footnote-reference" href="#id15" id="id14">[3]</a></li>
+<li>To download the package you can either use <a class="reference external" href="https://git-scm.com/downloads">Git</a> to clone the <a class="reference external" href="https://github.com/tzutalin/labelImg">labelImg repo</a> inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder, or you can simply download it as a <a class="reference external" href="https://github.com/tzutalin/labelImg/archive/master.zip">ZIP</a> and extract it’s contents inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder. To keep things consistent, in the latter case you will have to rename the extracted folder <code class="docutils literal notranslate"><span class="pre">labelImg-master</span></code> to <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>. <a class="footnote-reference" href="#id16" id="id15">[3]</a></li>
 <li>You should now have a single folder named <code class="docutils literal notranslate"><span class="pre">addons\labelImg</span></code> under your <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, which contains another 4 folders as such:</li>
 </ul>
 <div class="line-block">
@@ -684,13 +762,12 @@ The steps for installing from source follow below.</p>
 <div class="line">├── samples</div>
 <div class="line">└── tutorials</div>
 <div class="line"><br /></div>
-<div class="line"><br /></div>
 </div>
 </div>
-<table class="docutils footnote" frame="void" id="id15" rules="none">
+<table class="docutils footnote" frame="void" id="id16" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id14">[3]</a></td><td>The latest repo commit when writing this tutorial is <a class="reference external" href="https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b">8d1bd68</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id15">[3]</a></td><td>The latest repo commit when writing this tutorial is <a class="reference external" href="https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b">8d1bd68</a>.</td></tr>
 </tbody>
 </table>
 </div>
@@ -710,8 +787,8 @@ The steps for installing from source follow below.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id16">
-<h3>Test your installation<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h3>Test your installation<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window and activate the <cite>tensorflow_gpu</cite> environment (if you have not done so already)</p>
 </li>

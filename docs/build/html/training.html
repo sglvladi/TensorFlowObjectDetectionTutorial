@@ -691,6 +691,7 @@ item {
                     <span class="n">epsilon</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
                 <span class="p">}</span>
             <span class="p">}</span>
+            <span class="n">override_base_feature_extractor_hyperparams</span><span class="p">:</span> <span class="n">true</span>
         <span class="p">}</span>
         <span class="n">loss</span> <span class="p">{</span>
             <span class="n">classification_loss</span> <span class="p">{</span>
@@ -724,9 +725,9 @@ item {
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">train_config</span><span class="p">:</span> <span class="p">{</span>
-<span class="hll">    <span class="n">batch_size</span><span class="p">:</span> <span class="mi">12</span> <span class="c1"># Increase/Decrease this value depending on the available memory (Higher values require more memory and vice-versa)</span>
-</span>    <span class="n">optimizer</span> <span class="p">{</span>
+<span class="hll"><span class="n">train_config</span><span class="p">:</span> <span class="p">{</span>
+</span>    <span class="n">batch_size</span><span class="p">:</span> <span class="mi">12</span> <span class="c1"># Increase/Decrease this value depending on the available memory (Higher values require more memory and vice-versa)</span>
+    <span class="n">optimizer</span> <span class="p">{</span>
         <span class="n">rms_prop_optimizer</span><span class="p">:</span> <span class="p">{</span>
             <span class="n">learning_rate</span><span class="p">:</span> <span class="p">{</span>
                 <span class="n">exponential_decay_learning_rate</span> <span class="p">{</span>
@@ -739,9 +740,9 @@ item {
             <span class="n">decay</span><span class="p">:</span> <span class="mf">0.9</span>
             <span class="n">epsilon</span><span class="p">:</span> <span class="mf">1.0</span>
         <span class="p">}</span>
-    <span class="p">}</span>
-<span class="hll">    <span class="n">fine_tune_checkpoint</span><span class="p">:</span> <span class="s2">&quot;pre-trained-model/model.ckpt&quot;</span> <span class="c1"># Path to extracted files of pre-trained model</span>
-</span>    <span class="n">from_detection_checkpoint</span><span class="p">:</span> <span class="n">true</span>
+<span class="hll">    <span class="p">}</span>
+</span>    <span class="n">fine_tune_checkpoint</span><span class="p">:</span> <span class="s2">&quot;pre-trained-model/model.ckpt&quot;</span> <span class="c1"># Path to extracted files of pre-trained model</span>
+    <span class="n">from_detection_checkpoint</span><span class="p">:</span> <span class="n">true</span>
     <span class="c1"># Note: The below line limits the training process to 200K steps, which we</span>
     <span class="c1"># empirically found to be sufficient enough to train the pets dataset. This</span>
     <span class="c1"># effectively bypasses the learning rate schedule (the learning rate will</span>
@@ -758,11 +759,11 @@ item {
 <span class="p">}</span>
 
 <span class="n">train_input_reader</span><span class="p">:</span> <span class="p">{</span>
-    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
-<span class="hll">        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/train.record&quot;</span> <span class="c1"># Path to training TFRecord file</span>
-</span>    <span class="p">}</span>
-<span class="hll">    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
-</span><span class="p">}</span>
+<span class="hll">    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
+</span>        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/train.record&quot;</span> <span class="c1"># Path to training TFRecord file</span>
+<span class="hll">    <span class="p">}</span>
+</span>    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
+<span class="p">}</span>
 
 <span class="n">eval_config</span><span class="p">:</span> <span class="p">{</span>
     <span class="n">num_examples</span><span class="p">:</span> <span class="mi">8000</span>
@@ -772,11 +773,11 @@ item {
 <span class="p">}</span>
 
 <span class="n">eval_input_reader</span><span class="p">:</span> <span class="p">{</span>
-    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
-<span class="hll">        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/test.record&quot;</span> <span class="c1"># Path to testing TFRecord</span>
-</span>    <span class="p">}</span>
-<span class="hll">    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
-</span>    <span class="n">shuffle</span><span class="p">:</span> <span class="n">false</span>
+<span class="hll">    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
+</span>        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/test.record&quot;</span> <span class="c1"># Path to testing TFRecord</span>
+<span class="hll">    <span class="p">}</span>
+</span>    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
+    <span class="n">shuffle</span><span class="p">:</span> <span class="n">false</span>
     <span class="n">num_readers</span><span class="p">:</span> <span class="mi">1</span>
 <span class="p">}</span>
 </pre></div>

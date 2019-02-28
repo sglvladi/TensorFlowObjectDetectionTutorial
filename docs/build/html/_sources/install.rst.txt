@@ -191,7 +191,7 @@ Install TensorFlow GPU for Python
 
     .. code-block:: posh
 
-        pip install --ignore-installed --upgrade tensorflow-gpu==1.7.0
+        pip install --ignore-installed --upgrade tensorflow-gpu==1.8
 
 - Wait for the installation to finish
 
@@ -221,12 +221,16 @@ Test your Installation
 
     .. code-block:: python
 
-        2018-03-21 21:46:18.962971: I C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\core\common_runtime\gpu\gpu_device.cc:1212] Found device 0 with properties:
-        name: GeForce GTX 770 major: 3 minor: 0 memoryClockRate(GHz): 1.163
-        pciBusID: 0000:02:00.0
-        totalMemory: 2.00GiB freeMemory: 1.63GiB
-        2018-03-21 21:46:18.978254: I C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\core\common_runtime\gpu\gpu_device.cc:1312] Adding visible gpu devices: 0
-        2018-03-21 21:46:19.295152: I C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\core\common_runtime\gpu\gpu_device.cc:993] Creating TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 1414 MB memory) -> physical GPU (device: 0, name: GeForce GTX 770, pci bus id: 0000:02:00.0, compute capability: 3.0)
+        2019-02-28 06:56:43.617192: I T:\src\github\tensorflow\tensorflow\core\platform\cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+        2019-02-28 06:56:43.792865: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:1356] Found device 0 with properties:
+        name: GeForce GTX 1080 major: 6 minor: 1 memoryClockRate(GHz): 1.7335
+        pciBusID: 0000:01:00.0
+        totalMemory: 8.00GiB freeMemory: 6.61GiB
+        2019-02-28 06:56:43.799610: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:1435] Adding visible gpu devices: 0
+        2019-02-28 06:56:44.338771: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:923] Device interconnect StreamExecutor with strength 1 edge matrix:
+        2019-02-28 06:56:44.348418: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:929]      0
+        2019-02-28 06:56:44.351039: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:942] 0:   N
+        2019-02-28 06:56:44.352873: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6387 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0, compute capability: 6.1)
 
 - Finally, for the sake of completing the test as described by TensorFlow themselves (see `here <https://www.tensorflow.org/install/install_windows#validate_your_installation>`_), let's run the following:
 
@@ -263,19 +267,23 @@ Building on the assumption that you have just created your new virtual environme
 | opencv       | 3.3.1-py36h20b85fd_1         |
 +--------------+------------------------------+
 
-The packages can be install by running:
+The packages can be installed using ``conda`` by running:
 
 .. code-block:: posh
 
-    conda install <package_name>(=<version>)
+    conda install <package_name>(=<version>), <package_name>(=<version>), ..., <package_name>(=<version>)
 
-where ``<package_name>`` can be replaced with the name of the package, and optionally the package version can be specified by adding the optional specifier ``=<version>`` after ``<package_name>``. 
+where ``<package_name>`` can be replaced with the name of the package, and optionally the package version can be specified by adding the optional specifier ``=<version>`` after ``<package_name>``. For example, to simply install all packages at their latest versions you can run:
+
+.. code-block:: posh
+
+    conda install pillow, lxml, jupyter, matplotlib, opencv
 
 Alternatively, if you don't want to use Anaconda you can install the packages using ``pip``:
 
 .. code-block:: posh
 
-    pip install <package_name>(=<version>)
+    pip install <package_name>(==<version>) <package_name>(==<version>) ... <package_name>(==<version>)
 
 but you will need to install ``opencv-python`` instead of ``opencv``.
 
@@ -298,41 +306,6 @@ Downloading the TensorFlow Models
 
 .. [#] The latest repo commit when writing this tutorial is `da903e0 <https://github.com/tensorflow/models/commit/da903e07aea0887d59ebf612557243351ddfb4e6>`_.
 
-Adding necessary Environment Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Since a lot of the scripts we will use require packages from ``Tensorflow\models\research\object_detection`` to be run, I have found that it's convenient to add the specific folder to our environmental variables.
-
-For Linux users, this can be done by either adding to ``~/.bashrc`` or running the following code:
-
-.. code-block:: bash
-
-    export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research/object_detection
-
-For Windows users, the following folder must be added to your ``Path`` environment variable (See :ref:`set_env`):
-
-- ``<PATH_TO_TF>\TensorFlow\models\research\object_detection``
-
-For whatever reason, some of the TensorFlow packages that we will need to use to do object detection, do not come pre-installed with our tensorflow installation. 
-
-For Linux users ONLY, the `Installation docs <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md>`_ suggest that you either run, or add to ``~/.bashrc`` file, the following command, which adds these packages to your PYTHONPATH:
-
-.. code-block:: bash
-
-    # From tensorflow/models/research/
-    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
-
-For Windows, the only way that I found works best, is to simply add the following folders to your ``Path`` environment variable (See also :ref:`set_env`):
-
-- ``<PATH_TO_TF>\TensorFlow\models\research\slim``
-- ``<PATH_TO_TF>\TensorFlow\models\research\slim\datasets``
-- ``<PATH_TO_TF>\TensorFlow\models\research\slim\deployment``
-- ``<PATH_TO_TF>\TensorFlow\models\research\slim\nets``
-- ``<PATH_TO_TF>\TensorFlow\models\research\slim\preprocessing``
-- ``<PATH_TO_TF>\TensorFlow\models\research\slim\scripts``
-
-where ``<PATH_TO_TF>`` replaces the absolute path to your ``TesnorFlow`` folder. (e.g. ``<PATH_TO_TF>`` = ``C:\Users\sglvladi\Documents`` if ``TensorFlow`` resides within your ``Documents`` folder)
-
 Protobuf Installation/Compilation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -351,17 +324,103 @@ This should be done as follows:
 
     .. code-block:: python
 
-        # From TensorFlow/models/research/
+        # From within TensorFlow/models/research/
         protoc object_detection/protos/*.proto --python_out=.
 
-If you are on Windows and using version 3.5 or later, the wildcard will not work and you have to run this in the command prompt:
+    If you are on Windows and using Protobuf 3.5 or later, the multi-file selection wildcard (i.e ``*.proto``) will not work but you can do one of the following:
 
-.. code-block:: python
+    1. If you are using `Windows Powershell`:
 
-        # From TensorFlow/models/research/
-        for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
+    .. code-block:: python
+
+        # From within TensorFlow/models/research/
+        Get-ChildItem object_detection/protos/*.proto | foreach {protoc "object_detection/protos/$($_.Name)" --python_out=.}
+
+
+    2. Alternatively, if you are using `Command Prompt`
+
+    .. code-block:: python
+
+            # From within TensorFlow/models/research/
+            for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
+
 
 .. [#] NOTE: You MUST open a new `Anaconda/Command Prompt` for the changes in the environment variables to take effect.
+
+
+Adding necessary Environment Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. As ``Tensorflow\models\research\object_detection`` is the core package for object detection, it's convenient to add the specific folder to our environmental variables.
+
+    - Linux: This can be done by either adding to ``~/.bashrc`` or running the following:
+
+        .. code-block:: bash
+
+            export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research/object_detection
+
+    - Windows: The following folder must be added to your ``PYTHONPATH`` environment variable (See :ref:`set_env`):
+
+        - ``<PATH_TO_TF>\TensorFlow\models\research\object_detection``
+
+.. note:: The above can also be achieved, in both Linux and Windows environments, by running the following from ``Tensorflow\models\research``:
+
+    .. code-block:: python
+
+        # From within TensorFlow/models/research/
+        python setup.py build
+        python setup.py install
+
+    The above commands essentially build and install the ``object_detection`` Python package. 
+    
+    **DRAWBACK**: The above commands need to be run everytime there is a change/update of the ``object_detection`` package.
+
+2. For whatever reason, some of the TensorFlow packages that are required to perform object detection, do not come pre-installed with our tensorflow installation. 
+
+    - Linux: The `Installation docs <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md>`_ suggest that you either run, or add to ``~/.bashrc`` file, the following command, which adds these packages to your PYTHONPATH:
+
+        .. code-block:: bash
+
+            # From within tensorflow/models/research/
+            export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research:<PATH_TO_TF>/TensorFlow/models/research/slim
+
+    - Windows: The only way that I found works best, is to simply add the following folders to your ``PYTHONPATH`` environment variable (See also :ref:`set_env`):
+
+        - ``<PATH_TO_TF>\TensorFlow\models\research``
+        - ``<PATH_TO_TF>\TensorFlow\models\research\slim``
+
+    where, in both cases, ``<PATH_TO_TF>`` replaces the absolute path to your ``TesnorFlow`` folder. (e.g. ``<PATH_TO_TF>`` = ``C:\Users\sglvladi\Documents`` if ``TensorFlow`` resides within your ``Documents`` folder)
+
+COCO API installation (Optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``pycocotools`` package should be installed if you are interested in using COCO evaluation metrics.
+
+1. Windows:
+
+    Run the following command to install ``pycocotools`` with Windows support:
+
+    .. code-block:: bash
+
+        pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+
+
+    Note that, according to the `package's instructions <https://github.com/philferriere/cocoapi#this-clones-readme>`_, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from `here <https://go.microsoft.com/fwlink/?LinkId=691126>`_.
+
+2. Linux:
+
+    Download `cocoapi <https://github.com/cocodataset/cocoapi>`_ to a directory of your choice, then ``make`` and copy the pycocotools subfolder to the ``Tensorflow/models/research`` directory, as such: 
+
+    .. code-block:: bash
+
+        git clone https://github.com/cocodataset/cocoapi.git
+        cd cocoapi/PythonAPI
+        make
+        cp -r pycocotools <PATH_TO_TF>/TensorFlow/models/research/
+
+
+The default metrics are based on those used in Pascal VOC evaluation. To use the COCO object detection metrics add `metrics_set: "coco_detection_metrics"` to the `eval_config` message in the config file. To use the COCO instance segmentation metrics add `metrics_set: "coco_mask_metrics"` to the `eval_config` message in the config file.
+
 
 .. _test_tf_models:
 
@@ -373,7 +432,7 @@ Test your Installation
 
     .. code-block:: posh
 
-        # From TensorFlow/models/research/object_detection
+        # From within TensorFlow/models/research/object_detection
         jupyter notebook
 
 - This should start a new ``jupyter notebook`` server on your machine and you should be redirected to a new tab of your default browser.
@@ -434,7 +493,6 @@ Downloading labelImg
 |     ├── research
 |     ├── samples
 |     └── tutorials
-|
 |
 
 .. [#] The latest repo commit when writing this tutorial is `8d1bd68 <https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b>`_.

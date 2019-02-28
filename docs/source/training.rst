@@ -532,6 +532,7 @@ Now that we have downloaded and extracted our pre-trained model, let's have a lo
                         epsilon: 0.001,
                     }
                 }
+                override_base_feature_extractor_hyperparams: true
             }
             loss {
                 classification_loss {
