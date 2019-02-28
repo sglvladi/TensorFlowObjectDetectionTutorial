@@ -24,27 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="TensorFlow Object Detection API tutorial  documentation" href="index.html"/>
-        <link rel="next" title="Detect Objects Using Your Webcam" href="camera.html"/>
-        <link rel="prev" title="TensorFlow Object Detection API tutorial" href="index.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Detect Objects Using Your Webcam" href="camera.html" />
+    <link rel="prev" title="TensorFlow Object Detection API tutorial" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -102,7 +94,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#install-cuda-toolkit">Install CUDA Toolkit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-cudnn">Install CUDNN</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#set-your-environment-variables">Set Your Environment Variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#update-your-gpu-drivers">Update your GPU drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-your-gpu-drivers-optional">Update your GPU drivers (Optional)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#create-a-new-conda-virtual-environment">Create a new Conda virtual environment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#install-tensorflow-gpu-for-python">Install TensorFlow GPU for Python</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">Test your Installation</a></li>
@@ -141,7 +133,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">TensorFlow Object Detection API tutorial</a>
@@ -149,9 +141,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -249,11 +242,11 @@
 <div class="section" id="install-tensorflow-cpu-for-python">
 <h4>Install TensorFlow CPU for Python<a class="headerlink" href="#install-tensorflow-cpu-for-python" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window and activate the <cite>tensorflow_gpu</cite> environment (if you have not done so already)</p>
+<li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window and activate the <cite>tensorflow_cpu</cite> environment (if you have not done so already)</p>
 </li>
 <li><p class="first">Once open, type the following on the command line:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow</span>
+<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">0</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -281,7 +274,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">If the above code shows an error, then check to make sure you have activated the <cite>tensorflow_gpu</cite> environment and that tensorflow_gpu was successfully installed within it in the previous step.</p>
+<li><p class="first">If the above code shows an error, then check to make sure you have activated the <cite>tensorflow_cpu</cite> environment and that tensorflow_cpu was successfully installed within it in the previous step.</p>
 </li>
 <li><p class="first">Then run the following:</p>
 <blockquote>
@@ -333,7 +326,7 @@
 </tbody>
 </table>
 <div class="section" id="install-cuda-toolkit">
-<h4>Install CUDA Toolkit<a class="headerlink" href="#install-cuda-toolkit" title="Permalink to this headline">¶</a></h4>
+<span id="cuda-install"></span><h4>Install CUDA Toolkit<a class="headerlink" href="#install-cuda-toolkit" title="Permalink to this headline">¶</a></h4>
 <p>Follow this <a class="reference external" href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&amp;target_arch=x86_64&amp;target_version=10&amp;target_type=exenetwork">link</a> to download and install CUDA Toolkit v9.0.</p>
 </div>
 <div class="section" id="install-cudnn">
@@ -355,7 +348,7 @@
 </li>
 <li><p class="first">Click on the <code class="docutils literal notranslate"><span class="pre">Path</span></code> system variable and select edit</p>
 </li>
-<li><p class="first">Add the following paths</p>
+<li><p class="first">Add the following paths:</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">&lt;INSTALL_PATH&gt;\NVIDIA</span> <span class="pre">GPU</span> <span class="pre">Computing</span> <span class="pre">Toolkit\CUDA\v9.0\bin</span></code></li>
@@ -367,8 +360,9 @@
 </li>
 </ul>
 </div>
-<div class="section" id="update-your-gpu-drivers">
-<h4>Update your GPU drivers<a class="headerlink" href="#update-your-gpu-drivers" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="update-your-gpu-drivers-optional">
+<h4>Update your GPU drivers (Optional)<a class="headerlink" href="#update-your-gpu-drivers-optional" title="Permalink to this headline">¶</a></h4>
+<p>If during the installation of the CUDA Toolkit (see <a class="reference internal" href="#cuda-install"><span class="std std-ref">Install CUDA Toolkit</span></a>) you selected the <cite>Express Installation</cite> option, then your GPU drivers will have been overwritten by those that come bundled with the CUDA toolkit. These drivers are typically NOT the latest drivers and, thus, you may wish to updte your drivers.</p>
 <ul class="simple">
 <li>Go to <a class="reference external" href="http://www.nvidia.com/Download/index.aspx">http://www.nvidia.com/Download/index.aspx</a></li>
 <li>Select your GPU version to download</li>
@@ -409,7 +403,7 @@
 </li>
 <li><p class="first">Once open, type the following on the command line:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow-gpu</span>
+<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow-gpu</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">0</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -473,7 +467,7 @@
 </div>
 <div class="section" id="tensorflow-models-installation">
 <span id="tf-models-install"></span><h2>TensorFlow Models Installation<a class="headerlink" href="#tensorflow-models-installation" title="Permalink to this headline">¶</a></h2>
-<p>Now that you have installed TensorFlow, it is time to install the models used b TesnorFlow to do it’s magic.</p>
+<p>Now that you have installed TensorFlow, it is time to install the models used by TensorFlow to do its magic.</p>
 <div class="section" id="install-prerequisites">
 <h3>Install Prerequisites<a class="headerlink" href="#install-prerequisites" title="Permalink to this headline">¶</a></h3>
 <p>Building on the assumption that you have just created your new virtual environment (whether that’s <cite>tensorflow_cpu</cite>,`tensorflow_gpu` or whatever other name you might have used), there are some packages which need to be installed before installing the models.</p>
@@ -499,7 +493,7 @@
 <tr class="row-odd"><td>jupyter</td>
 <td>1.0.0-py36_4</td>
 </tr>
-<tr class="row-even"><td>matlplotlib</td>
+<tr class="row-even"><td>matplotlib</td>
 <td>2.2.2-py36h153e9ff_0</td>
 </tr>
 <tr class="row-odd"><td>opencv</td>
@@ -516,6 +510,7 @@
 <div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">&lt;</span><span class="n">package_name</span><span class="p">&gt;(=&lt;</span><span class="n">version</span><span class="p">&gt;)</span>
 </pre></div>
 </div>
+<p>but you will need to install <code class="docutils literal notranslate"><span class="pre">opencv-python</span></code> instead of <code class="docutils literal notranslate"><span class="pre">opencv</span></code>.</p>
 </div>
 <div class="section" id="downloading-the-tensorflow-models">
 <h3>Downloading the TensorFlow Models<a class="headerlink" href="#downloading-the-tensorflow-models" title="Permalink to this headline">¶</a></h3>
@@ -598,6 +593,11 @@ must be downloaded and compiled.</p>
 </div></blockquote>
 </li>
 </ul>
+<p>If you are on Windows and using version 3.5 or later, the wildcard will not work and you have to run this in the command prompt:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From TensorFlow/models/research/</span>
+<span class="k">for</span> <span class="o">/</span><span class="n">f</span> <span class="o">%</span><span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;dir /b object_detection\protos\*.proto&#39;</span><span class="p">)</span> <span class="n">do</span> <span class="n">protoc</span> <span class="n">object_detection</span>\<span class="n">protos</span>\<span class="o">%</span><span class="n">i</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span>
+</pre></div>
+</div>
 <table class="docutils footnote" frame="void" id="id9" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -636,6 +636,8 @@ must be downloaded and compiled.</p>
 </div>
 <div class="section" id="labelimg-installation">
 <span id="labelimg-install"></span><h2>LabelImg Installation<a class="headerlink" href="#labelimg-installation" title="Permalink to this headline">¶</a></h2>
+<p>For Windows and Linux you can download the precompiled binary at <a class="reference external" href="http://tzutalin.github.io/labelImg/">http://tzutalin.github.io/labelImg/</a>.
+The steps for installing from source follow below.</p>
 <div class="section" id="id11">
 <h3>Create a new Conda virtual environment<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>To deal with the fact that <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> (on Windows) requires the use of <code class="docutils literal notranslate"><span class="pre">pyqt4</span></code>, while <code class="docutils literal notranslate"><span class="pre">tensorflow</span> <span class="pre">1.6</span></code> (and possibly other packages) require <code class="docutils literal notranslate"><span class="pre">pyqt5</span></code>, we will create a new virtual environment in which to run <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>.</p>
@@ -659,7 +661,7 @@ must be downloaded and compiled.</p>
 </div></blockquote>
 </li>
 </ul>
-<p>Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beggining of your cmd path specifier, e.g.:</p>
+<p>Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beginning of your cmd path specifier, e.g.:</p>
 <div class="highlight-ps1con notranslate"><div class="highlight"><pre><span></span><span class="go">(labelImg) C:\Users\sglvladi&gt;</span>
 </pre></div>
 </div>
@@ -667,7 +669,7 @@ must be downloaded and compiled.</p>
 <div class="section" id="downloading-labelimg">
 <h3>Downloading labelImg<a class="headerlink" href="#downloading-labelimg" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Inside you <code class="docutils literal notranslate"><span class="pre">TesnorFlow</span></code> folder, create a new directory, name it <code class="docutils literal notranslate"><span class="pre">addons</span></code> and then <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it.</li>
+<li>Inside you <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, create a new directory, name it <code class="docutils literal notranslate"><span class="pre">addons</span></code> and then <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it.</li>
 <li>To download the package you can either use <a class="reference external" href="https://git-scm.com/downloads">Git</a> to clone the <a class="reference external" href="https://github.com/tzutalin/labelImg">labelImg repo</a> inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder, or you can simply download it as a <a class="reference external" href="https://github.com/tzutalin/labelImg/archive/master.zip">ZIP</a> and extract it’s contents inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder. To keep things consistent, in the latter case you will have to rename the extracted folder <code class="docutils literal notranslate"><span class="pre">labelImg-master</span></code> to <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>. <a class="footnote-reference" href="#id15" id="id14">[3]</a></li>
 <li>You should now have a single folder named <code class="docutils literal notranslate"><span class="pre">addons\labelImg</span></code> under your <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, which contains another 4 folders as such:</li>
 </ul>
@@ -729,9 +731,7 @@ must be downloaded and compiled.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -749,11 +749,11 @@ must be downloaded and compiled.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Lyudmil Vladimirov.
+        &copy; Copyright 2018, Lyudmil Vladimirov
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -768,35 +768,33 @@ must be downloaded and compiled.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

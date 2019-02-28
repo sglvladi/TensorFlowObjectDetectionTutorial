@@ -62,7 +62,7 @@ Install TensorFlow CPU for Python
 
     .. code-block:: posh
 
-        pip install --ignore-installed --upgrade tensorflow
+        pip install --ignore-installed --upgrade tensorflow==1.7.0
 
 - Wait for the installation to finish
 
@@ -123,6 +123,8 @@ Before proceeding to install TesnsorFlow GPU, you need to make sure that your sy
 | Anaconda with Python 3.6 (Optional) |
 +-------------------------------------+
 
+.. _cuda_install:
+
 Install CUDA Toolkit
 ***********************
 Follow this `link <https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`_ to download and install CUDA Toolkit v9.0.
@@ -145,15 +147,17 @@ Set Your Environment Variables
 - Go to `Start` and Search "environment variables"
 - Click the Environment Variables button
 - Click on the ``Path`` system variable and select edit
-- Add the following paths
+- Add the following paths:
     
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin``
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\libnvvp``
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64``
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\cuda\bin``
 
-Update your GPU drivers
-***********************
+Update your GPU drivers (Optional)
+**********************************
+If during the installation of the CUDA Toolkit (see :ref:`cuda_install`) you selected the `Express Installation` option, then your GPU drivers will have been overwritten by those that come bundled with the CUDA toolkit. These drivers are typically NOT the latest drivers and, thus, you may wish to updte your drivers.
+
 - Go to `<http://www.nvidia.com/Download/index.aspx>`_
 - Select your GPU version to download
 - Install the driver 
@@ -187,7 +191,7 @@ Install TensorFlow GPU for Python
 
     .. code-block:: posh
 
-        pip install --ignore-installed --upgrade tensorflow-gpu
+        pip install --ignore-installed --upgrade tensorflow-gpu==1.7.0
 
 - Wait for the installation to finish
 

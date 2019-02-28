@@ -24,27 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="TensorFlow Object Detection API tutorial  documentation" href="index.html"/>
-        <link rel="next" title="Common issues" href="issues.html"/>
-        <link rel="prev" title="Detect Objects Using Your Webcam" href="camera.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Common issues" href="issues.html" />
+    <link rel="prev" title="Detect Objects Using Your Webcam" href="camera.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -117,7 +109,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">TensorFlow Object Detection API tutorial</a>
@@ -125,9 +117,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -188,7 +181,7 @@
 </ol>
 <div class="section" id="preparing-workspace">
 <h2>Preparing workspace<a class="headerlink" href="#preparing-workspace" title="Permalink to this headline">¶</a></h2>
-<p>If you have followed the tutorial, you shhould by now have a folder <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>, placed under <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code>), with the following directory tree:</p>
+<p>If you have followed the tutorial, you should by now have a folder <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>, placed under <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code>), with the following directory tree:</p>
 <div class="line-block">
 <div class="line">TensorFlow</div>
 <div class="line">├─ addons</div>
@@ -241,7 +234,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">images\train</span></code>: This folder contains a copy of all images, and the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, which will be used to train our model.</li>
-<li><code class="docutils literal notranslate"><span class="pre">images\test</span></code>: This folder contains a copy of all images, and the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, which will be used to train our model.</li>
+<li><code class="docutils literal notranslate"><span class="pre">images\test</span></code>: This folder contains a copy of all images, and the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, which will be used to test our model.</li>
 </ul>
 </div></blockquote>
 </li>
@@ -466,6 +459,8 @@ item {
 <span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../../models/research&quot;</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="kn">import</span> <span class="n">dataset_util</span>
@@ -475,13 +470,24 @@ item {
 <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="s1">&#39;csv_input&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Path to the CSV input&#39;</span><span class="p">)</span>
 <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="s1">&#39;output_path&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Path to output TFRecord&#39;</span><span class="p">)</span>
 <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Name of class label&#39;</span><span class="p">)</span>
+<span class="c1"># if your image has more labels input them as</span>
+<span class="c1"># flags.DEFINE_string(&#39;label0&#39;, &#39;&#39;, &#39;Name of class[0] label&#39;)</span>
+<span class="c1"># flags.DEFINE_string(&#39;label1&#39;, &#39;&#39;, &#39;Name of class[1] label&#39;)</span>
+<span class="c1"># and so on.</span>
+<span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="s1">&#39;img_path&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Path to images&#39;</span><span class="p">)</span>
 <span class="n">FLAGS</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">FLAGS</span>
 
 
 <span class="c1"># TO-DO replace this with label map</span>
+<span class="c1"># for multiple labels add more else if statements</span>
 <span class="k">def</span> <span class="nf">class_text_to_int</span><span class="p">(</span><span class="n">row_label</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">row_label</span> <span class="o">==</span> <span class="n">FLAGS</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>  <span class="c1"># &#39;ship&#39;:</span>
         <span class="k">return</span> <span class="mi">1</span>
+    <span class="c1"># comment upper if statement and uncomment these statements for multiple labelling</span>
+    <span class="c1"># if row_label == FLAGS.label0:</span>
+    <span class="c1">#   return 1</span>
+    <span class="c1"># elif row_label == FLAGS.label1:</span>
+    <span class="c1">#   return 0</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="bp">None</span>
 
@@ -501,6 +507,7 @@ item {
 
     <span class="n">filename</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
     <span class="n">image_format</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;jpg&#39;</span>
+    <span class="c1"># check if the image format is matching with your images.</span>
     <span class="n">xmins</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">xmaxs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">ymins</span> <span class="o">=</span> <span class="p">[]</span>
@@ -535,7 +542,7 @@ item {
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
     <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">python_io</span><span class="o">.</span><span class="n">TFRecordWriter</span><span class="p">(</span><span class="n">FLAGS</span><span class="o">.</span><span class="n">output_path</span><span class="p">)</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">FLAGS</span><span class="o">.</span><span class="n">img_path</span><span class="p">)</span>
     <span class="n">examples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">FLAGS</span><span class="o">.</span><span class="n">csv_input</span><span class="p">)</span>
     <span class="n">grouped</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
@@ -558,11 +565,11 @@ item {
 <blockquote>
 <div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="c"># Create train data:</span>
 <span class="n">python</span> <span class="n">generate_tfrecord</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-label</span><span class="p">=&lt;</span><span class="n">LABEL</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-csv_input</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">train_labels</span><span class="p">.</span><span class="n">csv</span>
-<span class="p">-</span><span class="n">-img_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_IMAGES_FOLDER</span><span class="p">&gt;</span>  <span class="p">-</span><span class="n">-output_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">train</span><span class="p">.</span><span class="n">record</span>
+<span class="p">-</span><span class="n">-img_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_IMAGES_FOLDER</span><span class="p">&gt;/</span><span class="n">train</span>  <span class="p">-</span><span class="n">-output_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">train</span><span class="p">.</span><span class="n">record</span>
 
 <span class="c"># Create test data:</span>
 <span class="n">python</span> <span class="n">generate_tfrecord</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-label</span><span class="p">=&lt;</span><span class="n">LABEL</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-csv_input</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">test_labels</span><span class="p">.</span><span class="n">csv</span>
-<span class="p">-</span><span class="n">-img_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_IMAGES_FOLDER</span><span class="p">&gt;</span>
+<span class="p">-</span><span class="n">-img_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_IMAGES_FOLDER</span><span class="p">&gt;/</span><span class="n">test</span>
 <span class="p">-</span><span class="n">-output_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">test</span><span class="p">.</span><span class="n">record</span>
 
 <span class="c"># For example</span>
@@ -778,7 +785,7 @@ item {
 </div>
 <div class="section" id="training-the-model">
 <h2>Training the Model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h2>
-<p>Before we begin training our model, let’s go and copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/train.py</span></code> script and paste it straight into our <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder. We will need this script in order to train our model.</p>
+<p>Before we begin training our model, let’s go and copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/legacy/train.py</span></code> script and paste it straight into our <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder. We will need this script in order to train our model.</p>
 <p>Now, to initiate a new training job, <code class="docutils literal notranslate"><span class="pre">cd</span></code> inside the <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder and type the following:</p>
 <div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">train</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-logtostderr</span> <span class="p">-</span><span class="n">-train_dir</span><span class="p">=</span><span class="n">training</span><span class="p">/</span> <span class="p">-</span><span class="n">-pipeline_config_path</span><span class="p">=</span><span class="n">training</span><span class="p">/</span><span class="n">ssd_inception_v2_coco</span><span class="p">.</span><span class="n">config</span>
 </pre></div>
@@ -875,13 +882,13 @@ item {
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/extract_inference_graph.py</span></code> script and paste it straight into your <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder.</p>
+<li><p class="first">Copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/export_inference_graph.py</span></code> script and paste it straight into your <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder.</p>
 </li>
 <li><p class="first">Check inside your <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code> folder for the <code class="docutils literal notranslate"><span class="pre">model.ckpt-*</span></code> checkpoint file with the highest number following the name of the dash e.g. <code class="docutils literal notranslate"><span class="pre">model.ckpt-34350</span></code>). This number represents the training step index at which the file was created.</p>
 </li>
 <li><p class="first">Alternatively, simply sort all the files inside <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code> by descending time and pick the <code class="docutils literal notranslate"><span class="pre">model.ckpt-*</span></code> file that comes first in the list.</p>
 </li>
-<li><p class="first">Make a note of the file’s name, as it will be passed as an argument when we call the <code class="docutils literal notranslate"><span class="pre">extract_inference_graph.py</span></code> script.</p>
+<li><p class="first">Make a note of the file’s name, as it will be passed as an argument when we call the <code class="docutils literal notranslate"><span class="pre">export_inference_graph.py</span></code> script.</p>
 </li>
 <li><p class="first">Now, <code class="docutils literal notranslate"><span class="pre">cd</span></code> inside your <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder, and run the following command:</p>
 </li>
@@ -894,9 +901,7 @@ item {
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -914,11 +919,11 @@ item {
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Lyudmil Vladimirov.
+        &copy; Copyright 2018, Lyudmil Vladimirov
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -933,35 +938,33 @@ item {
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

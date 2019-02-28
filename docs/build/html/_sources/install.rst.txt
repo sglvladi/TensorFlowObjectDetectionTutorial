@@ -57,12 +57,12 @@ Once you have activated your virtual environment, the name of the environment sh
 
 Install TensorFlow CPU for Python
 *********************************
-- Open a new `Anaconda/Command Prompt` window and activate the `tensorflow_gpu` environment (if you have not done so already)
+- Open a new `Anaconda/Command Prompt` window and activate the `tensorflow_cpu` environment (if you have not done so already)
 - Once open, type the following on the command line:
 
     .. code-block:: posh
 
-        pip install --ignore-installed --upgrade tensorflow
+        pip install --ignore-installed --upgrade tensorflow==1.7.0
 
 - Wait for the installation to finish
 
@@ -81,7 +81,7 @@ Test your Installation
 
         >>> import tensorflow as tf
 
-- If the above code shows an error, then check to make sure you have activated the `tensorflow_gpu` environment and that tensorflow_gpu was successfully installed within it in the previous step.
+- If the above code shows an error, then check to make sure you have activated the `tensorflow_cpu` environment and that tensorflow_cpu was successfully installed within it in the previous step.
 - Then run the following:
 
     .. code-block:: python
@@ -123,6 +123,8 @@ Before proceeding to install TesnsorFlow GPU, you need to make sure that your sy
 | Anaconda with Python 3.6 (Optional) |
 +-------------------------------------+
 
+.. _cuda_install:
+
 Install CUDA Toolkit
 ***********************
 Follow this `link <https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`_ to download and install CUDA Toolkit v9.0.
@@ -145,15 +147,17 @@ Set Your Environment Variables
 - Go to `Start` and Search "environment variables"
 - Click the Environment Variables button
 - Click on the ``Path`` system variable and select edit
-- Add the following paths
+- Add the following paths:
     
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin``
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\libnvvp``
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64``
     - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\cuda\bin``
 
-Update your GPU drivers
-***********************
+Update your GPU drivers (Optional)
+**********************************
+If during the installation of the CUDA Toolkit (see :ref:`cuda_install`) you selected the `Express Installation` option, then your GPU drivers will have been overwritten by those that come bundled with the CUDA toolkit. These drivers are typically NOT the latest drivers and, thus, you may wish to updte your drivers.
+
 - Go to `<http://www.nvidia.com/Download/index.aspx>`_
 - Select your GPU version to download
 - Install the driver 
@@ -187,7 +191,7 @@ Install TensorFlow GPU for Python
 
     .. code-block:: posh
 
-        pip install --ignore-installed --upgrade tensorflow-gpu
+        pip install --ignore-installed --upgrade tensorflow-gpu==1.7.0
 
 - Wait for the installation to finish
 
@@ -236,7 +240,7 @@ Test your Installation
 TensorFlow Models Installation 
 ------------------------------
 
-Now that you have installed TensorFlow, it is time to install the models used b TesnorFlow to do it's magic.
+Now that you have installed TensorFlow, it is time to install the models used by TensorFlow to do its magic.
 
 Install Prerequisites
 ~~~~~~~~~~~~~~~~~~~~~
@@ -254,7 +258,7 @@ Building on the assumption that you have just created your new virtual environme
 +--------------+------------------------------+
 | jupyter      | 1.0.0-py36_4                 |
 +--------------+------------------------------+
-| matlplotlib  | 2.2.2-py36h153e9ff_0         |
+| matplotlib   | 2.2.2-py36h153e9ff_0         |
 +--------------+------------------------------+
 | opencv       | 3.3.1-py36h20b85fd_1         |
 +--------------+------------------------------+
@@ -273,6 +277,7 @@ Alternatively, if you don't want to use Anaconda you can install the packages us
 
     pip install <package_name>(=<version>)
 
+but you will need to install ``opencv-python`` instead of ``opencv``.
 
 Downloading the TensorFlow Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -349,6 +354,13 @@ This should be done as follows:
         # From TensorFlow/models/research/
         protoc object_detection/protos/*.proto --python_out=.
 
+If you are on Windows and using version 3.5 or later, the wildcard will not work and you have to run this in the command prompt:
+
+.. code-block:: python
+
+        # From TensorFlow/models/research/
+        for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
+
 .. [#] NOTE: You MUST open a new `Anaconda/Command Prompt` for the changes in the environment variables to take effect.
 
 .. _test_tf_models:
@@ -379,6 +391,9 @@ Test your Installation
 LabelImg Installation
 ---------------------
 
+For Windows and Linux you can download the precompiled binary at http://tzutalin.github.io/labelImg/.
+The steps for installing from source follow below.
+
 Create a new Conda virtual environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -398,7 +413,7 @@ To deal with the fact that ``labelImg`` (on Windows) requires the use of ``pyqt4
 
         activate labelImg
 
-Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beggining of your cmd path specifier, e.g.:
+Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beginning of your cmd path specifier, e.g.:
 
 .. code-block:: ps1con
 
@@ -407,7 +422,7 @@ Once you have activated your virtual environment, the name of the environment sh
 Downloading labelImg
 ~~~~~~~~~~~~~~~~~~~~
 
-- Inside you ``TesnorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
+- Inside you ``TensorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
 - To download the package you can either use `Git <https://git-scm.com/downloads>`_ to clone the `labelImg repo <https://github.com/tzutalin/labelImg>`_ inside the ``TensorFlow\addons`` folder, or you can simply download it as a `ZIP <https://github.com/tzutalin/labelImg/archive/master.zip>`_ and extract it's contents inside the ``TensorFlow\addons`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``labelImg-master`` to ``labelImg``. [#]_
 - You should now have a single folder named ``addons\labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
