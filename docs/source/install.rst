@@ -330,22 +330,26 @@ This should be done as follows:
         # From within TensorFlow/models/research/
         protoc object_detection/protos/*.proto --python_out=.
 
-    If you are on Windows and using Protobuf 3.5 or later, the multi-file selection wildcard (i.e ``*.proto``) will not work but you can do one of the following:
+    .. important::
 
-    1. If you are using `Windows Powershell`:
+        If you are on Windows and using Protobuf 3.5 or later, the multi-file selection wildcard (i.e ``*.proto``) will not work but you can do one of the following:
 
-    .. code-block:: python
+        .. tabs:: 
 
-        # From within TensorFlow/models/research/
-        Get-ChildItem object_detection/protos/*.proto | foreach {protoc "object_detection/protos/$($_.Name)" --python_out=.}
+            .. tab:: Windows Powershell
+
+                .. code-block:: python
+
+                    # From within TensorFlow/models/research/
+                    Get-ChildItem object_detection/protos/*.proto | foreach {protoc "object_detection/protos/$($_.Name)" --python_out=.}
 
 
-    2. Alternatively, if you are using `Command Prompt`
+            .. tab:: Command Prompt
 
-    .. code-block:: python
+                .. code-block:: python
 
-            # From within TensorFlow/models/research/
-            for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
+                        # From within TensorFlow/models/research/
+                        for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
 
 
 .. [#] NOTE: You MUST open a new `Anaconda/Command Prompt` for the changes in the environment variables to take effect.
@@ -356,15 +360,21 @@ Adding necessary Environment Variables
 
 1. As ``Tensorflow\models\research\object_detection`` is the core package for object detection, it's convenient to add the specific folder to our environmental variables.
 
-    - Linux: This can be done by either adding to ``~/.bashrc`` or running the following:
+.. tabs::
+
+    .. tab:: Linux
+        
+        This can be done by either adding to ``~/.bashrc`` or running the following:
 
         .. code-block:: bash
 
             export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research/object_detection
 
-    - Windows: The following folder must be added to your ``PYTHONPATH`` environment variable (See :ref:`set_env`):
+    .. tab:: Windows
+    
+        The following folder must be added to your ``PYTHONPATH`` environment variable (See :ref:`set_env`):
 
-        - ``<PATH_TO_TF>\TensorFlow\models\research\object_detection``
+            - ``<PATH_TO_TF>\TensorFlow\models\research\object_detection``
 
 .. note:: The above can also be achieved, in both Linux and Windows environments, by running the following from ``Tensorflow\models\research``:
 
@@ -380,14 +390,20 @@ Adding necessary Environment Variables
 
 2. For whatever reason, some of the TensorFlow packages that are required to perform object detection, do not come pre-installed with our tensorflow installation. 
 
-    - Linux: The `Installation docs <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md>`_ suggest that you either run, or add to ``~/.bashrc`` file, the following command, which adds these packages to your PYTHONPATH:
+.. tabs::
+
+    .. tab:: Linux
+    
+        The `Installation docs <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md>`_ suggest that you either run, or add to ``~/.bashrc`` file, the following command, which adds these packages to your PYTHONPATH:
 
         .. code-block:: bash
 
             # From within tensorflow/models/research/
             export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research:<PATH_TO_TF>/TensorFlow/models/research/slim
 
-    - Windows: The only way that I found works best, is to simply add the following folders to your ``PYTHONPATH`` environment variable (See also :ref:`set_env`):
+    .. tab:: Windows
+        
+        The only way that I found works best, is to simply add the following folders to your ``PYTHONPATH`` environment variable (See also :ref:`set_env`):
 
         - ``<PATH_TO_TF>\TensorFlow\models\research``
         - ``<PATH_TO_TF>\TensorFlow\models\research\slim``
@@ -399,27 +415,29 @@ COCO API installation (Optional)
 
 The ``pycocotools`` package should be installed if you are interested in using COCO evaluation metrics.
 
-1. Windows:
+.. tabs::
 
-    Run the following command to install ``pycocotools`` with Windows support:
+    .. tab:: Windows
 
-    .. code-block:: bash
+        Run the following command to install ``pycocotools`` with Windows support:
 
-        pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+        .. code-block:: bash
+
+            pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 
 
-    Note that, according to the `package's instructions <https://github.com/philferriere/cocoapi#this-clones-readme>`_, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from `here <https://go.microsoft.com/fwlink/?LinkId=691126>`_.
+        Note that, according to the `package's instructions <https://github.com/philferriere/cocoapi#this-clones-readme>`_, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from `here <https://go.microsoft.com/fwlink/?LinkId=691126>`_.
 
-2. Linux:
+    .. tab:: Linux
+    
+        Download `cocoapi <https://github.com/cocodataset/cocoapi>`_ to a directory of your choice, then ``make`` and copy the pycocotools subfolder to the ``Tensorflow/models/research`` directory, as such: 
 
-    Download `cocoapi <https://github.com/cocodataset/cocoapi>`_ to a directory of your choice, then ``make`` and copy the pycocotools subfolder to the ``Tensorflow/models/research`` directory, as such: 
+        .. code-block:: bash
 
-    .. code-block:: bash
-
-        git clone https://github.com/cocodataset/cocoapi.git
-        cd cocoapi/PythonAPI
-        make
-        cp -r pycocotools <PATH_TO_TF>/TensorFlow/models/research/
+            git clone https://github.com/cocodataset/cocoapi.git
+            cd cocoapi/PythonAPI
+            make
+            cp -r pycocotools <PATH_TO_TF>/TensorFlow/models/research/
 
 
 The default metrics are based on those used in Pascal VOC evaluation. To use the COCO object detection metrics add `metrics_set: "coco_detection_metrics"` to the `eval_config` message in the config file. To use the COCO instance segmentation metrics add `metrics_set: "coco_mask_metrics"` to the `eval_config` message in the config file.
@@ -447,6 +465,8 @@ Test your Installation
         2018-03-22 03:07:54.623130: E C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\stream_executor\cuda\cuda_dnn.cc:378] Loaded runtime CuDNN library: 7101 (compatibility version 7100) but source was compiled with 7003 (compatibility version 7000).  If using a binary install, upgrade your CuDNN library to match.  If building from sources, make sure the library loaded at runtime matches a compatible version specified during compile configuration.
 
 - If the above line is present in the printed debugging, it means that you have not installed the correct version of the cuDNN libraries. In this case make sure you re-do the :ref:`cudnn_install` step, making sure you instal cuDNN v7.0.5.
+
+ 
 
 .. _labelImg_install:
 

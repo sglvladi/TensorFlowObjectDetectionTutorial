@@ -29,7 +29,7 @@ The software tools which we shall use throughout this tutorial are listed in the
 .. [*] Even though this tutorial is based on Windows 10, most steps (excluding the setting of environmental variables) should apply for Linux, too.
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 4
    :caption: Contents:
 
    install
