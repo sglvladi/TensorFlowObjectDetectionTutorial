@@ -24,7 +24,10 @@ Although having Anaconda is not a requirement in order to install and use Tensor
 TensorFlow Installation 
 -----------------------
 
-As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilise different hardware on your computer to run their computationally heavy Machine Learning algorithms. The simplest to install, but also in most cases the slowest in terms of performance, is :ref:`tensorflow_cpu`, which runs directly on the CPU of your machine. Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TesnsorFlow, in which case you should follow the guidelines for installing :ref:`tensorflow_gpu`.  
+As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilise different hardware on your computer to run their computationally heavy Machine Learning algorithms.
+    
+    1. The simplest to install, but also in most cases the slowest in terms of performance, is :ref:`tensorflow_cpu`, which runs directly on the CPU of your machine. 
+    2. Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TesnsorFlow, in which case you should follow the guidelines for installing :ref:`tensorflow_gpu`.  
 
 .. _tensorflow_cpu:
 
@@ -62,7 +65,7 @@ Install TensorFlow CPU for Python
 
     .. code-block:: posh
 
-        pip install --ignore-installed --upgrade tensorflow==1.7.0
+        pip install --ignore-installed --upgrade tensorflow==1.9
 
 - Wait for the installation to finish
 
@@ -89,11 +92,11 @@ Test your Installation
         >>> hello = tf.constant('Hello, TensorFlow!')
         >>> sess = tf.Session()
 
-- Once the above is run, if you see a print-out similar (but not identical) to the one below, it means that you could benefit from installing TensorFlow by building the sources that correspond to you specific CPU. Everything should still run as normal, just slower than if you had built TensorFlow from source.
+- Once the above is run, if you see a print-out similar (or identical) to the one below, it means that you could benefit from installing TensorFlow by building the sources that correspond to you specific CPU. Everything should still run as normal, just slower than if you had built TensorFlow from source.
 
     .. code-block:: python
 
-        2018-03-21 22:10:18.682767: I C:\tf_jenkins\workspace\rel-win\M\windows\PY\36\tensorflow\core\platform\cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+        2019-02-28 11:59:25.810663: I T:\src\github\tensorflow\tensorflow\core\platform\cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
 
 - Finally, for the sake of completing the test as described by TensorFlow themselves (see `here <https://www.tensorflow.org/install/install_windows#validate_your_installation>`_), let's run the following:
 
@@ -191,7 +194,7 @@ Install TensorFlow GPU for Python
 
     .. code-block:: posh
 
-        pip install --ignore-installed --upgrade tensorflow-gpu==1.8
+        pip install --ignore-installed --upgrade tensorflow-gpu==1.9
 
 - Wait for the installation to finish
 
@@ -450,7 +453,7 @@ Test your Installation
 LabelImg Installation
 ---------------------
 
-For Windows and Linux you can download the precompiled binary at http://tzutalin.github.io/labelImg/.
+For Windows and Linux you can download the precompiled binary `here <http://tzutalin.github.io/labelImg/>`_ .
 The steps for installing from source follow below.
 
 Create a new Conda virtual environment

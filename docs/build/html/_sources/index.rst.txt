@@ -13,11 +13,11 @@ The software tools which we shall use throughout this tutorial are listed in the
 +---------------------------------------------+
 | Target Software versions                    |
 +==============+==============================+
-| OS           | Windows 10, Ubuntu16.04 [*]_ |
+| OS           | Windows, Linux [*]_          |
 +--------------+------------------------------+
 | Python       | 3.6                          |
 +--------------+------------------------------+
-| TensorFlow   | 1.6                          |
+| TensorFlow   | 1.9                          |
 +--------------+------------------------------+
 | CUDA Toolkit | v9.0                         |
 +--------------+------------------------------+
@@ -26,7 +26,7 @@ The software tools which we shall use throughout this tutorial are listed in the
 | Anaconda     | Python 3.6 (Optional)        |
 +--------------+------------------------------+
 
-.. [*] Even though this tutorial is based on Windows 10, most steps (excluding the setting of environmental variables) should apply for Ubuntu 16.04, too.
+.. [*] Even though this tutorial is based on Windows 10, most steps (excluding the setting of environmental variables) should apply for Linux, too.
 
 .. toctree::
    :maxdepth: 5

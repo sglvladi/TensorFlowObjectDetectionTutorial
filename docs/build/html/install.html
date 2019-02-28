@@ -112,10 +112,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#labelimg-installation">LabelImg Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">Create a new Conda virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Create a new Conda virtual environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#downloading-labelimg">Downloading labelImg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-dependencies-and-compiling-package">Installing dependencies and compiling package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">Test your installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Test your installation</a></li>
 </ul>
 </li>
 </ul>
@@ -209,7 +209,13 @@
 </div>
 <div class="section" id="tensorflow-installation">
 <span id="tf-install"></span><h2>TensorFlow Installation<a class="headerlink" href="#tensorflow-installation" title="Permalink to this headline">¶</a></h2>
-<p>As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilise different hardware on your computer to run their computationally heavy Machine Learning algorithms. The simplest to install, but also in most cases the slowest in terms of performance, is <a class="reference internal" href="#tensorflow-cpu"><span class="std std-ref">TensorFlow CPU</span></a>, which runs directly on the CPU of your machine. Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TesnsorFlow, in which case you should follow the guidelines for installing <a class="reference internal" href="#tensorflow-gpu"><span class="std std-ref">TensorFlow GPU</span></a>.</p>
+<p>As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilise different hardware on your computer to run their computationally heavy Machine Learning algorithms.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The simplest to install, but also in most cases the slowest in terms of performance, is <a class="reference internal" href="#tensorflow-cpu"><span class="std std-ref">TensorFlow CPU</span></a>, which runs directly on the CPU of your machine.</li>
+<li>Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TesnsorFlow, in which case you should follow the guidelines for installing <a class="reference internal" href="#tensorflow-gpu"><span class="std std-ref">TensorFlow GPU</span></a>.</li>
+</ol>
+</div></blockquote>
 <div class="section" id="tensorflow-cpu">
 <span id="id1"></span><h3>TensorFlow CPU<a class="headerlink" href="#tensorflow-cpu" title="Permalink to this headline">¶</a></h3>
 <p>Getting setup with an installation of TensorFlow CPU can be done in 3 simple steps.</p>
@@ -247,7 +253,7 @@
 </li>
 <li><p class="first">Once open, type the following on the command line:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">0</span>
+<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">9</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -285,9 +291,9 @@
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Once the above is run, if you see a print-out similar (but not identical) to the one below, it means that you could benefit from installing TensorFlow by building the sources that correspond to you specific CPU. Everything should still run as normal, just slower than if you had built TensorFlow from source.</p>
+<li><p class="first">Once the above is run, if you see a print-out similar (or identical) to the one below, it means that you could benefit from installing TensorFlow by building the sources that correspond to you specific CPU. Everything should still run as normal, just slower than if you had built TensorFlow from source.</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">21</span> <span class="mi">22</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mf">18.682767</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">platform</span>\<span class="n">cpu_feature_guard</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">140</span><span class="p">]</span> <span class="n">Your</span> <span class="n">CPU</span> <span class="n">supports</span> <span class="n">instructions</span> <span class="n">that</span> <span class="n">this</span> <span class="n">TensorFlow</span> <span class="n">binary</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span><span class="p">:</span> <span class="n">AVX2</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span> <span class="mi">11</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mf">25.810663</span><span class="p">:</span> <span class="n">I</span> <span class="n">T</span><span class="p">:</span>\<span class="n">src</span>\<span class="n">github</span>\<span class="n">tensorflow</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">platform</span>\<span class="n">cpu_feature_guard</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">141</span><span class="p">]</span> <span class="n">Your</span> <span class="n">CPU</span> <span class="n">supports</span> <span class="n">instructions</span> <span class="n">that</span> <span class="n">this</span> <span class="n">TensorFlow</span> <span class="n">binary</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span><span class="p">:</span> <span class="n">AVX2</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -404,7 +410,7 @@
 </li>
 <li><p class="first">Once open, type the following on the command line:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow-gpu</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">8</span>
+<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-ignore-installed</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">tensorflow-gpu</span><span class="p">==</span><span class="n">1</span><span class="p">.</span><span class="n">9</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -714,10 +720,10 @@ cp -r pycocotools &lt;PATH_TO_TF&gt;/TensorFlow/models/research/
 </div>
 <div class="section" id="labelimg-installation">
 <span id="labelimg-install"></span><h2>LabelImg Installation<a class="headerlink" href="#labelimg-installation" title="Permalink to this headline">¶</a></h2>
-<p>For Windows and Linux you can download the precompiled binary at <a class="reference external" href="http://tzutalin.github.io/labelImg/">http://tzutalin.github.io/labelImg/</a>.
+<p>For Windows and Linux you can download the precompiled binary <a class="reference external" href="http://tzutalin.github.io/labelImg/">here</a> .
 The steps for installing from source follow below.</p>
-<div class="section" id="id12">
-<h3>Create a new Conda virtual environment<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h3>Create a new Conda virtual environment<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <p>To deal with the fact that <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> (on Windows) requires the use of <code class="docutils literal notranslate"><span class="pre">pyqt4</span></code>, while <code class="docutils literal notranslate"><span class="pre">tensorflow</span> <span class="pre">1.6</span></code> (and possibly other packages) require <code class="docutils literal notranslate"><span class="pre">pyqt5</span></code>, we will create a new virtual environment in which to run <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>.</p>
 <ul>
 <li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window</p>
@@ -748,7 +754,7 @@ The steps for installing from source follow below.</p>
 <h3>Downloading labelImg<a class="headerlink" href="#downloading-labelimg" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Inside you <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, create a new directory, name it <code class="docutils literal notranslate"><span class="pre">addons</span></code> and then <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it.</li>
-<li>To download the package you can either use <a class="reference external" href="https://git-scm.com/downloads">Git</a> to clone the <a class="reference external" href="https://github.com/tzutalin/labelImg">labelImg repo</a> inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder, or you can simply download it as a <a class="reference external" href="https://github.com/tzutalin/labelImg/archive/master.zip">ZIP</a> and extract it’s contents inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder. To keep things consistent, in the latter case you will have to rename the extracted folder <code class="docutils literal notranslate"><span class="pre">labelImg-master</span></code> to <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>. <a class="footnote-reference" href="#id16" id="id15">[3]</a></li>
+<li>To download the package you can either use <a class="reference external" href="https://git-scm.com/downloads">Git</a> to clone the <a class="reference external" href="https://github.com/tzutalin/labelImg">labelImg repo</a> inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder, or you can simply download it as a <a class="reference external" href="https://github.com/tzutalin/labelImg/archive/master.zip">ZIP</a> and extract it’s contents inside the <code class="docutils literal notranslate"><span class="pre">TensorFlow\addons</span></code> folder. To keep things consistent, in the latter case you will have to rename the extracted folder <code class="docutils literal notranslate"><span class="pre">labelImg-master</span></code> to <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>. <a class="footnote-reference" href="#id17" id="id16">[3]</a></li>
 <li>You should now have a single folder named <code class="docutils literal notranslate"><span class="pre">addons\labelImg</span></code> under your <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, which contains another 4 folders as such:</li>
 </ul>
 <div class="line-block">
@@ -764,10 +770,10 @@ The steps for installing from source follow below.</p>
 <div class="line"><br /></div>
 </div>
 </div>
-<table class="docutils footnote" frame="void" id="id16" rules="none">
+<table class="docutils footnote" frame="void" id="id17" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id15">[3]</a></td><td>The latest repo commit when writing this tutorial is <a class="reference external" href="https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b">8d1bd68</a>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id16">[3]</a></td><td>The latest repo commit when writing this tutorial is <a class="reference external" href="https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b">8d1bd68</a>.</td></tr>
 </tbody>
 </table>
 </div>
@@ -787,8 +793,8 @@ The steps for installing from source follow below.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id17">
-<h3>Test your installation<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h3>Test your installation<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window and activate the <cite>tensorflow_gpu</cite> environment (if you have not done so already)</p>
 </li>
