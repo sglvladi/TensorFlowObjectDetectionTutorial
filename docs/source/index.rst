@@ -23,10 +23,10 @@ The software tools which we shall use throughout this tutorial are listed in the
 +--------------+------------------------------+
 | CuDNN        | v7.0.5                       |
 +--------------+------------------------------+ 
-| Anaconda     | Python 3.6 (Optional)        |
+| Anaconda     | Python 3.7 (Optional)        |
 +--------------+------------------------------+
 
-.. [*] Even though this tutorial is based on Windows 10, most steps (excluding the setting of environmental variables) should apply for Linux, too.
+.. [*] Even though this tutorial is mostly based (and properly tested) on Windows 10, information is also provided for Linux systems.
 
 .. toctree::
    :maxdepth: 4

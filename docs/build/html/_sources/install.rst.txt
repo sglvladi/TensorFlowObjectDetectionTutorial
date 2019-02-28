@@ -10,14 +10,25 @@ General Remarks
 
 - To ensure that we have no package conflicts and/or that we can install several different versions/variants of TensorFlow (e.g. CPU and GPU), it is generally recommended to use a virtual environment of some sort. For the purposes of this tutorial we will be creating and managing our virtual environments using Anaconda, but you are welcome to use the virtual environment manager of your choice (e.g. virtualenv). 
 
-Install Anaconda Python 3.6 (Optional)
+Install Anaconda Python 3.7 (Optional)
 --------------------------------------
 Although having Anaconda is not a requirement in order to install and use TensorFlow, I suggest doing so, due to it's intuitive way of managing packages and setting up new virtual environments. Anaconda is a pretty useful tool, not only for working with TensorFlow, but in general for anyone working in Python, so if you haven't had a chance to work with it, now is a good chance.
 
-- Go to `<https://www.anaconda.com/download/>`_
-- Download Anaconda Python 3.6 version
-- If disk space is an issue for your machine, you could install the minified version of Anaconda (i.e. Miniconda).
-- When prompted for a "Destination Folder" you can chose whichever you wish, but I generally tend to use ``C:\Anaconda3``, to keep things simple. Putting Anaconda under ``C:\Anaconda3`` also ensures that you don't get the awkward ```Destination Folder` contains spaces`` warning.
+.. tabs::
+
+    .. tab:: Windows
+
+        - Go to `<https://www.anaconda.com/download/>`_
+        - Download `Anaconda Python 3.7 version for Windows <https://repo.anaconda.com/archive/Anaconda3-2018.12-Windows-x86_64.exe>`_
+        - Run the downloaded executable (``.exe``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/windows/>`_ for more details.
+        - (Optional) In the next step, check the box "Add Anaconda to my PATH environment variable". This will make Anaconda your default Python distribution, which should ensure that you have the same default Python distribution across all editors.
+
+    .. tab:: Linux
+
+        - Go to `<https://www.anaconda.com/download/>`_
+        - Download `Anaconda Python 3.7 version for Linux <https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh>`_
+        - Run the downloaded bash script (``.sh``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/linux/>`_ for more details.
+        - When prompted with the question "Do you wish the installer to prepend the Anaconda<2 or 3> install location to PATH in your /home/<user>/.bashrc ?", answer "Yes". If you enter "No", you must manually add the path to Anaconda or conda will not work.
 
 .. _tf_install:
 
@@ -123,39 +134,72 @@ Before proceeding to install TesnsorFlow GPU, you need to make sure that your sy
 +-------------------------------------+
 | CuDNN v7.0.5                        |
 +-------------------------------------+ 
-| Anaconda with Python 3.6 (Optional) |
+| Anaconda with Python 3.7 (Optional) |
 +-------------------------------------+
 
 .. _cuda_install:
 
 Install CUDA Toolkit
 ***********************
-Follow this `link <https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`_ to download and install CUDA Toolkit v9.0.
+.. tabs::
+
+    .. tab:: Windows
+
+        Follow this `link <https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`_ to download and install CUDA Toolkit v9.0.
+
+    .. tab:: Linux
+
+        Follow this `link <https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&target_arch=x86_64>`_ to download and install CUDA Toolkit v9.0 for your Linux distribution.
 
 .. _cudnn_install:
 
 Install CUDNN
 ****************
-- Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
-- Create a user profile if needed and log in
-- Select `cuDNN v7.0.5 (Feb 28, 2018), for CUDA 9.0 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse705-9>`_
-- Download `cuDNN v7.0.5 Library for Windows 10 <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.0.5/prod/9.0_20171129/cudnn-9.0-windows10-x64-v7>`_
-- Extract the contents of the zip file (i.e. the folder named ``cuda``) inside ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\``, where ``<INSTALL_PATH>`` points to the installation directory specified during the installation of the CUDA Toolkit. By default ``<INSTALL_PATH>`` = ``C:\Program Files``.
+.. tabs::
+
+    .. tab:: Windows
+
+        - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
+        - Create a user profile if needed and log in
+        - Select `cuDNN v7.0.5 (Feb 28, 2018), for CUDA 9.0 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse705-9>`_
+        - Download `cuDNN v7.0.5 Library for Windows 10 <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.0.5/prod/9.0_20171129/cudnn-9.0-windows10-x64-v7>`_
+        - Extract the contents of the zip file (i.e. the folder named ``cuda``) inside ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\``, where ``<INSTALL_PATH>`` points to the installation directory specified during the installation of the CUDA Toolkit. By default ``<INSTALL_PATH>`` = ``C:\Program Files``.
+
+    .. tab:: Linux
+
+        - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
+        - Create a user profile if needed and log in
+        - Select `cuDNN v7.0.5 (Feb 28, 2018), for CUDA 9.0 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse705-9>`_
+        - Download `cuDNN v7.0.5 Library for Linux <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.0.5/prod/9.0_20171129/cudnn-9.0-linux-x64-v7>`_
+        - Follow the instructions under Section 2.3.1 of the `CuDNN Installation Guide <https://developer.download.nvidia.com/compute/machine-learning/cudnn/secure/v7.0.5/prod/Doc/cuDNN-Installation-Guide.pdf?KuMH0SWQKOxRm-iCAdfWlxEMK7eWjI528XHuZvaXjt73sOFgHT0dczMVRMRx8NqSNxabcGwzsgBgdTeshiZqQ7QmMQ3DwdTQHbjJGu04-Dw1F4Eyvd8B9u_U5YkSthOTFCASAp-MWj6Ki9RIK209dftWXhk7Df33u2__kbsKa5L9a0BXvRfTjZ-LZzH3zQpydg>`_ to install CuDNN.
 
 .. _set_env:
 
-Set Your Environment Variables
-**********************************
+Environment Setup
+*****************
+.. tabs::
 
-- Go to `Start` and Search "environment variables"
-- Click the Environment Variables button
-- Click on the ``Path`` system variable and select edit
-- Add the following paths:
-    
-    - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin``
-    - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\libnvvp``
-    - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64``
-    - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\cuda\bin``
+    .. tab:: Windows
+
+        - Go to `Start` and Search "environment variables"
+        - Click the Environment Variables button
+        - Click on the ``Path`` system variable and select edit
+        - Add the following paths:
+            
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\libnvvp``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v9.0\cuda\bin``
+
+    .. tab:: Linux 
+
+        As per Section 7.1.1 of the `CUDA Installation Guide for Linux <http://developer.download.nvidia.com/compute/cuda/9.0/Prod/docs/sidebar/CUDA_Installation_Guide_Linux.pdf>`_, append the following lines to ``~/.bashrc``:
+
+        .. code-block:: bash
+
+            # CUDA related exports
+            export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
+            export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 Update your GPU drivers (Optional)
 **********************************
@@ -163,7 +207,7 @@ If during the installation of the CUDA Toolkit (see :ref:`cuda_install`) you sel
 
 - Go to `<http://www.nvidia.com/Download/index.aspx>`_
 - Select your GPU version to download
-- Install the driver 
+- Install the driver for your chosen OS
 
 Create a new Conda virtual environment
 **************************************
@@ -259,15 +303,15 @@ Building on the assumption that you have just created your new virtual environme
 +--------------+------------------------------+
 | Name         | Tutorial version-build       |
 +==============+==============================+
-| pillow       | 5.0.0-py36h0738816_0         |
+| pillow       | 5.4.1-py36hdc69c19_0         |
 +--------------+------------------------------+
-| lxml         | 4.2.0-py36heafd4d3_0         |
+| lxml         | 4.3.1-py36h1350720_0         |
 +--------------+------------------------------+
-| jupyter      | 1.0.0-py36_4                 |
+| jupyter      | 1.0.0-py36_7                 |
 +--------------+------------------------------+
-| matplotlib   | 2.2.2-py36h153e9ff_0         |
+| matplotlib   | 3.0.2-py36hc8f65d3_0         |
 +--------------+------------------------------+
-| opencv       | 3.3.1-py36h20b85fd_1         |
+| opencv       | 3.4.2-py36h40b0b35_0         |
 +--------------+------------------------------+
 
 The packages can be installed using ``conda`` by running:
@@ -307,7 +351,7 @@ Downloading the TensorFlow Models
         ├── samples
         └── tutorials
     
-.. [#] The latest repo commit when writing this tutorial is `da903e0 <https://github.com/tensorflow/models/commit/da903e07aea0887d59ebf612557243351ddfb4e6>`_.
+.. [#] The latest repo commit when writing this tutorial is `4b566d4 <https://github.com/tensorflow/models/commit/4b566d4e800ff82579eda1f682f9ce7aa8792ea8>`_.
 
 Protobuf Installation/Compilation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -483,10 +527,20 @@ To deal with the fact that ``labelImg`` (on Windows) requires the use of ``pyqt4
 
 * Open a new `Anaconda/Command Prompt` window 
 * Type the following command:
+    
+    .. tabs:: 
 
-    .. code-block:: bash
+        .. tab:: Windows
 
-        conda create -n labelImg pyqt=4
+            .. code-block:: bash
+
+                conda create -n labelImg pyqt=4
+
+        .. tab:: Linux
+        
+            .. code-block:: bash
+
+                conda create -n labelImg pyqt=5
 
 * The above will create a new virtual environment with name ``labelImg``
 * Now lets activate the newly created virtual environment by running the following in the `Anaconda Promt` window:
@@ -527,11 +581,23 @@ Installing dependencies and compiling package
 - Open a new `Anaconda/Command Prompt` window and activate the `tensorflow_gpu` environment (if you have not done so already) 
 - ``cd`` into ``TensorFlow\addons\labelImg`` and run the following commands:
 
-    .. code-block:: posh
-        
-        conda install pyqt=4
-        conda install lxml
-        pyrcc4 -py3 -o resources.py resources.qrc
+    .. tabs:: 
+
+        .. tab:: Windows
+
+            .. code-block:: bash
+                
+                conda install pyqt=4
+                conda install lxml
+                pyrcc4 -py3 -o resources.py resources.qrc
+            
+        .. tab:: Linux 
+
+            .. code-block:: bash
+
+                sudo apt-get install pyqt5-dev-tools
+                sudo pip install -r requirements/requirements-linux-python3.txt
+                make qt5py3
 
 
 Test your installation

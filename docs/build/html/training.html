@@ -184,51 +184,52 @@
 </ol>
 <div class="section" id="preparing-workspace">
 <h2>Preparing workspace<a class="headerlink" href="#preparing-workspace" title="Permalink to this headline">¶</a></h2>
-<p>If you have followed the tutorial, you should by now have a folder <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>, placed under <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code>), with the following directory tree:</p>
-<div class="line-block">
-<div class="line">TensorFlow</div>
-<div class="line">├─ addons</div>
-<div class="line">│   └── labelImg</div>
-<div class="line">└─ models</div>
-<div class="line-block">
-<div class="line">├── official</div>
-<div class="line">├── research</div>
-<div class="line">├── samples</div>
-<div class="line">└── tutorials</div>
-<div class="line"><br /></div>
-<div class="line"><br /></div>
+<ol class="arabic">
+<li><p class="first">If you have followed the tutorial, you should by now have a folder <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>, placed under <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code>), with the following directory tree:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TensorFlow
+├─ addons
+│   └── labelImg
+└─ models
+    ├── official
+    ├── research
+    ├── samples
+    └── tutorials
+</pre></div>
 </div>
+</div></blockquote>
+</li>
+<li><p class="first">Now create a new folder under <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>  and call it <code class="docutils literal notranslate"><span class="pre">workspace</span></code>. It is within the <code class="docutils literal notranslate"><span class="pre">workspace</span></code> that we will store all our training set-ups. Now let’s go under workspace and create another folder named <code class="docutils literal notranslate"><span class="pre">training_demo</span></code>. Now our directory structure should be as so:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TensorFlow
+├─ addons
+│   └─ labelImg
+├─ models
+│   ├─ official
+│   ├─ research
+│   ├─ samples
+│   └─ tutorials
+└─ workspace
+    └─ training_demo
+</pre></div>
 </div>
-<p>Now create a new folder under <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>  and call it <code class="docutils literal notranslate"><span class="pre">workspace</span></code>. It is within the <code class="docutils literal notranslate"><span class="pre">workspace</span></code> that we will store all our training set-ups. Now let’s go under workspace and create another folder named <code class="docutils literal notranslate"><span class="pre">training_demo</span></code>. Now our directory structure should be as so:</p>
-<div class="line-block">
-<div class="line">TensorFlow</div>
-<div class="line">├─ addons</div>
-<div class="line">│   └─ labelImg</div>
-<div class="line">├─ models</div>
-<div class="line">│   ├─ official</div>
-<div class="line">│   ├─ research</div>
-<div class="line">│   ├─ samples</div>
-<div class="line">│   └─ tutorials</div>
-<div class="line">└─ workspace</div>
-<div class="line-block">
-<div class="line">└─ training_demo</div>
-<div class="line"><br /></div>
-<div class="line"><br /></div>
+</div></blockquote>
+</li>
+<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder shall be our <cite>training folder</cite>, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train a different model. The typical structure for training folders is shown below.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>training_demo
+├─ annotations
+├─ images
+│   ├─ <span class="nb">test</span>
+│   └─ train
+├─ pre-trained-model
+├─ training
+└─ README.md
+</pre></div>
 </div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder shall be our <cite>training folder</cite>, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train a different model. The typical structure for training folders is shown below.</p>
-<div class="line-block">
-<div class="line">training_demo</div>
-<div class="line">├─ annotations</div>
-<div class="line">├─ images</div>
-<div class="line">│   ├─ test</div>
-<div class="line">│   └─ train</div>
-<div class="line">├─ pre-trained-model</div>
-<div class="line">├─ training</div>
-<div class="line">└─ README.md</div>
-<div class="line"><br /></div>
-<div class="line"><br /></div>
-</div>
+</div></blockquote>
+</li>
+</ol>
 <p>Here’s an explanation for each of the folders/filer shown in the above tree:</p>
 <ul>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">annotations</span></code>: This folder will be used to store all <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> files and the respective TensorFlow <code class="docutils literal notranslate"><span class="pre">*.record</span></code> files, which contain the list of annotations for our dataset images.</p>
@@ -309,23 +310,19 @@ item {
 <li>Converting the <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> files of each dataset to <code class="docutils literal notranslate"><span class="pre">*.record</span></code> files (TFRecord format).</li>
 </ul>
 <p>Before we proceed to describe the above steps, let’s create a directory where we can store some scripts. Under the <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, create a new folder <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts</span></code>, which we can use to store some useful scripts. To make things even tidier, let’s create a new folder <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code>, where we shall store scripts that we can use to preprocess our training inputs. Below is out <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> directory tree structure, up to now:</p>
-<div class="line-block">
-<div class="line">TensorFlow</div>
-<div class="line">├─ addons</div>
-<div class="line">│   └─ labelImg</div>
-<div class="line">├─ models</div>
-<div class="line">│   ├─ official</div>
-<div class="line">│   ├─ research</div>
-<div class="line">│   ├─ samples</div>
-<div class="line">│   └─ tutorials</div>
-<div class="line">├─ scripts</div>
-<div class="line">│   └─ preprocessing</div>
-<div class="line">└─ workspace</div>
-<div class="line-block">
-<div class="line">└─ training_demo</div>
-<div class="line"><br /></div>
-<div class="line"><br /></div>
-</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TensorFlow
+├─ addons
+│   └─ labelImg
+├─ models
+│   ├─ official
+│   ├─ research
+│   ├─ samples
+│   └─ tutorials
+├─ scripts
+│   └─ preprocessing
+└─ workspace
+    └─ training_demo
+</pre></div>
 </div>
 <div class="section" id="converting-xml-to-csv">
 <h3>Converting <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> to <code class="docutils literal notranslate"><span class="pre">*.csv</span></code><a class="headerlink" href="#converting-xml-to-csv" title="Permalink to this headline">¶</a></h3>
