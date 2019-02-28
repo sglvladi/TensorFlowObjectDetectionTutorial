@@ -298,15 +298,15 @@ Downloading the TensorFlow Models
 - To download the models you can either use `Git <https://git-scm.com/downloads>`_ to clone the `TensorFlow Models repo <https://github.com/tensorflow/models>`_ inside the ``TensorFlow`` folder, or you can simply download it as a `ZIP <https://github.com/tensorflow/models/archive/master.zip>`_ and extract it's contents inside the ``TensorFlow`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``models-master`` to ``models``. [#]_
 - You should now have a single folder named ``models`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
-| TensorFlow
-| └─ models
-|     ├── official
-|     ├── research
-|     ├── samples
-|     └── tutorials
-|
-|
+.. code-block:: bash
 
+    TensorFlow
+    └─ models
+        ├── official
+        ├── research
+        ├── samples
+        └── tutorials
+    
 .. [#] The latest repo commit when writing this tutorial is `da903e0 <https://github.com/tensorflow/models/commit/da903e07aea0887d59ebf612557243351ddfb4e6>`_.
 
 Protobuf Installation/Compilation
@@ -484,14 +484,14 @@ To deal with the fact that ``labelImg`` (on Windows) requires the use of ``pyqt4
 * Open a new `Anaconda/Command Prompt` window 
 * Type the following command:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         conda create -n labelImg pyqt=4
 
 * The above will create a new virtual environment with name ``labelImg``
 * Now lets activate the newly created virtual environment by running the following in the `Anaconda Promt` window:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         activate labelImg
 
@@ -508,15 +508,16 @@ Downloading labelImg
 - To download the package you can either use `Git <https://git-scm.com/downloads>`_ to clone the `labelImg repo <https://github.com/tzutalin/labelImg>`_ inside the ``TensorFlow\addons`` folder, or you can simply download it as a `ZIP <https://github.com/tzutalin/labelImg/archive/master.zip>`_ and extract it's contents inside the ``TensorFlow\addons`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``labelImg-master`` to ``labelImg``. [#]_
 - You should now have a single folder named ``addons\labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
-| TensorFlow
-| ├─ addons
-| │   └── labelImg
-| └─ models
-|     ├── official
-|     ├── research
-|     ├── samples
-|     └── tutorials
-|
+.. code-block:: bash
+
+    TensorFlow
+    ├─ addons
+    │   └── labelImg
+    └─ models
+        ├── official
+        ├── research
+        ├── samples
+        └── tutorials
 
 .. [#] The latest repo commit when writing this tutorial is `8d1bd68 <https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b>`_.
 

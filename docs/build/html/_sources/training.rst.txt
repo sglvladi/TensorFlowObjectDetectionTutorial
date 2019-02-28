@@ -19,46 +19,46 @@ Now that we have done all the above, we can start doing some cool stuff. Here we
 Preparing workspace
 ~~~~~~~~~~~~~~~~~~~
 
-If you have followed the tutorial, you should by now have a folder ``Tensorflow``, placed under ``<PATH_TO_TF>`` (e.g. ``C:\Users\sglvladi\Documents``), with the following directory tree:
+1. If you have followed the tutorial, you should by now have a folder ``Tensorflow``, placed under ``<PATH_TO_TF>`` (e.g. ``C:\Users\sglvladi\Documents``), with the following directory tree:
 
-| TensorFlow
-| ├─ addons
-| │   └── labelImg
-| └─ models
-|     ├── official
-|     ├── research
-|     ├── samples
-|     └── tutorials
-|
-|
+    .. code-block:: bash
 
-Now create a new folder under ``TensorFlow``  and call it ``workspace``. It is within the ``workspace`` that we will store all our training set-ups. Now let's go under workspace and create another folder named ``training_demo``. Now our directory structure should be as so:
+        TensorFlow
+        ├─ addons
+        │   └── labelImg
+        └─ models
+            ├── official
+            ├── research
+            ├── samples
+            └── tutorials
 
-| TensorFlow
-| ├─ addons
-| │   └─ labelImg
-| ├─ models
-| │   ├─ official
-| │   ├─ research
-| │   ├─ samples
-| │   └─ tutorials
-| └─ workspace
-|     └─ training_demo
-|
-|
+2. Now create a new folder under ``TensorFlow``  and call it ``workspace``. It is within the ``workspace`` that we will store all our training set-ups. Now let's go under workspace and create another folder named ``training_demo``. Now our directory structure should be as so:
 
-The ``training_demo`` folder shall be our `training folder`, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train a different model. The typical structure for training folders is shown below.
+    .. code-block:: bash
 
-| training_demo
-| ├─ annotations
-| ├─ images
-| │   ├─ test
-| │   └─ train
-| ├─ pre-trained-model
-| ├─ training
-| └─ README.md
-|
-|
+        TensorFlow
+        ├─ addons
+        │   └─ labelImg
+        ├─ models
+        │   ├─ official
+        │   ├─ research
+        │   ├─ samples
+        │   └─ tutorials
+        └─ workspace
+            └─ training_demo
+
+3. The ``training_demo`` folder shall be our `training folder`, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train a different model. The typical structure for training folders is shown below.
+
+    .. code-block:: bash
+    
+        training_demo
+        ├─ annotations
+        ├─ images
+        │   ├─ test
+        │   └─ train
+        ├─ pre-trained-model
+        ├─ training
+        └─ README.md
 
 Here's an explanation for each of the folders/filer shown in the above tree:
 
@@ -142,20 +142,20 @@ There are two steps in doing so:
 
 Before we proceed to describe the above steps, let's create a directory where we can store some scripts. Under the ``TensorFlow`` folder, create a new folder ``TensorFlow\scripts``, which we can use to store some useful scripts. To make things even tidier, let's create a new folder ``TensorFlow\scripts\preprocessing``, where we shall store scripts that we can use to preprocess our training inputs. Below is out ``TensorFlow`` directory tree structure, up to now:
 
-| TensorFlow
-| ├─ addons
-| │   └─ labelImg
-| ├─ models
-| │   ├─ official
-| │   ├─ research
-| │   ├─ samples
-| │   └─ tutorials
-| ├─ scripts
-| │   └─ preprocessing
-| └─ workspace
-|     └─ training_demo
-|
-|
+.. code-block:: bash
+
+    TensorFlow
+    ├─ addons
+    │   └─ labelImg
+    ├─ models
+    │   ├─ official
+    │   ├─ research
+    │   ├─ samples
+    │   └─ tutorials
+    ├─ scripts
+    │   └─ preprocessing
+    └─ workspace
+        └─ training_demo
 
 Converting ``*.xml`` to ``*.csv``
 ---------------------------------
