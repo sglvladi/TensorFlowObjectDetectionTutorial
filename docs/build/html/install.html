@@ -17,34 +17,43 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/sphinx_tabs/tabs.js"></script>
+        <script type="text/javascript" src="_static/sphinx_tabs/semantic-ui-2.2.10/tab.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/semantic-ui-2.2.10/segment.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/semantic-ui-2.2.10/menu.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/semantic-ui-2.2.10/tab.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Detect Objects Using Your Webcam" href="camera.html" />
     <link rel="prev" title="TensorFlow Object Detection API tutorial" href="index.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -576,20 +585,35 @@ must be downloaded and compiled.</p>
 <span class="n">protoc</span> <span class="n">object_detection</span><span class="o">/</span><span class="n">protos</span><span class="o">/*.</span><span class="n">proto</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span>
 </pre></div>
 </div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
 <p>If you are on Windows and using Protobuf 3.5 or later, the multi-file selection wildcard (i.e <code class="docutils literal notranslate"><span class="pre">*.proto</span></code>) will not work but you can do one of the following:</p>
-<ol class="arabic simple">
-<li>If you are using <cite>Windows Powershell</cite>:</li>
-</ol>
+<div class="sphinx-tabs last docutils container">
+<div class="ui top attached tabular menu sphinx-menu docutils container">
+<div class="active item sphinx-data-tab-0-0 docutils container">
+<div class="docutils container">
+<p>Windows Powershell</p>
+</div>
+</div>
+<div class="item sphinx-data-tab-0-1 docutils container">
+<div class="docutils container">
+<p>Command Prompt</p>
+</div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-0-0 active docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within TensorFlow/models/research/</span>
 <span class="n">Get</span><span class="o">-</span><span class="n">ChildItem</span> <span class="n">object_detection</span><span class="o">/</span><span class="n">protos</span><span class="o">/*.</span><span class="n">proto</span> <span class="o">|</span> <span class="n">foreach</span> <span class="p">{</span><span class="n">protoc</span> <span class="s2">&quot;object_detection/protos/$($_.Name)&quot;</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span><span class="p">}</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="2">
-<li>Alternatively, if you are using <cite>Command Prompt</cite></li>
-</ol>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-0-1 docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within TensorFlow/models/research/</span>
 <span class="k">for</span> <span class="o">/</span><span class="n">f</span> <span class="o">%</span><span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;dir /b object_detection\protos\*.proto&#39;</span><span class="p">)</span> <span class="n">do</span> <span class="n">protoc</span> <span class="n">object_detection</span>\<span class="n">protos</span>\<span class="o">%</span><span class="n">i</span> <span class="o">--</span><span class="n">python_out</span><span class="o">=.</span>
 </pre></div>
+</div>
+</div>
+</div>
 </div>
 </div></blockquote>
 </li>
@@ -603,28 +627,35 @@ must be downloaded and compiled.</p>
 </div>
 <div class="section" id="adding-necessary-environment-variables">
 <h3>Adding necessary Environment Variables<a class="headerlink" href="#adding-necessary-environment-variables" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic">
-<li><p class="first">As <code class="docutils literal notranslate"><span class="pre">Tensorflow\models\research\object_detection</span></code> is the core package for object detection, it’s convenient to add the specific folder to our environmental variables.</p>
-<blockquote>
-<div><ul>
-<li><p class="first">Linux: This can be done by either adding to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or running the following:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:&lt;PATH_TO_TF&gt;/TensorFlow/models/research/object_detection
+<ol class="arabic simple">
+<li>As <code class="docutils literal notranslate"><span class="pre">Tensorflow\models\research\object_detection</span></code> is the core package for object detection, it’s convenient to add the specific folder to our environmental variables.</li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div class="ui top attached tabular menu sphinx-menu docutils container">
+<div class="active item sphinx-data-tab-1-0 docutils container">
+<div class="docutils container">
+Linux</div>
+</div>
+<div class="item sphinx-data-tab-1-1 docutils container">
+<div class="docutils container">
+Windows</div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-1-0 active docutils container">
+<p>This can be done by either adding to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or running the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:&lt;PATH_TO_TF&gt;/TensorFlow/models/research/object_detection
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p class="first">Windows: The following folder must be added to your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment variable (See <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-1-1 docutils container">
+<p>The following folder must be added to your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment variable (See <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\object_detection</span></code></li>
 </ul>
 </div></blockquote>
-</li>
-</ul>
-</div></blockquote>
-</li>
-</ol>
+</div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The above can also be achieved, in both Linux and Windows environments, by running the following from <code class="docutils literal notranslate"><span class="pre">Tensorflow\models\research</span></code>:</p>
@@ -636,57 +667,68 @@ must be downloaded and compiled.</p>
 <p>The above commands essentially build and install the <code class="docutils literal notranslate"><span class="pre">object_detection</span></code> Python package.</p>
 <p class="last"><strong>DRAWBACK</strong>: The above commands need to be run everytime there is a change/update of the <code class="docutils literal notranslate"><span class="pre">object_detection</span></code> package.</p>
 </div>
-<ol class="arabic" start="2">
-<li><p class="first">For whatever reason, some of the TensorFlow packages that are required to perform object detection, do not come pre-installed with our tensorflow installation.</p>
-<blockquote>
-<div><ul>
-<li><p class="first">Linux: The <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md">Installation docs</a> suggest that you either run, or add to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file, the following command, which adds these packages to your PYTHONPATH:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within tensorflow/models/research/</span>
+<ol class="arabic simple" start="2">
+<li>For whatever reason, some of the TensorFlow packages that are required to perform object detection, do not come pre-installed with our tensorflow installation.</li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div class="ui top attached tabular menu sphinx-menu docutils container">
+<div class="active item sphinx-data-tab-2-0 docutils container">
+<div class="docutils container">
+Linux</div>
+</div>
+<div class="item sphinx-data-tab-2-1 docutils container">
+<div class="docutils container">
+Windows</div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-2-0 active docutils container">
+<p>The <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md">Installation docs</a> suggest that you either run, or add to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file, the following command, which adds these packages to your PYTHONPATH:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From within tensorflow/models/research/</span>
 <span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:&lt;PATH_TO_TF&gt;/TensorFlow/models/research:&lt;PATH_TO_TF&gt;/TensorFlow/models/research/slim
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p class="first">Windows: The only way that I found works best, is to simply add the following folders to your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment variable (See also <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
-<blockquote>
-<div><ul class="simple">
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-2-1 docutils container">
+<p>The only way that I found works best, is to simply add the following folders to your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment variable (See also <a class="reference internal" href="#set-env"><span class="std std-ref">Set Your Environment Variables</span></a>):</p>
+<ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;\TensorFlow\models\research\slim</span></code></li>
 </ul>
-</div></blockquote>
-</li>
-</ul>
+</div>
 <p>where, in both cases, <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> replaces the absolute path to your <code class="docutils literal notranslate"><span class="pre">TesnorFlow</span></code> folder. (e.g. <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> = <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code> if <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> resides within your <code class="docutils literal notranslate"><span class="pre">Documents</span></code> folder)</p>
-</div></blockquote>
-</li>
-</ol>
+</div>
 </div>
 <div class="section" id="coco-api-installation-optional">
 <h3>COCO API installation (Optional)<a class="headerlink" href="#coco-api-installation-optional" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> package should be installed if you are interested in using COCO evaluation metrics.</p>
-<ol class="arabic">
-<li><p class="first">Windows:</p>
-<blockquote>
-<div><p>Run the following command to install <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> with Windows support:</p>
+<div class="sphinx-tabs docutils container">
+<div class="ui top attached tabular menu sphinx-menu docutils container">
+<div class="active item sphinx-data-tab-3-0 docutils container">
+<div class="docutils container">
+Windows</div>
+</div>
+<div class="item sphinx-data-tab-3-1 docutils container">
+<div class="docutils container">
+Linux</div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-3-0 active docutils container">
+<p>Run the following command to install <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> with Windows support:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/philferriere/cocoapi.git#subdirectory<span class="o">=</span>PythonAPI
 </pre></div>
 </div>
 <p>Note that, according to the <a class="reference external" href="https://github.com/philferriere/cocoapi#this-clones-readme">package’s instructions</a>, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from <a class="reference external" href="https://go.microsoft.com/fwlink/?LinkId=691126">here</a>.</p>
-</div></blockquote>
-</li>
-<li><p class="first">Linux:</p>
-<blockquote>
-<div><p>Download <a class="reference external" href="https://github.com/cocodataset/cocoapi">cocoapi</a> to a directory of your choice, then <code class="docutils literal notranslate"><span class="pre">make</span></code> and copy the pycocotools subfolder to the <code class="docutils literal notranslate"><span class="pre">Tensorflow/models/research</span></code> directory, as such:</p>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-3-1 docutils container">
+<p>Download <a class="reference external" href="https://github.com/cocodataset/cocoapi">cocoapi</a> to a directory of your choice, then <code class="docutils literal notranslate"><span class="pre">make</span></code> and copy the pycocotools subfolder to the <code class="docutils literal notranslate"><span class="pre">Tensorflow/models/research</span></code> directory, as such:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/cocodataset/cocoapi.git
 <span class="nb">cd</span> cocoapi/PythonAPI
 make
 cp -r pycocotools &lt;PATH_TO_TF&gt;/TensorFlow/models/research/
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-</ol>
+</div>
+</div>
 <p>The default metrics are based on those used in Pascal VOC evaluation. To use the COCO object detection metrics add <cite>metrics_set: “coco_detection_metrics”</cite> to the <cite>eval_config</cite> message in the config file. To use the COCO instance segmentation metrics add <cite>metrics_set: “coco_mask_metrics”</cite> to the <cite>eval_config</cite> message in the config file.</p>
 </div>
 <div class="section" id="test-tf-models">
@@ -823,7 +865,7 @@ The steps for installing from source follow below.</p>
         <a href="camera.html" class="btn btn-neutral float-right" title="Detect Objects Using Your Webcam" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="TensorFlow Object Detection API tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="TensorFlow Object Detection API tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -849,35 +891,16 @@ The steps for installing from source follow below.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

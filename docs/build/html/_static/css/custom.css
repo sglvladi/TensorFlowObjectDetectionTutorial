@@ -1,0 +1,6 @@
+.tab .wy-plain-list-disc:last-child,
+.rst-content .section ul:last-child,
+.rst-content .toctree-wrapper ul:last-child,
+article ul:last-child {
+    margin-bottom: 24px;
+}
