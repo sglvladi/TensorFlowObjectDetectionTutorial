@@ -303,15 +303,15 @@ Building on the assumption that you have just created your new virtual environme
 +--------------+------------------------------+
 | Name         | Tutorial version-build       |
 +==============+==============================+
-| pillow       | 5.4.1-py36hdc69c19_0         |
+| pillow       | 5.4.1                        |
 +--------------+------------------------------+
-| lxml         | 4.3.1-py36h1350720_0         |
+| lxml         | 4.3.1                        |
 +--------------+------------------------------+
-| jupyter      | 1.0.0-py36_7                 |
+| jupyter      | 1.0.0                        |
 +--------------+------------------------------+
-| matplotlib   | 3.0.2-py36hc8f65d3_0         |
+| matplotlib   | 3.0.2                        |
 +--------------+------------------------------+
-| opencv       | 3.4.2-py36h40b0b35_0         |
+| opencv       | 3.4.2                        |
 +--------------+------------------------------+
 
 The packages can be installed using ``conda`` by running:
