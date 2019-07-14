@@ -324,7 +324,7 @@ where ``<package_name>`` can be replaced with the name of the package, and optio
 
 .. code-block:: posh
 
-    conda install pillow, lxml, jupyter, matplotlib, opencv
+    conda install pillow, lxml, jupyter, matplotlib, opencv, cython
 
 Alternatively, if you don't want to use Anaconda you can install the packages using ``pip``:
 
