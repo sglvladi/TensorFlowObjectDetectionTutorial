@@ -329,13 +329,13 @@ The packages can be installed using ``conda`` by running:
 
 .. code-block:: posh
 
-    conda install <package_name>(=<version>), <package_name>(=<version>), ..., <package_name>(=<version>)
+    conda install <package_name>(=<version>) <package_name>(=<version>) ... <package_name>(=<version>)
 
 where ``<package_name>`` can be replaced with the name of the package, and optionally the package version can be specified by adding the optional specifier ``=<version>`` after ``<package_name>``. For example, to simply install all packages at their latest versions you can run:
 
 .. code-block:: posh
 
-    conda install pillow, lxml, jupyter, matplotlib, opencv, cython
+    conda install pillow lxml jupyter matplotlib opencv cython
 
 Alternatively, if you don't want to use Anaconda you can install the packages using ``pip``:
 
