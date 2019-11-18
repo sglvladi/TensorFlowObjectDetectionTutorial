@@ -578,7 +578,7 @@ Downloading labelImg
 Installing dependencies and compiling package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Open a new `Anaconda/Command Prompt` window and activate the `tensorflow_gpu` environment (if you have not done so already) 
+- Open a new `Anaconda/Command Prompt` window and activate the `labelImg` environment (if you have not done so already) 
 - ``cd`` into ``TensorFlow\addons\labelImg`` and run the following commands:
 
     .. tabs:: 
@@ -589,7 +589,7 @@ Installing dependencies and compiling package
                 
                 conda install pyqt=4
                 conda install lxml
-                pyrcc4 -py3 -o resources.py resources.qrc
+                pyrcc4 -py3 -o libs/resources.py resources.qrc
             
         .. tab:: Linux 
 
@@ -603,7 +603,7 @@ Installing dependencies and compiling package
 Test your installation
 ~~~~~~~~~~~~~~~~~~~~~~
 
-- Open a new `Anaconda/Command Prompt` window and activate the `tensorflow_gpu` environment (if you have not done so already) 
+- Open a new `Anaconda/Command Prompt` window and activate the `labelImg` environment (if you have not done so already) 
 - ``cd`` into ``TensorFlow\addons\labelImg`` and run the following command:
 
     .. code-block:: posh
