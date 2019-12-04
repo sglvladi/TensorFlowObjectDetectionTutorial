@@ -38,7 +38,7 @@ TensorFlow Installation
 As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilise different hardware on your computer to run their computationally heavy Machine Learning algorithms.
     
     1. The simplest to install, but also in most cases the slowest in terms of performance, is :ref:`tensorflow_cpu`, which runs directly on the CPU of your machine. 
-    2. Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TesnsorFlow, in which case you should follow the guidelines for installing :ref:`tensorflow_gpu`.  
+    2. Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TensorFlow, in which case you should follow the guidelines for installing :ref:`tensorflow_gpu`.  
 
 .. _tensorflow_cpu:
 
@@ -121,9 +121,9 @@ Test your Installation
 TensorFlow GPU
 ~~~~~~~~~~~~~~
 
-The installation of `TesnorFlow GPU` is slightly more involved than that of `TensorFlow CPU`, mainly due to the need of installing the relevant Graphics and CUDE drivers. There's a nice Youtube tutorial (see `here <https://www.youtube.com/watch?v=RplXYjxgZbw>`_), explaining how to install TensorFlow GPU. Although it describes different versions of the relevant components (including TensorFlow itself), the installation steps are generally the same with this tutorial. 
+The installation of `TensorFlow GPU` is slightly more involved than that of `TensorFlow CPU`, mainly due to the need of installing the relevant Graphics and CUDE drivers. There's a nice Youtube tutorial (see `here <https://www.youtube.com/watch?v=RplXYjxgZbw>`_), explaining how to install TensorFlow GPU. Although it describes different versions of the relevant components (including TensorFlow itself), the installation steps are generally the same with this tutorial. 
 
-Before proceeding to install TesnsorFlow GPU, you need to make sure that your system can satisfy the following requirements:
+Before proceeding to install TensorFlow GPU, you need to make sure that your system can satisfy the following requirements:
 
 +-------------------------------------+
 | Prerequisites                       |
@@ -452,7 +452,7 @@ Adding necessary Environment Variables
         - ``<PATH_TO_TF>\TensorFlow\models\research``
         - ``<PATH_TO_TF>\TensorFlow\models\research\slim``
 
-    where, in both cases, ``<PATH_TO_TF>`` replaces the absolute path to your ``TesnorFlow`` folder. (e.g. ``<PATH_TO_TF>`` = ``C:\Users\sglvladi\Documents`` if ``TensorFlow`` resides within your ``Documents`` folder)
+    where, in both cases, ``<PATH_TO_TF>`` replaces the absolute path to your ``TensorFlow`` folder. (e.g. ``<PATH_TO_TF>`` = ``C:\Users\sglvladi\Documents`` if ``TensorFlow`` resides within your ``Documents`` folder)
 
 COCO API installation (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
