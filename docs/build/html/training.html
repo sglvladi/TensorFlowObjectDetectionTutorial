@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,28 +11,36 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/semantic-ui-2.4.1/segment.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/semantic-ui-2.4.1/menu.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_tabs/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/sphinx_tabs/semantic-ui-2.4.1/tab.min.js"></script>
+        <script src="_static/sphinx_tabs/tabs.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Common issues" href="issues.html" />
@@ -51,7 +58,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> TensorFlow Object Detection API tutorial
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> TensorFlow Object Detection API tutorial
           
 
           
@@ -74,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -88,6 +96,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Training Custom Object Detector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#preparing-workspace">Preparing workspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#annotating-images">Annotating images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#partitioning-the-images">Partitioning the images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-label-map">Creating Label Map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-tensorflow-records">Creating TensorFlow Records</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#converting-xml-to-csv">Converting <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> to <code class="docutils literal notranslate"><span class="pre">*.csv</span></code></a></li>
@@ -96,6 +105,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#configuring-a-training-pipeline">Configuring a Training Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#training-the-model">Training the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluating-the-model-optional">Evaluating the Model (Optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#monitor-training-job-progress-using-tensorboard">Monitor Training Job Progress using TensorBoard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#exporting-a-trained-inference-graph">Exporting a Trained Inference Graph</a></li>
 </ul>
@@ -106,6 +116,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -144,7 +155,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Training Custom Object Detector</li>
     
@@ -169,23 +180,23 @@
 <h1>Training Custom Object Detector<a class="headerlink" href="#training-custom-object-detector" title="Permalink to this headline">¶</a></h1>
 <p>So, up to now you should have done the following:</p>
 <ul class="simple">
-<li>Installed TensorFlow, either CPU or GPU (See <a class="reference internal" href="install.html#tf-install"><span class="std std-ref">TensorFlow Installation</span></a>)</li>
-<li>Installed TensorFlow Models (See <a class="reference internal" href="install.html#tf-models-install"><span class="std std-ref">TensorFlow Models Installation</span></a>)</li>
-<li>Installed labelImg (See <a class="reference internal" href="install.html#labelimg-install"><span class="std std-ref">LabelImg Installation</span></a>)</li>
+<li><p>Installed TensorFlow, either CPU or GPU (See <a class="reference internal" href="install.html#tf-install"><span class="std std-ref">TensorFlow Installation</span></a>)</p></li>
+<li><p>Installed TensorFlow Models (See <a class="reference internal" href="install.html#tf-models-install"><span class="std std-ref">TensorFlow Models Installation</span></a>)</p></li>
+<li><p>Installed labelImg (See <a class="reference internal" href="install.html#labelimg-install"><span class="std std-ref">LabelImg Installation</span></a>)</p></li>
 </ul>
 <p>Now that we have done all the above, we can start doing some cool stuff. Here we will see how you can train your own object detector, and since it is not as simple as it sounds, we will have a look at:</p>
 <ol class="arabic simple">
-<li>How to organise your workspace/training files</li>
-<li>How to prepare/annotate image datasets</li>
-<li>How to generate tf records from such datasets</li>
-<li>How to configure a simple training pipeline</li>
-<li>How to train a model and monitor it’s progress</li>
-<li>How to export the resulting model and use it to detect objects.</li>
+<li><p>How to organise your workspace/training files</p></li>
+<li><p>How to prepare/annotate image datasets</p></li>
+<li><p>How to generate tf records from such datasets</p></li>
+<li><p>How to configure a simple training pipeline</p></li>
+<li><p>How to train a model and monitor it’s progress</p></li>
+<li><p>How to export the resulting model and use it to detect objects.</p></li>
 </ol>
 <div class="section" id="preparing-workspace">
 <h2>Preparing workspace<a class="headerlink" href="#preparing-workspace" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">If you have followed the tutorial, you should by now have a folder <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>, placed under <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code>), with the following directory tree:</p>
+<li><p>If you have followed the tutorial, you should by now have a folder <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>, placed under <code class="docutils literal notranslate"><span class="pre">&lt;PATH_TO_TF&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Documents</span></code>), with the following directory tree:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TensorFlow
 ├─ addons
@@ -199,7 +210,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Now create a new folder under <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>  and call it <code class="docutils literal notranslate"><span class="pre">workspace</span></code>. It is within the <code class="docutils literal notranslate"><span class="pre">workspace</span></code> that we will store all our training set-ups. Now let’s go under workspace and create another folder named <code class="docutils literal notranslate"><span class="pre">training_demo</span></code>. Now our directory structure should be as so:</p>
+<li><p>Now create a new folder under <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>  and call it <code class="docutils literal notranslate"><span class="pre">workspace</span></code>. It is within the <code class="docutils literal notranslate"><span class="pre">workspace</span></code> that we will store all our training set-ups. Now let’s go under workspace and create another folder named <code class="docutils literal notranslate"><span class="pre">training_demo</span></code>. Now our directory structure should be as so:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TensorFlow
 ├─ addons
@@ -215,7 +226,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder shall be our <cite>training folder</cite>, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train a different model. The typical structure for training folders is shown below.</p>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder shall be our <cite>training folder</cite>, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train a different model. The typical structure for training folders is shown below.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>training_demo
 ├─ annotations
@@ -232,22 +243,18 @@
 </ol>
 <p>Here’s an explanation for each of the folders/filer shown in the above tree:</p>
 <ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">annotations</span></code>: This folder will be used to store all <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> files and the respective TensorFlow <code class="docutils literal notranslate"><span class="pre">*.record</span></code> files, which contain the list of annotations for our dataset images.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">images</span></code>: This folder contains a copy of all the images in our dataset, as well as the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files produced for each one, once <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> is used to annotate objects.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">annotations</span></code>: This folder will be used to store all <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> files and the respective TensorFlow <code class="docutils literal notranslate"><span class="pre">*.record</span></code> files, which contain the list of annotations for our dataset images.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">images</span></code>: This folder contains a copy of all the images in our dataset, as well as the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files produced for each one, once <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> is used to annotate objects.</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">images\train</span></code>: This folder contains a copy of all images, and the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, which will be used to train our model.</li>
-<li><code class="docutils literal notranslate"><span class="pre">images\test</span></code>: This folder contains a copy of all images, and the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, which will be used to test our model.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">images\train</span></code>: This folder contains a copy of all images, and the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, which will be used to train our model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">images\test</span></code>: This folder contains a copy of all images, and the respective <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, which will be used to test our model.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">pre-trained-model</span></code>: This folder will contain the pre-trained model of our choice, which shall be used as a starting checkpoint for our training job.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">training</span></code>: This folder will contain the training pipeline configuration file <code class="docutils literal notranslate"><span class="pre">*.config</span></code>, as well as a <code class="docutils literal notranslate"><span class="pre">*.pbtxt</span></code> label map file and all files generated during the training of our model.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: This is an optional file which provides some general information regarding the training conditions of our model. It is not used by TensorFlow in any way, but it generally helps when you have a few training folders and/or you are revisiting a trained model after some time.</p>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pre-trained-model</span></code>: This folder will contain the pre-trained model of our choice, which shall be used as a starting checkpoint for our training job.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">training</span></code>: This folder will contain the training pipeline configuration file <code class="docutils literal notranslate"><span class="pre">*.config</span></code>, as well as a <code class="docutils literal notranslate"><span class="pre">*.pbtxt</span></code> label map file and all files generated during the training of our model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: This is an optional file which provides some general information regarding the training conditions of our model. It is not used by TensorFlow in any way, but it generally helps when you have a few training folders and/or you are revisiting a trained model after some time.</p></li>
 </ul>
 <p>If you do not understand most of the things mentioned above, no need to worry, as we’ll see how all the files are generated further down.</p>
 </div>
@@ -255,34 +262,144 @@
 <h2>Annotating images<a class="headerlink" href="#annotating-images" title="Permalink to this headline">¶</a></h2>
 <p>To annotate images we will be using the <a class="reference external" href="https://github.com/tzutalin/labelImg">labelImg</a> package. If you haven’t installed the package yet, then have a look at <a class="reference internal" href="install.html#labelimg-install"><span class="std std-ref">LabelImg Installation</span></a>.</p>
 <ul>
-<li><p class="first">Once you have collected all the images to be used to test your model (ideally more than 100 per class), place them inside the folder <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code>.</p>
-</li>
-<li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite> window and <code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">Tensorflow\addons\labelImg</span></code>.</p>
-</li>
-<li><p class="first">If (as suggested in <a class="reference internal" href="install.html#labelimg-install"><span class="std std-ref">LabelImg Installation</span></a>) you created a separate Conda environment for <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> then go ahead and activate it by running:</p>
+<li><p>Once you have collected all the images to be used to test your model (ideally more than 100 per class), place them inside the folder <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code>.</p></li>
+<li><p>Open a new <cite>Anaconda/Command Prompt</cite> window and <code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">Tensorflow\addons\labelImg</span></code>.</p></li>
+<li><p>If (as suggested in <a class="reference internal" href="install.html#labelimg-install"><span class="std std-ref">LabelImg Installation</span></a>) you created a separate Conda environment for <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> then go ahead and activate it by running:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">activate</span> <span class="n">labelImg</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>activate labelImg
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Next go ahead and start <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>, pointing it to your <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code> folder.</p>
+<li><p>Next go ahead and start <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>, pointing it to your <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code> folder.</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">labelImg</span><span class="p">.</span><span class="n">py</span> <span class="p">..\..\</span><span class="n">workspace</span><span class="p">\</span><span class="n">training_demo</span><span class="p">\</span><span class="n">images</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python labelImg.py ..<span class="se">\.</span>.<span class="se">\w</span>orkspace<span class="se">\t</span>raining_demo<span class="se">\i</span>mages
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">A File Explorer Dialog windows should open, which points to the <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code> folder.</p>
-</li>
-<li><p class="first">Press the “Select Folder” button, to start annotating your images.</p>
-</li>
+<li><p>A File Explorer Dialog windows should open, which points to the <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code> folder.</p></li>
+<li><p>Press the “Select Folder” button, to start annotating your images.</p></li>
 </ul>
 <p>Once open, you should see a window similar to the one below:</p>
 <a class="reference internal image-reference" href="_images/labelImg.JPG"><img alt="alternate text" class="align-center" src="_images/labelImg.JPG" style="width: 90%;" /></a>
 <p>I won’t be covering a tutorial on how to use <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>, but you can have a look at <a class="reference external" href="https://github.com/tzutalin/labelImg#usage">labelImg’s repo</a> for more details. A nice Youtube video demonstrating how to use <code class="docutils literal notranslate"><span class="pre">labelImg</span></code> is also available <a class="reference external" href="https://youtu.be/K_mFnvzyLvc?t=9m13s">here</a>. What is important is that once you annotate all your images, a set of new <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, one for each image, should be generated inside your <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code> folder.</p>
-<p>Once you have finished annotating your image dataset, it is a general convention to use only part of it for training, and the rest is used for testing purposes. Typically, the ratio is 90%/10%, i.e. 90% of the images are used for training and the rest 10% is maintained for testing, but you can chose whatever ratio suits your needs.</p>
-<p>Once you have decided how you will be splitting your dataset, copy all training images, together with their corresponding <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, and place them inside the <code class="docutils literal notranslate"><span class="pre">training_demo\images\train</span></code> folder. Similarly, copy all testing images, with their <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, and paste them inside <code class="docutils literal notranslate"><span class="pre">training_demo\images\train</span></code>.</p>
+</div>
+<div class="section" id="partitioning-the-images">
+<span id="image-partitioning-sec"></span><h2>Partitioning the images<a class="headerlink" href="#partitioning-the-images" title="Permalink to this headline">¶</a></h2>
+<p>Once you have finished annotating your image dataset, it is a general convention to use only part of it for training, and the rest is used for evaluation purposes (e.g. as discussed in <a class="reference internal" href="#evaluation-sec"><span class="std std-ref">Evaluating the Model (Optional)</span></a>).</p>
+<p>Typically, the ratio is 90%/10%, i.e. 90% of the images are used for training and the rest 10% is maintained for testing, but you can chose whatever ratio suits your needs.</p>
+<p>Once you have decided how you will be splitting your dataset, copy all training images, together with their corresponding <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, and place them inside the <code class="docutils literal notranslate"><span class="pre">training_demo\images\train</span></code> folder. Similarly, copy all testing images, with their <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files, and paste them inside <code class="docutils literal notranslate"><span class="pre">training_demo\images\test</span></code>.</p>
+<p>For lazy people like myself, who cannot be bothered to do the above, I have put tugether a simple script that automates the above process:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; usage: partition_dataset.py [-h] [-i IMAGEDIR] [-o OUTPUTDIR] [-r RATIO] [-x]</span>
+
+<span class="sd">Partition dataset of images into training and testing sets</span>
+
+<span class="sd">optional arguments:</span>
+<span class="sd">  -h, --help            show this help message and exit</span>
+<span class="sd">  -i IMAGEDIR, --imageDir IMAGEDIR</span>
+<span class="sd">                        Path to the folder where the image dataset is stored. If not specified, the CWD will be used.</span>
+<span class="sd">  -o OUTPUTDIR, --outputDir OUTPUTDIR</span>
+<span class="sd">                        Path to the output folder where the train and test dirs should be created. Defaults to the same directory as IMAGEDIR.</span>
+<span class="sd">  -r RATIO, --ratio RATIO</span>
+<span class="sd">                        The ratio of the number of test images over the total number of images. The default is 0.1.</span>
+<span class="sd">  -x, --xml             Set this flag if you want the xml annotation files to be processed and copied over.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">copyfile</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+
+
+<span class="k">def</span> <span class="nf">iterate_dir</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">copy_xml</span><span class="p">):</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="n">dest</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="n">train_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
+    <span class="n">test_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">train_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">train_dir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">test_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">test_dir</span><span class="p">)</span>
+
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+              <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([a-zA-Z0-9\s_</span><span class="se">\\</span><span class="s1">.\-\(\):])+(.jpg|.jpeg|.png)$&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)]</span>
+
+    <span class="n">num_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">num_test_images</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">ratio</span><span class="o">*</span><span class="n">num_images</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test_images</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span>
+                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">copy_xml</span><span class="p">:</span>
+            <span class="n">xml_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
+            <span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xml_filename</span><span class="p">),</span>
+                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span><span class="n">xml_filename</span><span class="p">))</span>
+        <span class="n">images</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+        <span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span>
+                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">copy_xml</span><span class="p">:</span>
+            <span class="n">xml_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
+            <span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xml_filename</span><span class="p">),</span>
+                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_dir</span><span class="p">,</span> <span class="n">xml_filename</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="c1"># Initiate argument parser</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Partition dataset of images into training and testing sets&quot;</span><span class="p">,</span>
+                                     <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--imageDir&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to the folder where the image dataset is stored. If not specified, the CWD will be used.&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--outputDir&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to the output folder where the train and test dirs should be created. &#39;</span>
+             <span class="s1">&#39;Defaults to the same directory as IMAGEDIR.&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-r&#39;</span><span class="p">,</span> <span class="s1">&#39;--ratio&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The ratio of the number of test images over the total number of images. The default is 0.1.&#39;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-x&#39;</span><span class="p">,</span> <span class="s1">&#39;--xml&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Set this flag if you want the xml annotation files to be processed and copied over.&#39;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span>
+    <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">outputDir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">outputDir</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">imageDir</span>
+
+    <span class="c1"># Now we are ready to start the iteration</span>
+    <span class="n">iterate_dir</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">imageDir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">outputDir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">ratio</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To use the script, simply copy and paste the code above in a script named <code class="docutils literal notranslate"><span class="pre">partition_dataset.py</span></code>. Then, assuming you have all your images and <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files inside <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code>, just run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python partition_dataser.py -x -i training_demo<span class="se">\i</span>mages -r <span class="m">0</span>.1
+</pre></div>
+</div>
+<p>Once the script has finished, there should exist two new folders under <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code>, namely <code class="docutils literal notranslate"><span class="pre">training_demo\images\train</span></code> and <code class="docutils literal notranslate"><span class="pre">training_demo\images\test</span></code>, containing 90% and 10% of the images (and <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files), respectively. To avoid loss of any files, the script will not delete the images under <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code>. Once you have checked that your images have been safely copied over, you can delete the images under <code class="docutils literal notranslate"><span class="pre">training_demo\images</span></code> manually.</p>
 </div>
 <div class="section" id="creating-label-map">
 <h2>Creating Label Map<a class="headerlink" href="#creating-label-map" title="Permalink to this headline">¶</a></h2>
@@ -306,8 +423,8 @@ item {
 <p>Now that we have generated our annotations and split our dataset into the desired training and testing subsets, it is time to convert our annotations into the so called <code class="docutils literal notranslate"><span class="pre">TFRecord</span></code> format.</p>
 <p>There are two steps in doing so:</p>
 <ul class="simple">
-<li>Converting the individual <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files to a unified <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> file for each dataset.</li>
-<li>Converting the <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> files of each dataset to <code class="docutils literal notranslate"><span class="pre">*.record</span></code> files (TFRecord format).</li>
+<li><p>Converting the individual <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files to a unified <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> file for each dataset.</p></li>
+<li><p>Converting the <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> files of each dataset to <code class="docutils literal notranslate"><span class="pre">*.record</span></code> files (TFRecord format).</p></li>
 </ul>
 <p>Before we proceed to describe the above steps, let’s create a directory where we can store some scripts. Under the <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> folder, create a new folder <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts</span></code>, which we can use to store some useful scripts. To make things even tidier, let’s create a new folder <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code>, where we shall store scripts that we can use to preprocess our training inputs. Below is out <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> directory tree structure, up to now:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TensorFlow
@@ -339,9 +456,9 @@ item {
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
-<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 
 
 <span class="k">def</span> <span class="nf">xml_to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -391,17 +508,17 @@ item {
                         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Name of output .csv file (including path)&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">inputDir</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">inputDir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">args</span><span class="o">.</span><span class="n">inputDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">outputFile</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">outputFile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">args</span><span class="o">.</span><span class="n">outputFile</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">inputDir</span> <span class="o">+</span> <span class="s2">&quot;/labels.csv&quot;</span>
 
     <span class="k">assert</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">inputDir</span><span class="p">))</span>
 
     <span class="n">xml_df</span> <span class="o">=</span> <span class="n">xml_to_csv</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">inputDir</span><span class="p">)</span>
     <span class="n">xml_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
-        <span class="n">args</span><span class="o">.</span><span class="n">outputFile</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Successfully converted xml to csv.&#39;</span><span class="p">)</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">outputFile</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Successfully converted xml to csv.&#39;</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -409,28 +526,27 @@ item {
 </pre></div>
 </div>
 <ul>
-<li><p class="first">Create a new file with name <code class="docutils literal notranslate"><span class="pre">xml_to_csv.py</span></code> under <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code>, open it, paste the above code inside it and save.</p>
-</li>
-<li><p class="first">Install the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package:</p>
+<li><p>Create a new file with name <code class="docutils literal notranslate"><span class="pre">xml_to_csv.py</span></code> under <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code>, open it, paste the above code inside it and save.</p></li>
+<li><p>Install the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">pandas</span> <span class="c"># Anaconda</span>
-                     <span class="c"># or</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">pandas</span>   <span class="c"># pip</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pandas <span class="c1"># Anaconda</span>
+                     <span class="c1"># or</span>
+pip install pandas   <span class="c1"># pip</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Finally, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code> and run:</p>
+<li><p>Finally, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code> and run:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="c"># Create train data:</span>
-<span class="n">python</span> <span class="n">xml_to_csv</span><span class="p">.</span><span class="n">py</span> <span class="n">-i</span> <span class="no">[PATH_TO_IMAGES_FOLDER]</span><span class="p">/</span><span class="n">train</span> <span class="n">-o</span> <span class="no">[PATH_TO_ANNOTATIONS_FOLDER]</span><span class="p">/</span><span class="n">train_labels</span><span class="p">.</span><span class="n">csv</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create train data:</span>
+python xml_to_csv.py -i <span class="o">[</span>PATH_TO_IMAGES_FOLDER<span class="o">]</span>/train -o <span class="o">[</span>PATH_TO_ANNOTATIONS_FOLDER<span class="o">]</span>/train_labels.csv
 
-<span class="c"># Create test data:</span>
-<span class="n">python</span> <span class="n">xml_to_csv</span><span class="p">.</span><span class="n">py</span> <span class="n">-i</span> <span class="no">[PATH_TO_IMAGES_FOLDER]</span><span class="p">/</span><span class="n">test</span> <span class="n">-o</span> <span class="no">[PATH_TO_ANNOTATIONS_FOLDER]</span><span class="p">/</span><span class="n">test_labels</span><span class="p">.</span><span class="n">csv</span>
+<span class="c1"># Create test data:</span>
+python xml_to_csv.py -i <span class="o">[</span>PATH_TO_IMAGES_FOLDER<span class="o">]</span>/test -o <span class="o">[</span>PATH_TO_ANNOTATIONS_FOLDER<span class="o">]</span>/test_labels.csv
 
-<span class="c"># For example</span>
-<span class="c"># python xml_to_csv.py -i C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\train -o C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\train_labels.csv</span>
-<span class="c"># python xml_to_csv.py -i C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\test -o C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test_labels.csv</span>
+<span class="c1"># For example</span>
+<span class="c1"># python xml_to_csv.py -i C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\train -o C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\train_labels.csv</span>
+<span class="c1"># python xml_to_csv.py -i C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\test -o C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test_labels.csv</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -457,8 +573,8 @@ item {
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">io</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../../models/research&quot;</span><span class="p">)</span>
 
@@ -489,7 +605,7 @@ item {
     <span class="c1"># elif row_label == FLAGS.label1:</span>
     <span class="c1">#   return 0</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="bp">None</span>
+        <span class="kc">None</span>
 
 
 <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
@@ -499,7 +615,7 @@ item {
 
 
 <span class="k">def</span> <span class="nf">create_tf_example</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">GFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">filename</span><span class="p">)),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">GFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">filename</span><span class="p">)),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
         <span class="n">encoded_jpg</span> <span class="o">=</span> <span class="n">fid</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="n">encoded_jpg_io</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">encoded_jpg</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">encoded_jpg_io</span><span class="p">)</span>
@@ -551,7 +667,7 @@ item {
 
     <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">FLAGS</span><span class="o">.</span><span class="n">output_path</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Successfully created the TFRecords: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_path</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Successfully created the TFRecords: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_path</span><span class="p">))</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -559,22 +675,21 @@ item {
 </pre></div>
 </div>
 <ul>
-<li><p class="first">Create a new file with name <code class="docutils literal notranslate"><span class="pre">generate_tfrecord.py</span></code> under <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code>, open it, paste the above code inside it and save.</p>
-</li>
-<li><p class="first">Once this is done, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code> and run:</p>
+<li><p>Create a new file with name <code class="docutils literal notranslate"><span class="pre">generate_tfrecord.py</span></code> under <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code>, open it, paste the above code inside it and save.</p></li>
+<li><p>Once this is done, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into <code class="docutils literal notranslate"><span class="pre">TensorFlow\scripts\preprocessing</span></code> and run:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="c"># Create train data:</span>
-<span class="n">python</span> <span class="n">generate_tfrecord</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-label</span><span class="p">=&lt;</span><span class="n">LABEL</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-csv_input</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">train_labels</span><span class="p">.</span><span class="n">csv</span>
-<span class="p">-</span><span class="n">-img_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_IMAGES_FOLDER</span><span class="p">&gt;/</span><span class="n">train</span>  <span class="p">-</span><span class="n">-output_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">train</span><span class="p">.</span><span class="n">record</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create train data:</span>
+python generate_tfrecord.py --label<span class="o">=</span>&lt;LABEL&gt; --csv_input<span class="o">=</span>&lt;PATH_TO_ANNOTATIONS_FOLDER&gt;/train_labels.csv
+--img_path<span class="o">=</span>&lt;PATH_TO_IMAGES_FOLDER&gt;/train  --output_path<span class="o">=</span>&lt;PATH_TO_ANNOTATIONS_FOLDER&gt;/train.record
 
-<span class="c"># Create test data:</span>
-<span class="n">python</span> <span class="n">generate_tfrecord</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-label</span><span class="p">=&lt;</span><span class="n">LABEL</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-csv_input</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">test_labels</span><span class="p">.</span><span class="n">csv</span>
-<span class="p">-</span><span class="n">-img_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_IMAGES_FOLDER</span><span class="p">&gt;/</span><span class="n">test</span>
-<span class="p">-</span><span class="n">-output_path</span><span class="p">=&lt;</span><span class="n">PATH_TO_ANNOTATIONS_FOLDER</span><span class="p">&gt;/</span><span class="n">test</span><span class="p">.</span><span class="n">record</span>
+<span class="c1"># Create test data:</span>
+python generate_tfrecord.py --label<span class="o">=</span>&lt;LABEL&gt; --csv_input<span class="o">=</span>&lt;PATH_TO_ANNOTATIONS_FOLDER&gt;/test_labels.csv
+--img_path<span class="o">=</span>&lt;PATH_TO_IMAGES_FOLDER&gt;/test
+--output_path<span class="o">=</span>&lt;PATH_TO_ANNOTATIONS_FOLDER&gt;/test.record
 
-<span class="c"># For example</span>
-<span class="c"># python generate_tfrecord.py --label=ship --csv_input=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\train_labels.csv --output_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\train.record --img_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\train</span>
-<span class="c"># python generate_tfrecord.py --label=ship --csv_input=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test_labels.csv --output_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test.record --img_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\test</span>
+<span class="c1"># For example</span>
+<span class="c1"># python generate_tfrecord.py --label=ship --csv_input=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\train_labels.csv --output_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\train.record --img_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\train</span>
+<span class="c1"># python generate_tfrecord.py --label=ship --csv_input=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test_labels.csv --output_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test.record --img_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\test</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -584,14 +699,207 @@ item {
 </div>
 </div>
 <div class="section" id="configuring-a-training-pipeline">
-<h2>Configuring a Training Pipeline<a class="headerlink" href="#configuring-a-training-pipeline" title="Permalink to this headline">¶</a></h2>
+<span id="config-training-pipeline-sec"></span><h2>Configuring a Training Pipeline<a class="headerlink" href="#configuring-a-training-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>For the purposes of this tutorial we will not be creating a training job from the scratch, but rather we will go through how to reuse one of the pre-trained models provided by TensorFlow. If you would like to train an entirely new model, you can have a look at <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md">TensorFlow’s tutorial</a>.</p>
 <p>The model we shall be using in our examples is the <code class="docutils literal notranslate"><span class="pre">ssd_inception_v2_coco</span></code> model, since it provides a relatively good trade-off between performance and speed, however there are a number of other models you can use, all of which are listed in <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md">TensorFlow’s detection model zoo</a>. More information about the detection performance, as well as reference times of execution, for each of the available pre-trained models can be found <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models">here</a>.</p>
 <p>First of all, we need to get ourselves the sample pipeline configuration file for the specific model we wish to re-train. You can find the specific file for the model of your choice <a class="reference external" href="https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs">here</a>. In our case, since we shall be using the <code class="docutils literal notranslate"><span class="pre">ssd_inception_v2_coco</span></code> model, we shall be downloading the corresponding <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/samples/configs/ssd_inception_v2_coco.config">ssd_inception_v2_coco.config</a> file.</p>
 <p>Apart from the configuration file, we also need to download the latest pre-trained NN for the model we wish to use. This can be done by simply clicking on the name of the desired model in the tables found in <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models">TensorFlow’s detection model zoo</a>. Clicking on the name of your model should initiate a download for a <code class="docutils literal notranslate"><span class="pre">*.tar.gz</span></code> file.</p>
 <p>Once the <code class="docutils literal notranslate"><span class="pre">*.tar.gz</span></code> file has been downloaded, open it using a decompression program of your choice (e.g. 7zip, WinZIP, etc.). Next, open the folder that you see when the compressed folder is opened (typically it will have the same name as the compressed folded, without the <code class="docutils literal notranslate"><span class="pre">*.tar.gz</span></code> extension), and extract it’s contents inside the folder <code class="docutils literal notranslate"><span class="pre">training_demo\pre-trained-model</span></code>.</p>
 <p>Now that we have downloaded and extracted our pre-trained model, let’s have a look at the changes that we shall need to apply to the downloaded  <code class="docutils literal notranslate"><span class="pre">*.config</span></code> file (highlighted in yellow):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSD with Inception v2 configuration for MSCOCO Dataset.</span>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># SSD with Inception v2 configuration for MSCOCO Dataset.</span>
 <span class="c1"># Users should configure the fine_tune_checkpoint field in the train config as</span>
 <span class="c1"># well as the label_map_path and input_path fields in the train_input_reader and</span>
 <span class="c1"># eval_input_reader. Search for &quot;PATH_TO_BE_CONFIGURED&quot; to find the fields that</span>
@@ -725,9 +1033,9 @@ item {
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="hll"><span class="n">train_config</span><span class="p">:</span> <span class="p">{</span>
-</span>    <span class="n">batch_size</span><span class="p">:</span> <span class="mi">12</span> <span class="c1"># Increase/Decrease this value depending on the available memory (Higher values require more memory and vice-versa)</span>
-    <span class="n">optimizer</span> <span class="p">{</span>
+<span class="n">train_config</span><span class="p">:</span> <span class="p">{</span>
+<span class="hll">    <span class="n">batch_size</span><span class="p">:</span> <span class="mi">12</span> <span class="c1"># Increase/Decrease this value depending on the available memory (Higher values require more memory and vice-versa)</span>
+</span>    <span class="n">optimizer</span> <span class="p">{</span>
         <span class="n">rms_prop_optimizer</span><span class="p">:</span> <span class="p">{</span>
             <span class="n">learning_rate</span><span class="p">:</span> <span class="p">{</span>
                 <span class="n">exponential_decay_learning_rate</span> <span class="p">{</span>
@@ -740,9 +1048,9 @@ item {
             <span class="n">decay</span><span class="p">:</span> <span class="mf">0.9</span>
             <span class="n">epsilon</span><span class="p">:</span> <span class="mf">1.0</span>
         <span class="p">}</span>
-<span class="hll">    <span class="p">}</span>
-</span>    <span class="n">fine_tune_checkpoint</span><span class="p">:</span> <span class="s2">&quot;pre-trained-model/model.ckpt&quot;</span> <span class="c1"># Path to extracted files of pre-trained model</span>
-    <span class="n">from_detection_checkpoint</span><span class="p">:</span> <span class="n">true</span>
+    <span class="p">}</span>
+<span class="hll">    <span class="n">fine_tune_checkpoint</span><span class="p">:</span> <span class="s2">&quot;pre-trained-model/model.ckpt&quot;</span> <span class="c1"># Path to extracted files of pre-trained model</span>
+</span>    <span class="n">from_detection_checkpoint</span><span class="p">:</span> <span class="n">true</span>
     <span class="c1"># Note: The below line limits the training process to 200K steps, which we</span>
     <span class="c1"># empirically found to be sufficient enough to train the pets dataset. This</span>
     <span class="c1"># effectively bypasses the learning rate schedule (the learning rate will</span>
@@ -759,36 +1067,88 @@ item {
 <span class="p">}</span>
 
 <span class="n">train_input_reader</span><span class="p">:</span> <span class="p">{</span>
-<span class="hll">    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
-</span>        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/train.record&quot;</span> <span class="c1"># Path to training TFRecord file</span>
-<span class="hll">    <span class="p">}</span>
-</span>    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
-<span class="p">}</span>
+    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
+<span class="hll">        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/train.record&quot;</span> <span class="c1"># Path to training TFRecord file</span>
+</span>    <span class="p">}</span>
+<span class="hll">    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
+</span><span class="p">}</span>
 
 <span class="n">eval_config</span><span class="p">:</span> <span class="p">{</span>
-    <span class="n">num_examples</span><span class="p">:</span> <span class="mi">8000</span>
-    <span class="c1"># Note: The below line limits the evaluation process to 10 evaluations.</span>
+    <span class="c1"># (Optional): Uncomment the line below if you installed the Coco evaluation tools</span>
+    <span class="c1"># and you want to also run evaluation</span>
+<span class="hll">    <span class="c1"># metrics_set: &quot;coco_detection_metrics&quot;</span>
+</span>    <span class="c1"># (Optional): Set this to the number of images in your &lt;PATH_TO_IMAGES_FOLDER&gt;/train</span>
+    <span class="c1"># if you want to also run evaluation</span>
+<span class="hll">    <span class="n">num_examples</span><span class="p">:</span> <span class="mi">8000</span>
+</span>    <span class="c1"># Note: The below line limits the evaluation process to 10 evaluations.</span>
     <span class="c1"># Remove the below line to evaluate indefinitely.</span>
     <span class="n">max_evals</span><span class="p">:</span> <span class="mi">10</span>
 <span class="p">}</span>
 
 <span class="n">eval_input_reader</span><span class="p">:</span> <span class="p">{</span>
-<span class="hll">    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
-</span>        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/test.record&quot;</span> <span class="c1"># Path to testing TFRecord</span>
-<span class="hll">    <span class="p">}</span>
-</span>    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
-    <span class="n">shuffle</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">tf_record_input_reader</span> <span class="p">{</span>
+<span class="hll">        <span class="n">input_path</span><span class="p">:</span> <span class="s2">&quot;annotations/test.record&quot;</span> <span class="c1"># Path to testing TFRecord</span>
+</span>    <span class="p">}</span>
+<span class="hll">    <span class="n">label_map_path</span><span class="p">:</span> <span class="s2">&quot;annotations/label_map.pbtxt&quot;</span> <span class="c1"># Path to label map file</span>
+</span>    <span class="n">shuffle</span><span class="p">:</span> <span class="n">false</span>
     <span class="n">num_readers</span><span class="p">:</span> <span class="mi">1</span>
 <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
+<p>It is worth noting here that the changes to lines <code class="docutils literal notranslate"><span class="pre">178</span></code> and <code class="docutils literal notranslate"><span class="pre">181</span></code> above are optional. These should only be used if you installed the COCO evaluation tools, as outlined in the <a class="reference internal" href="install.html#tf-models-install-coco"><span class="std std-ref">COCO API installation (Optional)</span></a> section, and you intend to run evaluation (see <a class="reference internal" href="#evaluation-sec"><span class="std std-ref">Evaluating the Model (Optional)</span></a>).</p>
 <p>Once the above changes have been applied to our config file, go ahead and save it under <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code>.</p>
 </div>
 <div class="section" id="training-the-model">
-<h2>Training the Model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h2>
+<span id="training-sec"></span><h2>Training the Model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h2>
+<div class="sphinx-tabs docutils container">
+<div class="ui top attached tabular menu sphinx-menu docutils container">
+<div class="active item sphinx-data-tab-0-0 docutils container">
+<div class="docutils container">
+<p>Standard</p>
+</div>
+</div>
+<div class="item sphinx-data-tab-0-1 docutils container">
+<div class="docutils container">
+<p>Legacy</p>
+</div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-0-0 active docutils container">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tab describes the training process using Tensorflow’s new model training script, namely <code class="docutils literal notranslate"><span class="pre">model_main.py</span></code>, as suggested by the <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md">Tensorflow Object Detection docs</a>. The advantage of using this script is that it interleaves training and evaluation, essentially combining the <code class="docutils literal notranslate"><span class="pre">train.py</span></code> and <code class="docutils literal notranslate"><span class="pre">eval.py</span></code> Legacy scripts.</p>
+<p>If instead you would like to use the legacy <code class="docutils literal notranslate"><span class="pre">train.py</span></code> script, switch to the Legacy tab.</p>
+</div>
+<p>Before we begin training our model, let’s go and copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/model_main.py</span></code> script and paste it straight into our <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder. We will need this script in order to train our model.</p>
+<p>Now, to initiate a new training job, <code class="docutils literal notranslate"><span class="pre">cd</span></code> inside the <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder and type the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python model_main.py --alsologtostderr --model_dir<span class="o">=</span>training/ --pipeline_config_path<span class="o">=</span>training/ssd_inception_v2_coco.config
+</pre></div>
+</div>
+<p>Once the training process has been initiated, you should see a series of print outs similar to the one below (plus/minus some warnings):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">depth</span> <span class="n">of</span> <span class="n">additional</span> <span class="n">conv</span> <span class="n">before</span> <span class="n">box</span> <span class="n">predictor</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">depth</span> <span class="n">of</span> <span class="n">additional</span> <span class="n">conv</span> <span class="n">before</span> <span class="n">box</span> <span class="n">predictor</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">depth</span> <span class="n">of</span> <span class="n">additional</span> <span class="n">conv</span> <span class="n">before</span> <span class="n">box</span> <span class="n">predictor</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">depth</span> <span class="n">of</span> <span class="n">additional</span> <span class="n">conv</span> <span class="n">before</span> <span class="n">box</span> <span class="n">predictor</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">depth</span> <span class="n">of</span> <span class="n">additional</span> <span class="n">conv</span> <span class="n">before</span> <span class="n">box</span> <span class="n">predictor</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">depth</span> <span class="n">of</span> <span class="n">additional</span> <span class="n">conv</span> <span class="n">before</span> <span class="n">box</span> <span class="n">predictor</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Restoring</span> <span class="n">parameters</span> <span class="kn">from</span> <span class="nn">ssd_inception_v2_coco_2017_11_17</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">ckpt</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Running</span> <span class="n">local_init_op</span><span class="o">.</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Done</span> <span class="n">running</span> <span class="n">local_init_op</span><span class="o">.</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Saving</span> <span class="n">checkpoints</span> <span class="k">for</span> <span class="mi">0</span> <span class="n">into</span> <span class="n">training</span>\<span class="n">model</span><span class="o">.</span><span class="n">ckpt</span><span class="o">.</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">loss</span> <span class="o">=</span> <span class="mf">16.100115</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The output will normally look like it has “frozen” after the loss for step 0 has been logged, but DO NOT rush to cancel the process. The training outputs logs only every 100 steps by default, therefore if you wait for a while, you should see a log for the loss at step 100.</p>
+<p>The time you should wait can vary greatly, depending on whether you are using a GPU and the chosen value for <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> in the config file, so be patient.</p>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-0-1 docutils container">
 <p>Before we begin training our model, let’s go and copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/legacy/train.py</span></code> script and paste it straight into our <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder. We will need this script in order to train our model.</p>
 <p>Now, to initiate a new training job, <code class="docutils literal notranslate"><span class="pre">cd</span></code> inside the <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder and type the following:</p>
-<div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">train</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-logtostderr</span> <span class="p">-</span><span class="n">-train_dir</span><span class="p">=</span><span class="n">training</span><span class="p">/</span> <span class="p">-</span><span class="n">-pipeline_config_path</span><span class="p">=</span><span class="n">training</span><span class="p">/</span><span class="n">ssd_inception_v2_coco</span><span class="p">.</span><span class="n">config</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python train.py --logtostderr --train_dir<span class="o">=</span>training/ --pipeline_config_path<span class="o">=</span>training/ssd_inception_v2_coco.config
 </pre></div>
 </div>
 <p>Once the training process has been initiated, you should see a series of print outs similar to the one below (plus/minus some warnings):</p>
@@ -823,39 +1183,100 @@ item {
 <span class="o">...</span>
 </pre></div>
 </div>
-<p>If you ARE NOT seeing a print-out similar to that shown above, and/or the training job crashes after a few seconds, then have a look at the issues and proposed solutions, under the <a class="reference internal" href="issues.html#issues"><span class="std std-ref">Common issues</span></a> section, to see if you can find a solution. Alternatively, you can try the issues section of the official <a class="reference external" href="https://github.com/tensorflow/models/issues">Tensorflow Models repo</a>.</p>
-<p>If you ARE observing a similar output to the above, then CONGRATULATIONS, you have successfully started your first training job. Now you may very well treat yourself to a cold beer, as waiting on the training to finish is likely to take a while. Following what people have said online, it seems that it is advisable to allow you model to reach a <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code> of at least 2 (ideally 1 and lower) if you want to achieve “fair” detection results. Obviously, lower <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code> is better, however very low <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code> should be avoided, as the model may end up overfitting the dataset, meaning that it will perform poorly when applied to images outside the dataset. To monitor <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code>, as well as a number of other metrics, while your model is training, have a look at <a class="reference internal" href="#tensorboard-sec"><span class="std std-ref">Monitor Training Job Progress using TensorBoard</span></a>.</p>
-<dl class="docutils">
-<dt>Training times can be affected by a number of factors such as:</dt>
-<dd><ul class="first last simple">
-<li>The computational power of you hardware (either CPU or GPU): Obviously, the more powerful your PC is, the faster the training process.</li>
-<li>Whether you are using the TensorFlow CPU or GPU variant: In general, even when compared to the best CPUs, almost any GPU graphics card will yield much faster training and detection speeds. As a matter of fact, when I first started I was running TensorFlow on my <cite>Intel i7-5930k</cite> (6/12 cores &#64; 4GHz, 32GB RAM) and was getting step times of around <cite>12 sec/step</cite>, after which I installed TensorFlow GPU and training the very same model -using the same dataset and config files- on a <cite>EVGA GTX-770</cite> (1536 CUDA-cores &#64; 1GHz, 2GB VRAM) I was down to <cite>0.9 sec/step</cite>!!! A 12-fold increase in speed, using a “low/mid-end” graphics card, when compared to a “mid/high-end” CPU.</li>
-<li>How big the dataset is: The higher the number of images in your dataset, the longer it will take for the model to reach satisfactory levels of detection performance.</li>
-<li>The complexity of the objects you are trying to detect: Obviously, if your objective is to track a black ball over a white background, the model will converge to satisfactory levels of detection pretty quickly. If on the other hand, for example, you wish to detect ships in ports, using Pan-Tilt-Zoom cameras, then training will be a much more challenging and time-consuming process, due to the high variability of the shape and size of ships, combined with a highly dynamic background.</li>
-<li>And many, many, many, more….</li>
-</ul>
-</dd>
-</dl>
 </div>
-<div class="section" id="monitor-training-job-progress-using-tensorboard">
-<span id="tensorboard-sec"></span><h2>Monitor Training Job Progress using TensorBoard<a class="headerlink" href="#monitor-training-job-progress-using-tensorboard" title="Permalink to this headline">¶</a></h2>
-<p>A very nice feature of TensorFlow, is that it allows you to coninuously monitor and visualise a number of different training/detection performance metrics, while your model is being trained. The specific tool that allows us to do all that is <a class="reference external" href="https://www.tensorflow.org/programmers_guide/summaries_and_tensorboard">Tensorboard</a>.</p>
-<p>To start a new TensorBoard server, we follow the following steps:</p>
-<ul>
-<li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite></p>
-</li>
-<li><p class="first">Activate your TensorFlow conda environment (if you have one), e.g.:</p>
+</div>
+<p>If you ARE observing a similar output to the above, then CONGRATULATIONS, you have successfully started your first training job. Now you may very well treat yourself to a cold beer, as waiting on the training to finish is likely to take a while. Following what people have said online, it seems that it is advisable to allow you model to reach a <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code> of at least 2 (ideally 1 and lower) if you want to achieve “fair” detection results. Obviously, lower <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code> is better, however very low <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code> should be avoided, as the model may end up overfitting the dataset, meaning that it will perform poorly when applied to images outside the dataset. To monitor <code class="docutils literal notranslate"><span class="pre">TotalLoss</span></code>, as well as a number of other metrics, while your model is training, have a look at <a class="reference internal" href="#tensorboard-sec"><span class="std std-ref">Monitor Training Job Progress using TensorBoard</span></a>.</p>
+<p>If you ARE NOT seeing a print-out similar to that shown above, and/or the training job crashes after a few seconds, then have a look at the issues and proposed solutions, under the <a class="reference internal" href="issues.html#issues"><span class="std std-ref">Common issues</span></a> section, to see if you can find a solution. Alternatively, you can try the issues section of the official <a class="reference external" href="https://github.com/tensorflow/models/issues">Tensorflow Models repo</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Training times can be affected by a number of factors such as:</p>
+<ul class="simple">
+<li><p>The computational power of you hardware (either CPU or GPU): Obviously, the more powerful your PC is, the faster the training process.</p></li>
+<li><p>Whether you are using the TensorFlow CPU or GPU variant: In general, even when compared to the best CPUs, almost any GPU graphics card will yield much faster training and detection speeds. As a matter of fact, when I first started I was running TensorFlow on my <cite>Intel i7-5930k</cite> (6/12 cores &#64; 4GHz, 32GB RAM) and was getting step times of around <cite>12 sec/step</cite>, after which I installed TensorFlow GPU and training the very same model -using the same dataset and config files- on a <cite>EVGA GTX-770</cite> (1536 CUDA-cores &#64; 1GHz, 2GB VRAM) I was down to <cite>0.9 sec/step</cite>!!! A 12-fold increase in speed, using a “low/mid-end” graphics card, when compared to a “mid/high-end” CPU.</p></li>
+<li><p>How big the dataset is: The higher the number of images in your dataset, the longer it will take for the model to reach satisfactory levels of detection performance.</p></li>
+<li><p>The complexity of the objects you are trying to detect: Obviously, if your objective is to track a black ball over a white background, the model will converge to satisfactory levels of detection pretty quickly. If on the other hand, for example, you wish to detect ships in ports, using Pan-Tilt-Zoom cameras, then training will be a much more challenging and time-consuming process, due to the high variability of the shape and size of ships, combined with a highly dynamic background.</p></li>
+<li><p>And many, many, many, more….</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="evaluating-the-model-optional">
+<span id="evaluation-sec"></span><h2>Evaluating the Model (Optional)<a class="headerlink" href="#evaluating-the-model-optional" title="Permalink to this headline">¶</a></h2>
+<p>By default, the training process logs some basic measures of training performance. These seem to change depending on the installed version of Tensorflow and the script used for training (i.e. <code class="docutils literal notranslate"><span class="pre">model_main.py</span></code> (Standard) or <code class="docutils literal notranslate"><span class="pre">train.py</span></code> (Legacy)).</p>
+<p>As you will have seen in various parts of this tutorial, we have mentioned a few times the optional utilisation of the COCO evaluation metrics. Also, under section <span class="xref std std-ref">_image_partitioning_sec</span> we partitioned our dataset in two parts, where one was to be used for training and the other for evaluation. In this section we will look at how we can use these metrics, along with the test images, to get a sense of the performance achieved by our model as it is being trained.</p>
+<p>Firstly, let’s start with a brief explanation of what the evaluation process does. While the training process runs, it will occasionally create checkpoint files inside the <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code> folder, which correspond to snapshots of the model at given steps. When a set of such new checkpoint files is generated, the evaluation process uses these files and evaluates how well the model performs in detecting objects in the test dataset. The results of this evaluation are summarised in the form of some metrics, which can be examined over time.</p>
+<p>The steps to run the evaluation are outlined below:</p>
+<ol class="arabic simple">
+<li><p>Firstly we need to download and install the metrics we want to use.</p></li>
+</ol>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">activate</span> <span class="n">tensorflow_gpu</span>
+<div><ul class="simple">
+<li><p>For a description of the supported object detection evaluation metrics, see <a class="reference external" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/evaluation_protocols.md">here</a>.</p></li>
+<li><p>The process of installing the COCO evaluation metrics is described in <a class="reference internal" href="install.html#tf-models-install-coco"><span class="std std-ref">COCO API installation (Optional)</span></a>.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Secondly, we must modify the configuration pipeline (<code class="docutils literal notranslate"><span class="pre">*.config</span></code> script).</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>See lines 178 and 181 of the script in <a class="reference internal" href="#config-training-pipeline-sec"><span class="std std-ref">Configuring a Training Pipeline</span></a>.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p>The third step depends on what method (script) was used when staring the training in <a class="reference internal" href="#training-sec"><span class="std std-ref">Training the Model</span></a>. See below for details:</p>
+<blockquote>
+<div><div class="sphinx-tabs docutils container">
+<div class="ui top attached tabular menu sphinx-menu docutils container">
+<div class="active item sphinx-data-tab-1-0 docutils container">
+<div class="docutils container">
+<p>Standard</p>
+</div>
+</div>
+<div class="item sphinx-data-tab-1-1 docutils container">
+<div class="docutils container">
+<p>Legacy</p>
+</div>
+</div>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-1-0 active docutils container">
+<p>The <code class="docutils literal notranslate"><span class="pre">model_main.py</span></code> script interleaves training and evaluation. Therefore, assuming that the following two steps were followed correctly, nothing else needs to be done.</p>
+</div>
+<div class="ui bottom attached sphinx-tab tab segment sphinx-data-tab-1-1 docutils container">
+<p>When using the Legacy scripts, evaluation is run using the <code class="docutils literal notranslate"><span class="pre">eval.py</span></code> script. This is done as follows:</p>
+<ul>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/legacy/eval.py</span></code> script and paste it inside the <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder.</p></li>
+<li><p>Now, to initiate an evaluation job, <code class="docutils literal notranslate"><span class="pre">cd</span></code> inside the <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder and type the following:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python eval.py --logtostderr --pipeline_config_path<span class="o">=</span>training/ssd_inception_v2_coco.config --checkpoint_dir<span class="o">=</span>training/ --eval_dir<span class="o">=</span>training/eval_0
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">cd</span></code> into the <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder.</p>
+</ul>
+</div>
+</div>
+</div></blockquote>
 </li>
-<li><p class="first">Run the following command:</p>
+</ol>
+<p>While the evaluation process is running, it will periodically (every 300 sec by default) check and use the latest <code class="docutils literal notranslate"><span class="pre">training/model.ckpt-*</span></code> checkpoint files to evaluate the performance of the model. The results are stored in the form of tf event files (<code class="docutils literal notranslate"><span class="pre">events.out.tfevents.*</span></code>) inside <code class="docutils literal notranslate"><span class="pre">training/eval_0</span></code>. These files can then be used to monitor the computed metrics, using the process described by the next section.</p>
+</div>
+<div class="section" id="monitor-training-job-progress-using-tensorboard">
+<span id="tensorboard-sec"></span><h2>Monitor Training Job Progress using TensorBoard<a class="headerlink" href="#monitor-training-job-progress-using-tensorboard" title="Permalink to this headline">¶</a></h2>
+<p>A very nice feature of TensorFlow, is that it allows you to coninuously monitor and visualise a number of different training/evaluation metrics, while your model is being trained. The specific tool that allows us to do all that is <a class="reference external" href="https://www.tensorflow.org/programmers_guide/summaries_and_tensorboard">Tensorboard</a>.</p>
+<p>To start a new TensorBoard server, we follow the following steps:</p>
+<ul>
+<li><p>Open a new <cite>Anaconda/Command Prompt</cite></p></li>
+<li><p>Activate your TensorFlow conda environment (if you have one), e.g.:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">tensorboard</span> <span class="p">-</span><span class="n">-logdir</span><span class="p">=</span><span class="n">training</span><span class="p">\</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>activate tensorflow_gpu
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span></code> into the <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder.</p></li>
+<li><p>Run the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tensorboard --logdir<span class="o">=</span>training<span class="se">\</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -863,7 +1284,7 @@ item {
 </ul>
 <p>The above command will start a new TensorBoard server, which (by default) listens to port 6006 of your machine. Assuming that everything went well, you should see a print-out similar to the one below (plus/minus some warnings):</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span>TensorBoard 1.6.0 at http://YOUR-PC:6006 (Press CTRL+C to quit)
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TensorBoard <span class="m">1</span>.6.0 at http://YOUR-PC:6006 <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -874,27 +1295,21 @@ item {
 <h2>Exporting a Trained Inference Graph<a class="headerlink" href="#exporting-a-trained-inference-graph" title="Permalink to this headline">¶</a></h2>
 <p>Once your training job is complete, you need to extract the newly trained inference graph, which will be later used to perform the object detection. This can be done as follows:</p>
 <ul>
-<li><p class="first">Open a new <cite>Anaconda/Command Prompt</cite></p>
-</li>
-<li><p class="first">Activate your TensorFlow conda environment (if you have one), e.g.:</p>
+<li><p>Open a new <cite>Anaconda/Command Prompt</cite></p></li>
+<li><p>Activate your TensorFlow conda environment (if you have one), e.g.:</p>
 <blockquote>
-<div><div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">activate</span> <span class="n">tensorflow_gpu</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>activate tensorflow_gpu
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/export_inference_graph.py</span></code> script and paste it straight into your <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder.</p>
-</li>
-<li><p class="first">Check inside your <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code> folder for the <code class="docutils literal notranslate"><span class="pre">model.ckpt-*</span></code> checkpoint file with the highest number following the name of the dash e.g. <code class="docutils literal notranslate"><span class="pre">model.ckpt-34350</span></code>). This number represents the training step index at which the file was created.</p>
-</li>
-<li><p class="first">Alternatively, simply sort all the files inside <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code> by descending time and pick the <code class="docutils literal notranslate"><span class="pre">model.ckpt-*</span></code> file that comes first in the list.</p>
-</li>
-<li><p class="first">Make a note of the file’s name, as it will be passed as an argument when we call the <code class="docutils literal notranslate"><span class="pre">export_inference_graph.py</span></code> script.</p>
-</li>
-<li><p class="first">Now, <code class="docutils literal notranslate"><span class="pre">cd</span></code> inside your <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder, and run the following command:</p>
-</li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">TensorFlow/models/research/object_detection/export_inference_graph.py</span></code> script and paste it straight into your <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder.</p></li>
+<li><p>Check inside your <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code> folder for the <code class="docutils literal notranslate"><span class="pre">model.ckpt-*</span></code> checkpoint file with the highest number following the name of the dash e.g. <code class="docutils literal notranslate"><span class="pre">model.ckpt-34350</span></code>). This number represents the training step index at which the file was created.</p></li>
+<li><p>Alternatively, simply sort all the files inside <code class="docutils literal notranslate"><span class="pre">training_demo/training</span></code> by descending time and pick the <code class="docutils literal notranslate"><span class="pre">model.ckpt-*</span></code> file that comes first in the list.</p></li>
+<li><p>Make a note of the file’s name, as it will be passed as an argument when we call the <code class="docutils literal notranslate"><span class="pre">export_inference_graph.py</span></code> script.</p></li>
+<li><p>Now, <code class="docutils literal notranslate"><span class="pre">cd</span></code> inside your <code class="docutils literal notranslate"><span class="pre">training_demo</span></code> folder, and run the following command:</p></li>
 </ul>
-<div class="highlight-posh notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">export_inference_graph</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-input_type</span> <span class="n">image_tensor</span> <span class="p">-</span><span class="n">-pipeline_config_path</span> <span class="n">training</span><span class="p">/</span><span class="n">ssd_inception_v2_coco</span><span class="p">.</span><span class="n">config</span> <span class="p">-</span><span class="n">-trained_checkpoint_prefix</span> <span class="n">training</span><span class="p">/</span><span class="n">model</span><span class="p">.</span><span class="n">ckpt</span><span class="p">-</span><span class="n">13302</span> <span class="p">-</span><span class="n">-output_directory</span> <span class="n">trained-inference-graphs</span><span class="p">/</span><span class="n">output_inference_graph_v1</span><span class="p">.</span><span class="n">pb</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/ssd_inception_v2_coco.config --trained_checkpoint_prefix training/model.ckpt-13302 --output_directory trained-inference-graphs/output_inference_graph_v1.pb
 </pre></div>
 </div>
 </div>
@@ -920,11 +1335,19 @@ item {
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2018, Lyudmil Vladimirov
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -935,7 +1358,6 @@ item {
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
