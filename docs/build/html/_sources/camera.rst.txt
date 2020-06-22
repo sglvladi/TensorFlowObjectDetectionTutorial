@@ -3,6 +3,8 @@ Detect Objects Using Your Webcam
 
 Hereby you can find an example which allows you to use your camera to generate a video stream, based on which you can perform object_detection.
 
+To run the example, simply create a new file under ``<PATH_TO_TF>/TensorFlow/models/research/object_detection`` and paste the code below.
+
 .. code-block:: python
 
     import numpy as np
@@ -18,8 +20,8 @@ Hereby you can find an example which allows you to use your camera to generate a
     from io import StringIO
     from matplotlib import pyplot as plt
     from PIL import Image
-    from utils import label_map_util
-    from utils import visualization_utils as vis_util
+    from object_detection.utils import label_map_util
+    from object_detection.utils import visualization_utils as vis_util
 
     # Define the video stream
     cap = cv2.VideoCapture(0)  # Change only if you have more than one webcams
@@ -40,20 +42,22 @@ Hereby you can find an example which allows you to use your camera to generate a
     NUM_CLASSES = 90
 
     # Download Model
-    opener = urllib.request.URLopener()
-    opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
-    tar_file = tarfile.open(MODEL_FILE)
-    for file in tar_file.getmembers():
-        file_name = os.path.basename(file.name)
-        if 'frozen_inference_graph.pb' in file_name:
-            tar_file.extract(file, os.getcwd())
+    if not os.path.exists(os.path.join(os.getcwd(), MODEL_FILE)):
+        print("Downloading model")
+        opener = urllib.request.URLopener()
+        opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
+        tar_file = tarfile.open(MODEL_FILE)
+        for file in tar_file.getmembers():
+            file_name = os.path.basename(file.name)
+            if 'frozen_inference_graph.pb' in file_name:
+                tar_file.extract(file, os.getcwd())
 
 
     # Load a (frozen) Tensorflow model into memory.
     detection_graph = tf.Graph()
     with detection_graph.as_default():
-        od_graph_def = tf.GraphDef()
-        with tf.gfile.GFile(PATH_TO_CKPT, 'rb') as fid:
+        od_graph_def = tf.compat.v1.GraphDef()
+        with tf.io.gfile.GFile(PATH_TO_CKPT, 'rb') as fid:
             serialized_graph = fid.read()
             od_graph_def.ParseFromString(serialized_graph)
             tf.import_graph_def(od_graph_def, name='')
@@ -76,9 +80,8 @@ Hereby you can find an example which allows you to use your camera to generate a
 
     # Detection
     with detection_graph.as_default():
-        with tf.Session(graph=detection_graph) as sess:
+        with tf.compat.v1.Session(graph=detection_graph) as sess:
             while True:
-
                 # Read frame from camera
                 ret, image_np = cap.read()
                 # Expand dimensions since the model expects images to have shape: [1, None, None, 3]

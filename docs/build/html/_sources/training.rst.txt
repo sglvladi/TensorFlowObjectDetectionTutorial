@@ -83,13 +83,13 @@ To annotate images we will be using the `labelImg <https://github.com/tzutalin/l
 - Open a new `Anaconda/Command Prompt` window and ``cd`` into ``Tensorflow\addons\labelImg``.
 - If (as suggested in :ref:`labelImg_install`) you created a separate Conda environment for ``labelImg`` then go ahead and activate it by running:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         activate labelImg
 
 - Next go ahead and start ``labelImg``, pointing it to your ``training_demo\images`` folder.
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         python labelImg.py ..\..\workspace\training_demo\images
 
@@ -105,9 +105,132 @@ Once open, you should see a window similar to the one below:
 
 I won't be covering a tutorial on how to use ``labelImg``, but you can have a look at `labelImg's repo <https://github.com/tzutalin/labelImg#usage>`_ for more details. A nice Youtube video demonstrating how to use ``labelImg`` is also available `here <https://youtu.be/K_mFnvzyLvc?t=9m13s>`_. What is important is that once you annotate all your images, a set of new ``*.xml`` files, one for each image, should be generated inside your ``training_demo\images`` folder. 
 
-Once you have finished annotating your image dataset, it is a general convention to use only part of it for training, and the rest is used for testing purposes. Typically, the ratio is 90%/10%, i.e. 90% of the images are used for training and the rest 10% is maintained for testing, but you can chose whatever ratio suits your needs. 
+.. _image_partitioning_sec:
 
-Once you have decided how you will be splitting your dataset, copy all training images, together with their corresponding ``*.xml`` files, and place them inside the ``training_demo\images\train`` folder. Similarly, copy all testing images, with their ``*.xml`` files, and paste them inside ``training_demo\images\train``.
+Partitioning the images
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Once you have finished annotating your image dataset, it is a general convention to use only part of it for training, and the rest is used for evaluation purposes (e.g. as discussed in :ref:`evaluation_sec`).
+
+Typically, the ratio is 90%/10%, i.e. 90% of the images are used for training and the rest 10% is maintained for testing, but you can chose whatever ratio suits your needs.
+
+Once you have decided how you will be splitting your dataset, copy all training images, together with their corresponding ``*.xml`` files, and place them inside the ``training_demo\images\train`` folder. Similarly, copy all testing images, with their ``*.xml`` files, and paste them inside ``training_demo\images\test``.
+
+For lazy people like myself, who cannot be bothered to do the above, I have put tugether a simple script that automates the above process:
+
+.. code-block:: python
+
+    """ usage: partition_dataset.py [-h] [-i IMAGEDIR] [-o OUTPUTDIR] [-r RATIO] [-x]
+
+    Partition dataset of images into training and testing sets
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -i IMAGEDIR, --imageDir IMAGEDIR
+                            Path to the folder where the image dataset is stored. If not specified, the CWD will be used.
+      -o OUTPUTDIR, --outputDir OUTPUTDIR
+                            Path to the output folder where the train and test dirs should be created. Defaults to the same directory as IMAGEDIR.
+      -r RATIO, --ratio RATIO
+                            The ratio of the number of test images over the total number of images. The default is 0.1.
+      -x, --xml             Set this flag if you want the xml annotation files to be processed and copied over.
+    """
+    import os
+    import re
+    import shutil
+    from PIL import Image
+    from shutil import copyfile
+    import argparse
+    import glob
+    import math
+    import random
+    import xml.etree.ElementTree as ET
+
+
+    def iterate_dir(source, dest, ratio, copy_xml):
+        source = source.replace('\\', '/')
+        dest = dest.replace('\\', '/')
+        train_dir = os.path.join(dest, 'train')
+        test_dir = os.path.join(dest, 'test')
+
+        if not os.path.exists(train_dir):
+            os.makedirs(train_dir)
+        if not os.path.exists(test_dir):
+            os.makedirs(test_dir)
+
+        images = [f for f in os.listdir(source)
+                  if re.search(r'([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$', f)]
+
+        num_images = len(images)
+        num_test_images = math.ceil(ratio*num_images)
+
+        for i in range(num_test_images):
+            idx = random.randint(0, len(images)-1)
+            filename = images[idx]
+            copyfile(os.path.join(source, filename),
+                     os.path.join(test_dir, filename))
+            if copy_xml:
+                xml_filename = os.path.splitext(filename)[0]+'.xml'
+                copyfile(os.path.join(source, xml_filename),
+                         os.path.join(test_dir,xml_filename))
+            images.remove(images[idx])
+
+        for filename in images:
+            copyfile(os.path.join(source, filename),
+                     os.path.join(train_dir, filename))
+            if copy_xml:
+                xml_filename = os.path.splitext(filename)[0]+'.xml'
+                copyfile(os.path.join(source, xml_filename),
+                         os.path.join(train_dir, xml_filename))
+
+
+    def main():
+
+        # Initiate argument parser
+        parser = argparse.ArgumentParser(description="Partition dataset of images into training and testing sets",
+                                         formatter_class=argparse.RawTextHelpFormatter)
+        parser.add_argument(
+            '-i', '--imageDir',
+            help='Path to the folder where the image dataset is stored. If not specified, the CWD will be used.',
+            type=str,
+            default=os.getcwd()
+        )
+        parser.add_argument(
+            '-o', '--outputDir',
+            help='Path to the output folder where the train and test dirs should be created. '
+                 'Defaults to the same directory as IMAGEDIR.',
+            type=str,
+            default=None
+        )
+        parser.add_argument(
+            '-r', '--ratio',
+            help='The ratio of the number of test images over the total number of images. The default is 0.1.',
+            default=0.1,
+            type=float)
+        parser.add_argument(
+            '-x', '--xml',
+            help='Set this flag if you want the xml annotation files to be processed and copied over.',
+            action='store_true'
+        )
+        args = parser.parse_args()
+
+        if args.outputDir is None:
+            args.outputDir = args.imageDir
+
+        # Now we are ready to start the iteration
+        iterate_dir(args.imageDir, args.outputDir, args.ratio, args.xml)
+
+
+    if __name__ == '__main__':
+        main()
+
+To use the script, simply copy and paste the code above in a script named ``partition_dataset.py``. Then, assuming you have all your images and ``*.xml`` files inside ``training_demo\images``, just run the following command:
+
+.. code-block:: bash
+
+    python partition_dataser.py -x -i training_demo\images -r 0.1
+
+Once the script has finished, there should exist two new folders under ``training_demo\images``, namely ``training_demo\images\train`` and ``training_demo\images\test``, containing 90% and 10% of the images (and ``*.xml`` files), respectively. To avoid loss of any files, the script will not delete the images under ``training_demo\images``. Once you have checked that your images have been safely copied over, you can delete the images under ``training_demo\images`` manually.
+
 
 Creating Label Map
 ~~~~~~~~~~~~~~~~~~
@@ -249,7 +372,7 @@ Here is an example script that allows us to do just that:
 - Create a new file with name ``xml_to_csv.py`` under ``TensorFlow\scripts\preprocessing``, open it, paste the above code inside it and save.
 - Install the ``pandas`` package:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         conda install pandas # Anaconda
                              # or
@@ -257,7 +380,7 @@ Here is an example script that allows us to do just that:
 
 - Finally, ``cd`` into ``TensorFlow\scripts\preprocessing`` and run:
 
-    .. code-block:: posh
+    .. code-block:: bash
         
         # Create train data:
         python xml_to_csv.py -i [PATH_TO_IMAGES_FOLDER]/train -o [PATH_TO_ANNOTATIONS_FOLDER]/train_labels.csv  
@@ -397,7 +520,7 @@ Now that we have obtained our ``*.csv`` annotation files, we will need to conver
 - Create a new file with name ``generate_tfrecord.py`` under ``TensorFlow\scripts\preprocessing``, open it, paste the above code inside it and save.
 - Once this is done, ``cd`` into ``TensorFlow\scripts\preprocessing`` and run:
 
-    .. code-block:: posh
+    .. code-block:: bash
         
         # Create train data:
         python generate_tfrecord.py --label=<LABEL> --csv_input=<PATH_TO_ANNOTATIONS_FOLDER>/train_labels.csv
@@ -413,6 +536,8 @@ Now that we have obtained our ``*.csv`` annotation files, we will need to conver
         # python generate_tfrecord.py --label=ship --csv_input=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test_labels.csv --output_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\annotations\test.record --img_path=C:\Users\sglvladi\Documents\TensorFlow\workspace\training_demo\images\test
 
 Once the above is done, there should be 2 new files under the ``training_demo\annotations`` folder, named ``test.record`` and ``train.record``, respectively.
+
+.. _config_training_pipeline_sec:
 
 Configuring a Training Pipeline
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -430,7 +555,8 @@ Once the ``*.tar.gz`` file has been downloaded, open it using a decompression pr
 Now that we have downloaded and extracted our pre-trained model, let's have a look at the changes that we shall need to apply to the downloaded  ``*.config`` file (highlighted in yellow):
 
 .. code-block:: python
-    :emphasize-lines: 9,77,135,150,169,171,183,185
+    :linenos:
+    :emphasize-lines: 9,77,136,151,170,172,178,181,189,191
 
     # SSD with Inception v2 configuration for MSCOCO Dataset.
     # Users should configure the fine_tune_checkpoint field in the train config as
@@ -607,6 +733,11 @@ Now that we have downloaded and extracted our pre-trained model, let's have a lo
     }
 
     eval_config: {
+        # (Optional): Uncomment the line below if you installed the Coco evaluation tools
+        # and you want to also run evaluation
+        # metrics_set: "coco_detection_metrics"
+        # (Optional): Set this to the number of images in your <PATH_TO_IMAGES_FOLDER>/train
+        # if you want to also run evaluation
         num_examples: 8000
         # Note: The below line limits the evaluation process to 10 evaluations.
         # Remove the below line to evaluate indefinitely.
@@ -622,90 +753,175 @@ Now that we have downloaded and extracted our pre-trained model, let's have a lo
         num_readers: 1
     }
 
+It is worth noting here that the changes to lines ``178`` and ``181`` above are optional. These should only be used if you installed the COCO evaluation tools, as outlined in the :ref:`tf_models_install_coco` section, and you intend to run evaluation (see :ref:`evaluation_sec`).
+
 Once the above changes have been applied to our config file, go ahead and save it under ``training_demo/training``.
 
+.. _training_sec:
+
 Training the Model
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. tabs::
+    .. tab:: Standard
 
-Before we begin training our model, let's go and copy the ``TensorFlow/models/research/object_detection/legacy/train.py`` script and paste it straight into our ``training_demo`` folder. We will need this script in order to train our model.
+        .. note::
 
-Now, to initiate a new training job, ``cd`` inside the ``training_demo`` folder and type the following: 
+            This tab describes the training process using Tensorflow's new model training script, namely ``model_main.py``, as suggested by the `Tensorflow Object Detection docs <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md>`_. The advantage of using this script is that it interleaves training and evaluation, essentially combining the ``train.py`` and ``eval.py`` Legacy scripts.
 
-.. code-block:: posh 
+            If instead you would like to use the legacy ``train.py`` script, switch to the Legacy tab.
 
-    python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/ssd_inception_v2_coco.config
+        Before we begin training our model, let's go and copy the ``TensorFlow/models/research/object_detection/model_main.py`` script and paste it straight into our ``training_demo`` folder. We will need this script in order to train our model.
 
-Once the training process has been initiated, you should see a series of print outs similar to the one below (plus/minus some warnings):
+        Now, to initiate a new training job, ``cd`` inside the ``training_demo`` folder and type the following:
 
-.. code-block:: python
+        .. code-block:: bash
 
-    INFO:tensorflow:depth of additional conv before box predictor: 0
-    INFO:tensorflow:depth of additional conv before box predictor: 0
-    INFO:tensorflow:depth of additional conv before box predictor: 0
-    INFO:tensorflow:depth of additional conv before box predictor: 0
-    INFO:tensorflow:depth of additional conv before box predictor: 0
-    INFO:tensorflow:depth of additional conv before box predictor: 0
-    INFO:tensorflow:Restoring parameters from ssd_inception_v2_coco_2017_11_17/model.ckpt
-    INFO:tensorflow:Running local_init_op.
-    INFO:tensorflow:Done running local_init_op.
-    INFO:tensorflow:Starting Session.
-    INFO:tensorflow:Saving checkpoint to path training\model.ckpt
-    INFO:tensorflow:Starting Queues.
-    INFO:tensorflow:global_step/sec: 0
-    INFO:tensorflow:global step 1: loss = 13.8886 (12.339 sec/step)
-    INFO:tensorflow:global step 2: loss = 16.2202 (0.937 sec/step)
-    INFO:tensorflow:global step 3: loss = 13.7876 (0.904 sec/step)
-    INFO:tensorflow:global step 4: loss = 12.9230 (0.894 sec/step)
-    INFO:tensorflow:global step 5: loss = 12.7497 (0.922 sec/step)
-    INFO:tensorflow:global step 6: loss = 11.7563 (0.936 sec/step)
-    INFO:tensorflow:global step 7: loss = 11.7245 (0.910 sec/step)
-    INFO:tensorflow:global step 8: loss = 10.7993 (0.916 sec/step)
-    INFO:tensorflow:global step 9: loss = 9.1277 (0.890 sec/step)
-    INFO:tensorflow:global step 10: loss = 9.3972 (0.919 sec/step)
-    INFO:tensorflow:global step 11: loss = 9.9487 (0.897 sec/step)
-    INFO:tensorflow:global step 12: loss = 8.7954 (0.884 sec/step)
-    INFO:tensorflow:global step 13: loss = 7.4329 (0.906 sec/step)
-    INFO:tensorflow:global step 14: loss = 7.8270 (0.897 sec/step)
-    INFO:tensorflow:global step 15: loss = 6.4877 (0.894 sec/step)
-    ...
+            python model_main.py --alsologtostderr --model_dir=training/ --pipeline_config_path=training/ssd_inception_v2_coco.config
 
-If you ARE NOT seeing a print-out similar to that shown above, and/or the training job crashes after a few seconds, then have a look at the issues and proposed solutions, under the :ref:`issues` section, to see if you can find a solution. Alternatively, you can try the issues section of the official `Tensorflow Models repo <https://github.com/tensorflow/models/issues>`_. 
+        Once the training process has been initiated, you should see a series of print outs similar to the one below (plus/minus some warnings):
 
-If you ARE observing a similar output to the above, then CONGRATULATIONS, you have successfully started your first training job. Now you may very well treat yourself to a cold beer, as waiting on the training to finish is likely to take a while. Following what people have said online, it seems that it is advisable to allow you model to reach a ``TotalLoss`` of at least 2 (ideally 1 and lower) if you want to achieve "fair" detection results. Obviously, lower ``TotalLoss`` is better, however very low ``TotalLoss`` should be avoided, as the model may end up overfitting the dataset, meaning that it will perform poorly when applied to images outside the dataset. To monitor ``TotalLoss``, as well as a number of other metrics, while your model is training, have a look at :ref:`tensorboard_sec`. 
+        .. code-block:: python
 
-Training times can be affected by a number of factors such as:
-    - The computational power of you hardware (either CPU or GPU): Obviously, the more powerful your PC is, the faster the training process. 
-    - Whether you are using the TensorFlow CPU or GPU variant: In general, even when compared to the best CPUs, almost any GPU graphics card will yield much faster training and detection speeds. As a matter of fact, when I first started I was running TensorFlow on my `Intel i7-5930k` (6/12 cores @ 4GHz, 32GB RAM) and was getting step times of around `12 sec/step`, after which I installed TensorFlow GPU and training the very same model -using the same dataset and config files- on a `EVGA GTX-770` (1536 CUDA-cores @ 1GHz, 2GB VRAM) I was down to `0.9 sec/step`!!! A 12-fold increase in speed, using a "low/mid-end" graphics card, when compared to a "mid/high-end" CPU. 
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:Restoring parameters from ssd_inception_v2_coco_2017_11_17/model.ckpt
+            INFO:tensorflow:Running local_init_op.
+            INFO:tensorflow:Done running local_init_op.
+            INFO:tensorflow:Saving checkpoints for 0 into training\model.ckpt.
+            INFO:tensorflow:loss = 16.100115, step = 0
+            ...
+
+        .. important:: The output will normally look like it has "frozen" after the loss for step 0 has been logged, but DO NOT rush to cancel the process. The training outputs logs only every 100 steps by default, therefore if you wait for a while, you should see a log for the loss at step 100.
+
+            The time you should wait can vary greatly, depending on whether you are using a GPU and the chosen value for ``batch_size`` in the config file, so be patient.
+
+
+    .. tab:: Legacy
+
+        Before we begin training our model, let's go and copy the ``TensorFlow/models/research/object_detection/legacy/train.py`` script and paste it straight into our ``training_demo`` folder. We will need this script in order to train our model.
+
+        Now, to initiate a new training job, ``cd`` inside the ``training_demo`` folder and type the following:
+
+        .. code-block:: bash
+
+            python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/ssd_inception_v2_coco.config
+
+        Once the training process has been initiated, you should see a series of print outs similar to the one below (plus/minus some warnings):
+
+        .. code-block:: python
+
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:depth of additional conv before box predictor: 0
+            INFO:tensorflow:Restoring parameters from ssd_inception_v2_coco_2017_11_17/model.ckpt
+            INFO:tensorflow:Running local_init_op.
+            INFO:tensorflow:Done running local_init_op.
+            INFO:tensorflow:Starting Session.
+            INFO:tensorflow:Saving checkpoint to path training\model.ckpt
+            INFO:tensorflow:Starting Queues.
+            INFO:tensorflow:global_step/sec: 0
+            INFO:tensorflow:global step 1: loss = 13.8886 (12.339 sec/step)
+            INFO:tensorflow:global step 2: loss = 16.2202 (0.937 sec/step)
+            INFO:tensorflow:global step 3: loss = 13.7876 (0.904 sec/step)
+            INFO:tensorflow:global step 4: loss = 12.9230 (0.894 sec/step)
+            INFO:tensorflow:global step 5: loss = 12.7497 (0.922 sec/step)
+            INFO:tensorflow:global step 6: loss = 11.7563 (0.936 sec/step)
+            INFO:tensorflow:global step 7: loss = 11.7245 (0.910 sec/step)
+            INFO:tensorflow:global step 8: loss = 10.7993 (0.916 sec/step)
+            INFO:tensorflow:global step 9: loss = 9.1277 (0.890 sec/step)
+            INFO:tensorflow:global step 10: loss = 9.3972 (0.919 sec/step)
+            INFO:tensorflow:global step 11: loss = 9.9487 (0.897 sec/step)
+            INFO:tensorflow:global step 12: loss = 8.7954 (0.884 sec/step)
+            INFO:tensorflow:global step 13: loss = 7.4329 (0.906 sec/step)
+            INFO:tensorflow:global step 14: loss = 7.8270 (0.897 sec/step)
+            INFO:tensorflow:global step 15: loss = 6.4877 (0.894 sec/step)
+            ...
+
+If you ARE observing a similar output to the above, then CONGRATULATIONS, you have successfully started your first training job. Now you may very well treat yourself to a cold beer, as waiting on the training to finish is likely to take a while. Following what people have said online, it seems that it is advisable to allow you model to reach a ``TotalLoss`` of at least 2 (ideally 1 and lower) if you want to achieve "fair" detection results. Obviously, lower ``TotalLoss`` is better, however very low ``TotalLoss`` should be avoided, as the model may end up overfitting the dataset, meaning that it will perform poorly when applied to images outside the dataset. To monitor ``TotalLoss``, as well as a number of other metrics, while your model is training, have a look at :ref:`tensorboard_sec`.
+
+If you ARE NOT seeing a print-out similar to that shown above, and/or the training job crashes after a few seconds, then have a look at the issues and proposed solutions, under the :ref:`issues` section, to see if you can find a solution. Alternatively, you can try the issues section of the official `Tensorflow Models repo <https://github.com/tensorflow/models/issues>`_.
+
+.. note::
+    Training times can be affected by a number of factors such as:
+
+    - The computational power of you hardware (either CPU or GPU): Obviously, the more powerful your PC is, the faster the training process.
+    - Whether you are using the TensorFlow CPU or GPU variant: In general, even when compared to the best CPUs, almost any GPU graphics card will yield much faster training and detection speeds. As a matter of fact, when I first started I was running TensorFlow on my `Intel i7-5930k` (6/12 cores @ 4GHz, 32GB RAM) and was getting step times of around `12 sec/step`, after which I installed TensorFlow GPU and training the very same model -using the same dataset and config files- on a `EVGA GTX-770` (1536 CUDA-cores @ 1GHz, 2GB VRAM) I was down to `0.9 sec/step`!!! A 12-fold increase in speed, using a "low/mid-end" graphics card, when compared to a "mid/high-end" CPU.
     - How big the dataset is: The higher the number of images in your dataset, the longer it will take for the model to reach satisfactory levels of detection performance.
     - The complexity of the objects you are trying to detect: Obviously, if your objective is to track a black ball over a white background, the model will converge to satisfactory levels of detection pretty quickly. If on the other hand, for example, you wish to detect ships in ports, using Pan-Tilt-Zoom cameras, then training will be a much more challenging and time-consuming process, due to the high variability of the shape and size of ships, combined with a highly dynamic background.
-    - And many, many, many, more.... 
+    - And many, many, many, more....
+
+.. _evaluation_sec:
+
+Evaluating the Model (Optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the training process logs some basic measures of training performance. These seem to change depending on the installed version of Tensorflow and the script used for training (i.e. ``model_main.py`` (Standard) or ``train.py`` (Legacy)).
+
+As you will have seen in various parts of this tutorial, we have mentioned a few times the optional utilisation of the COCO evaluation metrics. Also, under section :ref:`_image_partitioning_sec` we partitioned our dataset in two parts, where one was to be used for training and the other for evaluation. In this section we will look at how we can use these metrics, along with the test images, to get a sense of the performance achieved by our model as it is being trained.
+
+Firstly, let's start with a brief explanation of what the evaluation process does. While the training process runs, it will occasionally create checkpoint files inside the ``training_demo/training`` folder, which correspond to snapshots of the model at given steps. When a set of such new checkpoint files is generated, the evaluation process uses these files and evaluates how well the model performs in detecting objects in the test dataset. The results of this evaluation are summarised in the form of some metrics, which can be examined over time.
+
+The steps to run the evaluation are outlined below:
+
+1. Firstly we need to download and install the metrics we want to use.
+  - For a description of the supported object detection evaluation metrics, see `here <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/evaluation_protocols.md>`_.
+  - The process of installing the COCO evaluation metrics is described in :ref:`tf_models_install_coco`.
+2. Secondly, we must modify the configuration pipeline (``*.config`` script).
+  - See lines 178 and 181 of the script in :ref:`config_training_pipeline_sec`.
+3. The third step depends on what method (script) was used when staring the training in :ref:`training_sec`. See below for details:
+
+    .. tabs::
+
+        .. tab:: Standard
+
+            The ``model_main.py`` script interleaves training and evaluation. Therefore, assuming that the following two steps were followed correctly, nothing else needs to be done.
+
+        .. tab:: Legacy
+
+            When using the Legacy scripts, evaluation is run using the ``eval.py`` script. This is done as follows:
+
+            - Copy the ``TensorFlow/models/research/object_detection/legacy/eval.py`` script and paste it inside the ``training_demo`` folder.
+            - Now, to initiate an evaluation job, ``cd`` inside the ``training_demo`` folder and type the following:
+
+                .. code-block:: bash
+
+                    python eval.py --logtostderr --pipeline_config_path=training/ssd_inception_v2_coco.config --checkpoint_dir=training/ --eval_dir=training/eval_0
+
+While the evaluation process is running, it will periodically (every 300 sec by default) check and use the latest ``training/model.ckpt-*`` checkpoint files to evaluate the performance of the model. The results are stored in the form of tf event files (``events.out.tfevents.*``) inside ``training/eval_0``. These files can then be used to monitor the computed metrics, using the process described by the next section.
 
 .. _tensorboard_sec:
 
 Monitor Training Job Progress using TensorBoard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A very nice feature of TensorFlow, is that it allows you to coninuously monitor and visualise a number of different training/detection performance metrics, while your model is being trained. The specific tool that allows us to do all that is `Tensorboard <https://www.tensorflow.org/programmers_guide/summaries_and_tensorboard>`_. 
+A very nice feature of TensorFlow, is that it allows you to coninuously monitor and visualise a number of different training/evaluation metrics, while your model is being trained. The specific tool that allows us to do all that is `Tensorboard <https://www.tensorflow.org/programmers_guide/summaries_and_tensorboard>`_.
 
 To start a new TensorBoard server, we follow the following steps:
 
 - Open a new `Anaconda/Command Prompt`
 - Activate your TensorFlow conda environment (if you have one), e.g.:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         activate tensorflow_gpu
 
 - ``cd`` into the ``training_demo`` folder.
 - Run the following command:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         tensorboard --logdir=training\
 
 The above command will start a new TensorBoard server, which (by default) listens to port 6006 of your machine. Assuming that everything went well, you should see a print-out similar to the one below (plus/minus some warnings):
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         TensorBoard 1.6.0 at http://YOUR-PC:6006 (Press CTRL+C to quit)
 
@@ -726,7 +942,7 @@ Once your training job is complete, you need to extract the newly trained infere
 - Open a new `Anaconda/Command Prompt`
 - Activate your TensorFlow conda environment (if you have one), e.g.:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         activate tensorflow_gpu
 
@@ -736,6 +952,6 @@ Once your training job is complete, you need to extract the newly trained infere
 - Make a note of the file's name, as it will be passed as an argument when we call the ``export_inference_graph.py`` script.
 - Now, ``cd`` inside your ``training_demo`` folder, and run the following command:
 
-.. code-block:: posh
+.. code-block:: bash
     
     python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/ssd_inception_v2_coco.config --trained_checkpoint_prefix training/model.ckpt-13302 --output_directory trained-inference-graphs/output_inference_graph_v1.pb
