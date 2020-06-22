@@ -35,7 +35,7 @@ Although having Anaconda is not a requirement in order to install and use Tensor
 TensorFlow Installation 
 -----------------------
 
-As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilise different hardware on your computer to run their computationally heavy Machine Learning algorithms.
+As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilize different hardware on your computer to run their computationally heavy Machine Learning algorithms.
     
     1. The simplest to install, but also in most cases the slowest in terms of performance, is :ref:`tensorflow_cpu`, which runs directly on the CPU of your machine. 
     2. Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TesnsorFlow, in which case you should follow the guidelines for installing :ref:`tensorflow_gpu`.  
@@ -134,7 +134,7 @@ Before proceeding to install TesnsorFlow GPU, you need to make sure that your sy
 +-------------------------------------+
 | CUDA Toolkit v10.0                  |
 +-------------------------------------+
-| CuDNN 7.6.5                         |
+| CuDNN 7.4.1                         |
 +-------------------------------------+ 
 | Anaconda with Python 3.7 (Optional) |
 +-------------------------------------+
@@ -161,18 +161,18 @@ Install CUDNN
 
     .. tab:: Windows
 
-        - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
+        - Go to `<https://developer.nvidia.com/rdp/cudnn-archive>`_
         - Create a user profile if needed and log in
-        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.0 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-10>`_
-        - Download `cuDNN v7.6.5 Library for Windows 10 <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.0_20191031/cudnn-10.0-windows10-x64-v7.6.5.32.zip>`_
+        - Select `cuDNN v7.4.1 (Nov 8, 2018), for CUDA 10.0 <https://developer.nvidia.com/rdp/cudnn-archive#a-collapse7415-10>`_
+        - Download `cuDNN v7.4.1 Library for Windows 10 <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.4.1.5/prod/10.0_20181108/cudnn-10.0-windows10-x64-v7.4.1.5.zip>`_
         - Extract the contents of the zip file (i.e. the folder named ``cuda``) inside ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.0\``, where ``<INSTALL_PATH>`` points to the installation directory specified during the installation of the CUDA Toolkit. By default ``<INSTALL_PATH>`` = ``C:\Program Files``.
 
     .. tab:: Linux
 
         - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
         - Create a user profile if needed and log in
-        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.0  <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-10>`_
-        - Download `cuDNN v7.6.5 Library for Linux <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.0_20191031/cudnn-10.0-linux-x64-v7.6.5.32.tgz>`_
+        - Select `cuDNN v7.4.1 (Nov 8, 2018), for CUDA 10.0  <https://developer.nvidia.com/rdp/cudnn-archive#a-collapse7415-10>`_
+        - Download `cuDNN v7.4.1 Library for Linux <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.4.1.5/prod/10.0_20181108/cudnn-10.0-linux-x64-v7.4.1.5.tgz>`_
         - Follow the instructions under Section 2.3.1 of the `CuDNN Installation Guide <https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#install-linux>`_ to install CuDNN.
 
 .. _set_env:
@@ -524,8 +524,9 @@ Test your Installation
 
             2018-03-22 03:07:54.623130: E C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\stream_executor\cuda\cuda_dnn.cc:378] Loaded runtime CuDNN library: 7101 (compatibility version 7100) but source was compiled with 7003 (compatibility version 7000).  If using a binary install, upgrade your CuDNN library to match.  If building from sources, make sure the library loaded at runtime matches a compatible version specified during compile configuration.
 
-        - If the above line is present in the printed debugging, it means that you have not installed the correct version of the cuDNN libraries. In this case make sure you re-do the :ref:`cudnn_install` step, making sure you instal cuDNN v7.6.5.
+        - If the above line is present in the printed debugging, it means that you have not installed the correct version of the cuDNN libraries. In this case make sure you re-do the :ref:`cudnn_install` step, making sure you install cuDNN v7.4.1.
 
+.. note:: To ensure compatibility with the chosen version of Tensorflow (i.e. ``1.14.0``), it is generally recommended to use one of the `CUDA toolkit` and `cudnn` libraries from the `official compatibility list <https://www.tensorflow.org/install/source#linux>`_.
 
 .. n
 

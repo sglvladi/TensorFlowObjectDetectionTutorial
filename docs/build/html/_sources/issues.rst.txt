@@ -44,3 +44,23 @@ labelImg saves annotation files with ``.xml.xml`` extension
 At the time of writing up this document, I haven't managed to identify why this might be happening. I have joined a `GitHub issue <https://github.com/tzutalin/labelImg/issues/252>`_, at which you can refer in case there are any updates.
 
 One way I managed to fix the issue was by clicking on the "Change Save Dir" button and selecting the directory where the annotations files should be stores. By doing so, you should not longer get a pop-up dialog when you click "Save" (or Ctrl+s), but you can always check if the file was saved by looking at the bottom left corner of ``labelImg``.
+
+"WARNING:tensorflow:Entity ``<bound method X of <Y>>`` could not be transformed ..."
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In some versions of Tensorflow, you may see errors that look similar to the ones below:
+
+.. code-block:: python
+
+    ...
+    WARNING:tensorflow:Entity <bound method Conv.call of <tensorflow.python.layers.convolutional.Conv2D object at 0x000001E92103EDD8>> could not be transformed and will be executed as-is. Please report this to the AutgoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: converting <bound method Conv.call of <tensorflow.python.layers.convolutional.Conv2D object at 0x000001E92103EDD8>>: AssertionError: Bad argument number for Name: 3, expecting 4
+    WARNING:tensorflow:Entity <bound method BatchNormalization.call of <tensorflow.python.layers.normalization.BatchNormalization object at 0x000001E9225EBA90>> could not be transformed and will be executed as-is. Please report this to the AutgoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: converting <bound method BatchNormalization.call of <tensorflow.python.layers.normalization.BatchNormalization object at 0x000001E9225EBA90>>: AssertionError: Bad argument number for Name: 3, expecting 4
+    ...
+
+These warnings appear to be harmless form my experience, however they can saturate the console with unnecessary messages, which makes it hard to scroll through the output of the training/evaluation process.
+
+As reported `here <https://github.com/tensorflow/tensorflow/issues/34551>`_, this issue seems to be caused by a mismatched version of `gast <https://github.com/serge-sans-paille/gast/>`_. Simply downgrading gast to version ``0.2.2`` seems to remove the warnings. This can be done by running:
+
+.. code-block:: bash
+
+    pip install gast==0.2.2
