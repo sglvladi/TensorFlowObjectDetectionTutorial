@@ -1,4 +1,4 @@
-# TensorFlowObjectDetectionTutorial [![Documentation Status](https://readthedocs.org/projects/tensorflow-object-detection-api-tutorial/badge/?version=latest)](http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/?badge=latest)
+# TensorFlowObjectDetectionTutorial
  
 
 This is a "short" (rather lengthy) tutorial that started off as self notes on how to set-up and get going with the TensorFlow Object Detection API.
