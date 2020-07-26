@@ -78,6 +78,15 @@ and save them inside the ``data/images`` folder.
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Downloading image1.jpg... Done
+    Downloading image2.jpg... Done
+
 
 
 
@@ -138,6 +147,15 @@ For example, the download link for the model used below is: ``download.tensorflo
 
 
 
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Downloading model. This may take a while... Done
+    Downloading label file... Done
 
 
 
@@ -329,7 +347,7 @@ Here are some simple things to try out if you are curious:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  31.329 seconds)
+   **Total running time of the script:** ( 2 minutes  29.261 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_object_detection_simple.py:

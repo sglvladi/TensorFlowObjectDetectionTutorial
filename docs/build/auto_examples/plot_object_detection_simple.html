@@ -223,6 +223,11 @@ and save them inside the <code class="docutils literal notranslate"><span class=
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Downloading image1.jpg... Done
+Downloading image2.jpg... Done
+</pre></div>
+</div>
 </div>
 <div class="section" id="download-the-model">
 <h2>Download the model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h2>
@@ -273,16 +278,21 @@ follows:</p>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Downloading model. This may take a while... Done
+Downloading label file... Done
+</pre></div>
+</div>
 </div>
 <div class="section" id="load-the-model">
 <h2>Load the model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h2>
 <p>Next we load the downloaded model</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>    <span class="c1"># Suppress TensorFlow logging (1)</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="kn">import</span> <span class="n">label_map_util</span>
-<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="kn">import</span> <span class="n">config_util</span>
-<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="kn">import</span> <span class="n">visualization_utils</span> <span class="k">as</span> <span class="n">viz_utils</span>
-<span class="kn">from</span> <span class="nn">object_detection.builders</span> <span class="kn">import</span> <span class="n">model_builder</span>
+<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="k">import</span> <span class="n">label_map_util</span>
+<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="k">import</span> <span class="n">config_util</span>
+<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="k">import</span> <span class="n">visualization_utils</span> <span class="k">as</span> <span class="n">viz_utils</span>
+<span class="kn">from</span> <span class="nn">object_detection.builders</span> <span class="k">import</span> <span class="n">model_builder</span>
 
 <span class="n">tf</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>           <span class="c1"># Suppress TensorFlow logging (2)</span>
 
@@ -338,8 +348,8 @@ faster.</p>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">min_score_thresh</span></code> to other values (between 0 and 1) to allow more detections in or to filter out more detections.</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">six</span> <span class="k">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>   <span class="c1"># Suppress Matplotlib warnings</span>
@@ -416,7 +426,7 @@ faster.</p>
 Running inference for image2.jpg... Done
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  31.329 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  29.261 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-object-detection-simple-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/cbc63cc7463d82d360a24cb612cedafe/plot_object_detection_simple.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_object_detection_simple.py</span></code></a></p>

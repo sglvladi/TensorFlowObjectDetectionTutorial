@@ -253,10 +253,10 @@ follows:</p>
 <p>Next we load the downloaded model</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>    <span class="c1"># Suppress TensorFlow logging</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="kn">import</span> <span class="n">label_map_util</span>
-<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="kn">import</span> <span class="n">config_util</span>
-<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="kn">import</span> <span class="n">visualization_utils</span> <span class="k">as</span> <span class="n">viz_utils</span>
-<span class="kn">from</span> <span class="nn">object_detection.builders</span> <span class="kn">import</span> <span class="n">model_builder</span>
+<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="k">import</span> <span class="n">label_map_util</span>
+<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="k">import</span> <span class="n">config_util</span>
+<span class="kn">from</span> <span class="nn">object_detection.utils</span> <span class="k">import</span> <span class="n">visualization_utils</span> <span class="k">as</span> <span class="n">viz_utils</span>
+<span class="kn">from</span> <span class="nn">object_detection.builders</span> <span class="k">import</span> <span class="n">model_builder</span>
 
 <span class="n">tf</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>           <span class="c1"># Suppress TensorFlow logging (2)</span>
 
