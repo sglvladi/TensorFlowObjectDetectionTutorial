@@ -3,16 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-TensorFlow Object Detection API tutorial
-============================================
+TensorFlow 2 Object Detection API tutorial
+==========================================
 
-.. important:: This tutorial is intended for TensorFlow 1.14, which (at the time of writing this tutorial) is the latest stable version before TensorFlow 2.x.
+.. important:: This tutorial is intended for TensorFlow 2.2, which (at the time of writing this tutorial) is the latest stable version of TensorFlow 2.x.
 
-   Tensorflow 1.15 has also been released, but seems to be exhibiting `instability issues <https://github.com/tensorflow/models/issues/7640>`_.
-
-   A version for TensorFlow 1.9 can be found `here <https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/v1.9.1/>`_.
-
-   At the time of righting this tutorial, Object Detection model training and evaluation was not migrated to TensorFlow 2.x (see `here <https://github.com/tensorflow/models/issues/6423#issuecomment-600925072>`_). From personal tests, it seems that detection using pre-trained models works, however it is not yet possible to train and evaluate models. Once the migration has been completed, a version for TensorFlow 2.x will be produced.
+   A version for TensorFlow 1.14 can be found `here <https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/1.14.2/>`_.
 
 This is a step-by-step tutorial/guide to setting up and using TensorFlow's Object Detection API to perform, namely, object detection in images/video.
 
@@ -23,11 +19,11 @@ The software tools which we shall use throughout this tutorial are listed in the
 +==============+==============================+
 | OS           | Windows, Linux               |
 +--------------+------------------------------+
-| Python       | 3.7                          |
+| Python       | 3.8                          |
 +--------------+------------------------------+
-| TensorFlow   | 1.14                         |
+| TensorFlow   | 2.2.0                        |
 +--------------+------------------------------+
-| CUDA Toolkit | 10.0                         |
+| CUDA Toolkit | 10.1                         |
 +--------------+------------------------------+
 | CuDNN        | 7.6.5                        |
 +--------------+------------------------------+ 
@@ -39,8 +35,8 @@ The software tools which we shall use throughout this tutorial are listed in the
    :caption: Contents:
 
    install
-   camera
    training
+   auto_examples/index
    issues
 
 

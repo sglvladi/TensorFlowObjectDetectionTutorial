@@ -12,15 +12,16 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
+import os
+import re
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'TensorFlow Object Detection API tutorial'
-copyright = '2018, Lyudmil Vladimirov'
+project = 'TensorFlow 2 Object Detection API tutorial'
+copyright = '2020, Lyudmil Vladimirov'
 author = 'Lyudmil Vladimirov'
 
 # The short X.Y version
@@ -39,7 +40,8 @@ release = ''
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx_tabs.tabs'
+    'sphinx_tabs.tabs',
+    'sphinx_gallery.gen_gallery',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -87,6 +89,8 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_css_files = ['css/custom.css']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -155,5 +159,10 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-def setup(app):
-    app.add_stylesheet('css/custom.css')  # may also be an URL
+# --Options for Sphinx Gallery -----------------------------------------------
+
+sphinx_gallery_conf = {
+     'examples_dirs': '../examples',   # path to your example scripts
+     'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
+     # 'filename_pattern': re.escape(os.sep),
+}
