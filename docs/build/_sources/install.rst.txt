@@ -4,181 +4,184 @@ Installation
 General Remarks
 ---------------
 
-- There are two different variations of TensorFlow that you might wish to install, depending on whether you would like TensorFlow to run on your CPU or GPU, namely :ref:`tensorflow_cpu` and :ref:`tensorflow_gpu`. I will proceed to document both and you can choose which one you wish to install.
+- In contrast to TensorFlow 1.x, where different Python packages needed to be installed for one to run TensorFlow on either their CPU or GPU (namely ``tensorflow`` and ``tensorflow-gpu``), TensorFlow 2.x only requires that the ``tensorflow`` package is installed and automatically checks to see if a GPU can be successfully registered.
 
-- If you wish to install both TensorFlow variants on your machine, ideally you should install each variant under a different (virtual) environment. If you attempt to install both :ref:`tensorflow_cpu` and :ref:`tensorflow_gpu`, without making use of virtual environments, you will either end up failing, or when we later start running code there will always be an uncertainty as to which variant is being used to execute your code.
 
-- To ensure that we have no package conflicts and/or that we can install several different versions/variants of TensorFlow (e.g. CPU and GPU), it is generally recommended to use a virtual environment of some sort. For the purposes of this tutorial we will be creating and managing our virtual environments using Anaconda, but you are welcome to use the virtual environment manager of your choice (e.g. virtualenv). 
+Anaconda Python 3.7 (Optional)
+------------------------------
 
-Install Anaconda Python 3.7 (Optional)
---------------------------------------
 Although having Anaconda is not a requirement in order to install and use TensorFlow, I suggest doing so, due to it's intuitive way of managing packages and setting up new virtual environments. Anaconda is a pretty useful tool, not only for working with TensorFlow, but in general for anyone working in Python, so if you haven't had a chance to work with it, now is a good chance.
+
+Install Anaconda Python 3.7
+***************************
 
 .. tabs::
 
     .. tab:: Windows
 
-        - Go to `<https://www.anaconda.com/download/>`_
-        - Download `Anaconda Python 3.7 version for Windows <https://www.anaconda.com/distribution/#windows>`_
-        - Run the downloaded executable (``.exe``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/windows/>`_ for more details.
-        - (Optional) In the next step, check the box "Add Anaconda to my PATH environment variable". This will make Anaconda your default Python distribution, which should ensure that you have the same default Python distribution across all editors.
+        - Go to `<https://www.anaconda.com/products/individual>`_ and click the "Download" button
+        - Download the `Python 3.7 64-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86_64.exe>`_ or the `32-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86.exe>`_ installer, per your system requirements
+        - Run the downloaded executable (``.exe``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/windows/>`_ for more details
+        - (Optional) In the next step, check the box "Add Anaconda3 to my PATH environment variable". This will make Anaconda your default Python distribution, which should ensure that you have the same default Python distribution across all editors.
 
     .. tab:: Linux
 
-        - Go to `<https://www.anaconda.com/download/>`_
-        - Download `Anaconda Python 3.7 version for Linux <https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh>`_
+        - Go to `<https://www.anaconda.com/products/individual>`_ and click the "Download" button
+        - Download the `Python 3.7 64-Bit (x86) Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh>`_
         - Run the downloaded bash script (``.sh``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/linux/>`_ for more details.
         - When prompted with the question "Do you wish the installer to prepend the Anaconda<2 or 3> install location to PATH in your /home/<user>/.bashrc ?", answer "Yes". If you enter "No", you must manually add the path to Anaconda or conda will not work.
 
-.. _tf_install:
+Create a new Anaconda virtual environment
+*****************************************
+- Open a new `Terminal` window
+- Type the following command:
 
-TensorFlow Installation 
------------------------
+    .. code-block:: posh
 
-As mentioned in the Remarks section, there exist two generic variants of TensorFlow, which utilise different hardware on your computer to run their computationally heavy Machine Learning algorithms.
-    
-    1. The simplest to install, but also in most cases the slowest in terms of performance, is :ref:`tensorflow_cpu`, which runs directly on the CPU of your machine. 
-    2. Alternatively, if you own a (compatible) Nvidia graphics card, you can take advantage of the available CUDA cores to speed up the computations performed by TesnsorFlow, in which case you should follow the guidelines for installing :ref:`tensorflow_gpu`.  
+        conda create -n tensorflow pip python=3.8
 
-.. _tensorflow_cpu:
-
-TensorFlow CPU
-~~~~~~~~~~~~~~
-
-Getting setup with an installation of TensorFlow CPU can be done in 3 simple steps.
+- The above will create a new virtual environment with name ``tensorflow``
 
 .. important:: The term `Terminal` will be used to refer to the Terminal of your choice (e.g. Command Prompt, Powershell, etc.)
 
-Create a new Conda virtual environment (Optional)
-*************************************************
-* Open a new `Terminal` window
-* Type the following command:
+Activate the Anaconda virtual environment
+*****************************************
+- Activating the newly created virtual environment is achieved by running the following in the `Terminal` window:
 
     .. code-block:: posh
 
-        conda create -n tensorflow_cpu pip python=3.7
+        conda activate tensorflow
 
-* The above will create a new virtual environment with name ``tensorflow_cpu``
-* Now lets activate the newly created virtual environment by running the following in the `Terminal` window:
+- Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beggining of your cmd path specifier, e.g.:
 
-    .. code-block:: posh
+    .. code-block:: ps1con
 
-        activate tensorflow_cpu
+        (tensorflow) C:\Users\sglvladi>
 
-Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beggining of your cmd path specifier, e.g.:
+.. important::
 
-.. code-block:: ps1con
+    Throughout the rest of the tutorial, execution of any commands in a `Terminal` window should be done after the Anaconda virtual environment has been activated!
 
-    (tensorflow_cpu) C:\Users\sglvladi>
+.. _tf_install:
 
-Install TensorFlow CPU for Python
-*********************************
-- Open a new `Terminal` window and activate the `tensorflow_cpu` environment (if you have not done so already)
-- Once open, type the following on the command line:
+TensorFlow Installation
+-----------------------
 
-    .. code-block:: posh
+Getting setup with an installation of TensorFlow can be done in 3 simple steps.
 
-        pip install --ignore-installed --upgrade tensorflow==1.14
-
-- Wait for the installation to finish
-
-Test your Installation
-**********************
-- Open a new `Terminal` window and activate the `tensorflow_cpu` environment (if you have not done so already)
-- Start a new Python interpreter session by running:
+Install the TensorFlow PIP package
+**********************************
+- Run the following command in a `Terminal` window:
 
     .. code-block:: posh
 
-        python
+        pip install --ignore-installed --upgrade tensorflow==2.2.0
 
-- Once the interpreter opens up, type:
+Verify your Installation
+************************
+- Run the following command in a `Terminal` window:
 
-    .. code-block:: python
+    .. code-block:: posh
 
-        >>> import tensorflow as tf
+        python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 
-- If the above code shows an error, then check to make sure you have activated the `tensorflow_cpu` environment and that tensorflow_cpu was successfully installed within it in the previous step.
-- Then run the following:
+- Once the above is run, you should see a print-out similar to the one bellow:
 
-    .. code-block:: python
+    .. code-block:: posh
 
-        >>> hello = tf.constant('Hello, TensorFlow!')
-        >>> sess = tf.Session()
-
-- Once the above is run, if you see a print-out similar (or identical) to the one below, it means that you could benefit from installing TensorFlow by building the sources that correspond to you specific CPU. Everything should still run as normal, but potentially slower than if you had built TensorFlow from source.
-
-    .. code-block:: python
-
-        2019-02-28 11:59:25.810663: I T:\src\github\tensorflow\tensorflow\core\platform\cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
-
-- Finally, run the following:
-
-    .. code-block:: python
-
-        >>> print(sess.run(hello))
-        b'Hello, TensorFlow!'
+        2020-06-22 19:20:32.614181: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.dll not found
+        2020-06-22 19:20:32.620571: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+        2020-06-22 19:20:35.027232: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library nvcuda.dll
+        2020-06-22 19:20:35.060549: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1561] Found device 0 with properties:
+        pciBusID: 0000:02:00.0 name: GeForce GTX 1070 Ti computeCapability: 6.1
+        coreClock: 1.683GHz coreCount: 19 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+        2020-06-22 19:20:35.074967: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.dll not found
+        2020-06-22 19:20:35.084458: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dll not found
+        2020-06-22 19:20:35.094112: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cufft64_10.dll'; dlerror: cufft64_10.dll not found
+        2020-06-22 19:20:35.103571: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'curand64_10.dll'; dlerror: curand64_10.dll not found
+        2020-06-22 19:20:35.113102: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_10.dll not found
+        2020-06-22 19:20:35.123242: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_10.dll not found
+        2020-06-22 19:20:35.140987: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
+        2020-06-22 19:20:35.146285: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1598] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+        Skipping registering GPU devices...
+        2020-06-22 19:20:35.162173: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+        2020-06-22 19:20:35.178588: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x15140db6390 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+        2020-06-22 19:20:35.185082: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+        2020-06-22 19:20:35.191117: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1102] Device interconnect StreamExecutor with strength 1 edge matrix:
+        2020-06-22 19:20:35.196815: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1108]
+        tf.Tensor(1620.5817, shape=(), dtype=float32)
 
 .. _tensorflow_gpu:
 
-TensorFlow GPU
-~~~~~~~~~~~~~~
+GPU Support (Optional)
+**********************
 
-The installation of `TesnorFlow GPU` is slightly more involved than that of `TensorFlow CPU`, mainly due to the need of installing the relevant Graphics and CUDE drivers. There's a nice Youtube tutorial (see `here <https://www.youtube.com/watch?v=RplXYjxgZbw>`_), explaining how to install TensorFlow GPU. Although it describes different versions of the relevant components (including TensorFlow itself), the installation steps are generally the same with this tutorial. 
+Although using a GPU to run TensorFlow is not necessary, the computational gains are substantial.
+Therefore, if your machine is equipped with a compatible CUDA-enabled GPU, it is recommended that
+you follow the steps listed below to install the relevant libraries necessary to enable TensorFlow
+to make use of your GPU.
 
-Before proceeding to install TesnsorFlow GPU, you need to make sure that your system can satisfy the following requirements:
+By default, when TensorFlow is run it will attempt to register compatible GPU devices. If this
+fails, TensorFlow will resort to running on the platform's CPU. This can also be observed in the
+printout shown in the previous section, under the "Verify the install" bullet-point, where there
+are a number of messages which report missing library files (e.g. ``Could not load dynamic library
+'cudart64_101.dll'; dlerror: cudart64_101.dll not found``).
+
+In order for TensorFlow to run on your GPU, the following requirements must be met:
 
 +-------------------------------------+
 | Prerequisites                       |
 +=====================================+
 | Nvidia GPU (GTX 650 or newer)       |
 +-------------------------------------+
-| CUDA Toolkit v10.0                  |
+| CUDA Toolkit v10.1                  |
 +-------------------------------------+
 | CuDNN 7.6.5                         |
-+-------------------------------------+ 
-| Anaconda with Python 3.7 (Optional) |
 +-------------------------------------+
 
 .. _cuda_install:
 
 Install CUDA Toolkit
-***********************
+~~~~~~~~~~~~~~~~~~~~
 .. tabs::
 
     .. tab:: Windows
 
-        Follow this `link <https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`_ to download and install CUDA Toolkit 10.0.
+        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`_ to download and install CUDA Toolkit 10.1
+        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-microsoft-windows/index.html>`_
 
     .. tab:: Linux
 
-        Follow this `link <https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&target_arch=x86_64>`_ to download and install CUDA Toolkit 10.0 for your Linux distribution.
+        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Linux&target_arch=x86_64>`_ to download and install CUDA Toolkit 10.1 for your Linux distribution.
+        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-linux/index.html>`_
+
 
 .. _cudnn_install:
 
 Install CUDNN
-****************
+~~~~~~~~~~~~~
 .. tabs::
 
     .. tab:: Windows
 
         - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
         - Create a user profile if needed and log in
-        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.0 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-10>`_
-        - Download `cuDNN v7.6.5 Library for Windows 10 <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.0_20191031/cudnn-10.0-windows10-x64-v7.6.5.32.zip>`_
-        - Extract the contents of the zip file (i.e. the folder named ``cuda``) inside ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.0\``, where ``<INSTALL_PATH>`` points to the installation directory specified during the installation of the CUDA Toolkit. By default ``<INSTALL_PATH>`` = ``C:\Program Files``.
+        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.1 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-101>`_
+        - Download `cuDNN v7.6.5 Library for Windows 10 <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.1_20191031/cudnn-10.1-windows10-x64-v7.6.5.32.zip>`_
+        - Extract the contents of the zip file (i.e. the folder named ``cuda``) inside ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\``, where ``<INSTALL_PATH>`` points to the installation directory specified during the installation of the CUDA Toolkit. By default ``<INSTALL_PATH>`` = ``C:\Program Files``.
 
     .. tab:: Linux
 
         - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
         - Create a user profile if needed and log in
-        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.0  <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-10>`_
-        - Download `cuDNN v7.6.5 Library for Linux <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.0_20191031/cudnn-10.0-linux-x64-v7.6.5.32.tgz>`_
+        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.1 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-101>`_
+        - Download `cuDNN v7.6.5 Library for Linux <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.1_20191031/cudnn-10.1-linux-x64-v7.6.5.32.tgz>`_
         - Follow the instructions under Section 2.3.1 of the `CuDNN Installation Guide <https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#install-linux>`_ to install CuDNN.
 
 .. _set_env:
 
 Environment Setup
-*****************
+~~~~~~~~~~~~~~~~~
 .. tabs::
 
     .. tab:: Windows
@@ -188,184 +191,113 @@ Environment Setup
         - In the opened window, click the "Environment Variables..." button to open the "Environment Variables" window.
         - Under "System variables", search for and click on the ``Path`` system variable, then click "Edit..."
         - Add the following paths, then click "OK" to save the changes:
-            
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin``
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.0\libnvvp``
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\libx64``
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.0\cuda\bin``
 
-    .. tab:: Linux 
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\libnvvp``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\extras\CUPTI\libx64``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\cuda\bin``
+
+    .. tab:: Linux
 
         As per Section 7.1.1 of the `CUDA Installation Guide for Linux <https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#install-linux>`_, append the following lines to ``~/.bashrc``:
 
         .. code-block:: bash
 
             # CUDA related exports
-            export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
-            export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+            export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
+            export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 Update your GPU drivers (Optional)
-**********************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If during the installation of the CUDA Toolkit (see :ref:`cuda_install`) you selected the `Express Installation` option, then your GPU drivers will have been overwritten by those that come bundled with the CUDA toolkit. These drivers are typically NOT the latest drivers and, thus, you may wish to updte your drivers.
 
 - Go to `<http://www.nvidia.com/Download/index.aspx>`_
 - Select your GPU version to download
 - Install the driver for your chosen OS
 
-Create a new Conda virtual environment
-**************************************
-* Open a new `Terminal` window
-* Type the following command:
+Verify the installation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+- Run the following command in a **NEW** `Terminal` window:
 
     .. code-block:: posh
 
-        conda create -n tensorflow_gpu pip python=3.7
+        python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 
-* The above will create a new virtual environment with name ``tensorflow_gpu``
-* Now lets activate the newly created virtual environment by running the following in the `Anaconda Promt` window:
+    .. important::
 
-    .. code-block:: posh
+        A new terminal window must be opened for the changes to the Environmental variables to take effect!!
 
-        activate tensorflow_gpu
-
-Once you have activated your virtual environment, the name of the environment should be displayed within brackets at the beggining of your cmd path specifier, e.g.:
-
-.. code-block:: ps1con
-
-    (tensorflow_gpu) C:\Users\sglvladi>
-
-Install TensorFlow GPU for Python
-*********************************
-- Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-- Once open, type the following on the command line:
+- Once the above is run, you should see a print-out similar to the one bellow:
 
     .. code-block:: posh
+        :emphasize-lines: 1,2,6,7,8,9,10,11,12,20,21,22,23,24,25,26,31
 
-        pip install --upgrade tensorflow-gpu==1.14
+        2020-06-22 20:24:31.355541: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
+        2020-06-22 20:24:33.650692: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library nvcuda.dll
+        2020-06-22 20:24:33.686846: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1561] Found device 0 with properties:
+        pciBusID: 0000:02:00.0 name: GeForce GTX 1070 Ti computeCapability: 6.1
+        coreClock: 1.683GHz coreCount: 19 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+        2020-06-22 20:24:33.697234: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
+        2020-06-22 20:24:33.747540: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_10.dll
+        2020-06-22 20:24:33.787573: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cufft64_10.dll
+        2020-06-22 20:24:33.810063: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library curand64_10.dll
+        2020-06-22 20:24:33.841474: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusolver64_10.dll
+        2020-06-22 20:24:33.862787: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusparse64_10.dll
+        2020-06-22 20:24:33.907318: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
+        2020-06-22 20:24:33.913612: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1703] Adding visible gpu devices: 0
+        2020-06-22 20:24:33.918093: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+        2020-06-22 20:24:33.932784: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x2382acc1c40 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+        2020-06-22 20:24:33.939473: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+        2020-06-22 20:24:33.944570: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1561] Found device 0 with properties:
+        pciBusID: 0000:02:00.0 name: GeForce GTX 1070 Ti computeCapability: 6.1
+        coreClock: 1.683GHz coreCount: 19 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+        2020-06-22 20:24:33.953910: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
+        2020-06-22 20:24:33.958772: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_10.dll
+        2020-06-22 20:24:33.963656: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cufft64_10.dll
+        2020-06-22 20:24:33.968210: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library curand64_10.dll
+        2020-06-22 20:24:33.973389: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusolver64_10.dll
+        2020-06-22 20:24:33.978058: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusparse64_10.dll
+        2020-06-22 20:24:33.983547: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
+        2020-06-22 20:24:33.990380: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1703] Adding visible gpu devices: 0
+        2020-06-22 20:24:35.338596: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1102] Device interconnect StreamExecutor with strength 1 edge matrix:
+        2020-06-22 20:24:35.344643: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1108]      0
+        2020-06-22 20:24:35.348795: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1121] 0:   N
+        2020-06-22 20:24:35.353853: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1247] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6284 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1070 Ti, pci bus id: 0000:02:00.0, compute capability: 6.1)
+        2020-06-22 20:24:35.369758: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x2384aa9f820 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+        2020-06-22 20:24:35.376320: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce GTX 1070 Ti, Compute Capability 6.1
+        tf.Tensor(122.478485, shape=(), dtype=float32)
 
-- Wait for the installation to finish
+- Notice from the lines highlighted above that the library files are now ``Successfully opened`` and a debugging message is presented to confirm that TensorFlow has successfully ``Created TensorFlow device``.
 
-Test your Installation
-**********************
-- Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-- Start a new Python interpreter session by running:
-
-    .. code-block:: posh
-
-        python
-
-- Once the interpreter opens up, type:
-
-    .. code-block:: python
-
-        >>> import tensorflow as tf
-
-- If the above code shows an error, then check to make sure you have activated the `tensorflow_gpu` environment and that tensorflow_gpu was successfully installed within it in the previous step.
-- Then run the following:
-
-    .. code-block:: python
-
-        >>> hello = tf.constant('Hello, TensorFlow!')
-        >>> sess = tf.Session()
-- Once the above is run, you should see a print-out similar (but not identical) to the one bellow:
-
-    .. code-block:: python
-
-        2019-11-25 07:20:32.415386: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library nvcuda.dll
-        2019-11-25 07:20:32.449116: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties:
-        name: GeForce GTX 1070 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.683
-        pciBusID: 0000:01:00.0
-        2019-11-25 07:20:32.455223: I tensorflow/stream_executor/platform/default/dlopen_checker_stub.cc:25] GPU libraries are statically linked, skip dlopen check.
-        2019-11-25 07:20:32.460799: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
-        2019-11-25 07:20:32.464391: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
-        2019-11-25 07:20:32.472682: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties:
-        name: GeForce GTX 1070 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.683
-        pciBusID: 0000:01:00.0
-        2019-11-25 07:20:32.478942: I tensorflow/stream_executor/platform/default/dlopen_checker_stub.cc:25] GPU libraries are statically linked, skip dlopen check.
-        2019-11-25 07:20:32.483948: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
-        2019-11-25 07:20:33.181565: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
-        2019-11-25 07:20:33.185974: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      0
-        2019-11-25 07:20:33.189041: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1178] 0:   N
-        2019-11-25 07:20:33.193290: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1304] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6358 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1070 Ti, pci bus id: 0000:01:00.0, compute capability: 6.1)
-
-- Finally, run the following:
-
-    .. code-block:: python
-
-        >>> print(sess.run(hello))
-        b'Hello, TensorFlow!'
 
 .. _tf_models_install:
 
-TensorFlow Models Installation 
-------------------------------
+TensorFlow Object Detection API Installation
+--------------------------------------------
 
-Now that you have installed TensorFlow, it is time to install the models used by TensorFlow to do its magic.
+Now that you have installed TensorFlow, it is time to install the TensorFlow Object Detection API.
 
-Install Prerequisites
-~~~~~~~~~~~~~~~~~~~~~
-
-Building on the assumption that you have just created your new virtual environment (whether that's `tensorflow_cpu`, `tensorflow_gpu` or whatever other name you might have used), there are some packages which need to be installed before installing the models.
-
-+---------------------------------------------+
-| Prerequisite packages                       |
-+--------------+------------------------------+
-| Name         | Tutorial version-build       |
-+==============+==============================+
-| pillow       | 6.2.1-py37hdc69c19_0         |
-+--------------+------------------------------+
-| lxml         | 4.4.1-py37h1350720_0         |
-+--------------+------------------------------+
-| jupyter      | 1.0.0-py37_7                 |
-+--------------+------------------------------+
-| matplotlib   | 3.1.1-py37hc8f65d3_0         |
-+--------------+------------------------------+
-| opencv       | 3.4.2-py37hc319ecb_0         |
-+--------------+------------------------------+
-| pathlib      | 1.0.1-cp37                   |
-+--------------+------------------------------+
-
-The packages can be installed using ``conda`` by running:
-
-.. code-block:: posh
-
-    conda install <package_name>(=<version>), <package_name>(=<version>), ..., <package_name>(=<version>)
-
-where ``<package_name>`` can be replaced with the name of the package, and optionally the package version can be specified by adding the optional specifier ``=<version>`` after ``<package_name>``. For example, to simply install all packages at their latest versions you can run:
-
-.. code-block:: posh
-
-    conda install pillow, lxml, jupyter, matplotlib, opencv, cython
-
-Alternatively, if you don't want to use Anaconda you can install the packages using ``pip``:
-
-.. code-block:: posh
-
-    pip install <package_name>(==<version>) <package_name>(==<version>) ... <package_name>(==<version>)
-
-but you will need to install ``opencv-python`` instead of ``opencv``.
-
-Downloading the TensorFlow Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. note:: To ensure compatibility with the chosen version of Tensorflow (i.e. ``1.14.0``), it is generally recommended to use one of the `Tensorflow Models releases <https://github.com/tensorflow/models/releases>`_, as they are most likely to be stable. Release ``v1.13.0`` is the last unofficial release before ``v2.0`` and therefore is the one used here.
+Downloading the TensorFlow Model Garden
+***************************************
 
 - Create a new folder under a path of your choice and name it ``TensorFlow``. (e.g. ``C:\Users\sglvladi\Documents\TensorFlow``).
 - From your `Terminal` ``cd`` into the ``TensorFlow`` directory.
-- To download the models you can either use `Git <https://git-scm.com/downloads>`_ to clone the `TensorFlow Models v.1.13.0 release <https://github.com/tensorflow/models/tree/r1.13.0>`_ inside the ``TensorFlow`` folder, or you can simply download it as a `ZIP <https://github.com/tensorflow/models/archive/r1.13.0.zip>`_ and extract it's contents inside the ``TensorFlow`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``models-r1.13.0`` to ``models``.
+- To download the models you can either use `Git <https://git-scm.com/downloads>`_ to clone the `TensorFlow Models repository <https://github.com/tensorflow/models>`_ inside the ``TensorFlow`` folder, or you can simply download it as a `ZIP <https://github.com/tensorflow/models/archive/master.zip>`_ and extract its contents inside the ``TensorFlow`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``models-master`` to ``models``.
 - You should now have a single folder named ``models`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
 .. code-block:: bash
 
-    TensorFlow
-    └─ models
-        ├── official
-        ├── research
-        ├── samples
-        └── tutorials
+    TensorFlow/
+    └─ models/
+       ├─ community/
+       ├─ official/
+       ├─ orbit/
+       ├─ research/
+       └── ...
 
 Protobuf Installation/Compilation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*********************************
 
 The Tensorflow Object Detection API uses Protobufs to configure model and
 training parameters. Before the framework can be used, the Protobuf libraries
@@ -374,9 +306,8 @@ must be downloaded and compiled.
 This should be done as follows:
 
 - Head to the `protoc releases page <https://github.com/google/protobuf/releases>`_
-- Download the latest ``protoc-*-*.zip`` release (e.g. ``protoc-3.11.0-win64.zip`` for 64-bit Windows)
+- Download the latest ``protoc-*-*.zip`` release (e.g. ``protoc-3.12.3-win64.zip`` for 64-bit Windows)
 - Extract the contents of the downloaded ``protoc-*-*.zip`` in a directory ``<PATH_TO_PB>`` of your choice (e.g. ``C:\Program Files\Google Protobuf``)
-- Extract the contents of the downloaded ``protoc-*-*.zip``, inside ``C:\Program Files\Google Protobuf``
 - Add ``<PATH_TO_PB>`` to your ``Path`` environment variable (see :ref:`set_env`)
 - In a new `Terminal` [#]_, ``cd`` into ``TensorFlow/models/research/`` directory and run the following command:
 
@@ -393,7 +324,7 @@ This should be done as follows:
 
         .. tab:: Windows Powershell
 
-            .. code-block:: python
+            .. code-block::
 
                 # From within TensorFlow/models/research/
                 Get-ChildItem object_detection/protos/*.proto | foreach {protoc "object_detection/protos/$($_.Name)" --python_out=.}
@@ -401,7 +332,7 @@ This should be done as follows:
 
         .. tab:: Command Prompt
 
-            .. code-block:: python
+            .. code-block::
 
                     # From within TensorFlow/models/research/
                     for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
@@ -410,49 +341,12 @@ This should be done as follows:
 .. [#] NOTE: You MUST open a new `Terminal` for the changes in the environment variables to take effect.
 
 
-Adding necessary Environment Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Install the ``Tensorflow\models\research\object_detection`` package by running the following from ``Tensorflow\models\research``:
-
-    .. code-block:: python
-
-        # From within TensorFlow/models/research/
-        pip install .
-
-2. Add `research/slim` to your ``PYTHONPATH``:
-
-.. tabs::
-
-    .. tab:: Windows
-
-        - Go to `Start` and Search "environment variables"
-        - Click "Edit the system environment variables". This should open the "System Properties" window
-        - In the opened window, click the "Environment Variables..." button to open the "Environment Variables" window.
-        - Under "System variables", search for and click on the ``PYTHONPATH`` system variable,
-
-            - If it exists then click "Edit..." and add ``<PATH_TO_TF>\TensorFlow\models\research\slim`` to the list
-            - If it doesn't already exist, then click "New...", under "Variable name" type ``PYTHONPATH`` and under "Variable value" enter ``<PATH_TO_TF>\TensorFlow\models\research\slim``
-
-        - Then click "OK" to save the changes:
-
-    .. tab:: Linux
-    
-        The `Installation docs <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md>`_ suggest that you either run, or add to ``~/.bashrc`` file, the following command, which adds these packages to your PYTHONPATH:
-
-        .. code-block:: bash
-
-            # From within tensorflow/models/research/
-            export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research/slim
-
-    where, in both cases, ``<PATH_TO_TF>`` replaces the absolute path to your ``TesnorFlow`` folder. (e.g. ``<PATH_TO_TF>`` = ``C:\Users\sglvladi\Documents`` if ``TensorFlow`` resides within your ``Documents`` folder)
-
 .. _tf_models_install_coco:
 
-COCO API installation (Optional)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+COCO API installation
+*********************
 
-The ``pycocotools`` package should be installed if you are interested in using COCO evaluation metrics, as discussed in :ref:`evaluation_sec`.
+As of TensorFlow 2.x, the ``pycocotools`` package is listed as `a dependency of the Object Detection API <https://github.com/tensorflow/models/blob/master/research/object_detection/packages/tf2/setup.py>`_. Ideally, this package should get installed when installing the Object Detection API as documented in the :ref:`tf_models_install_object_detection` section below, however the installation can fail for various reasons and therefore it is simpler to just install the package beforehand, in which case later installation will be skipped.
 
 .. tabs::
 
@@ -462,14 +356,15 @@ The ``pycocotools`` package should be installed if you are interested in using C
 
         .. code-block:: bash
 
+            pip install cython
             pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 
 
         Note that, according to the `package's instructions <https://github.com/philferriere/cocoapi#this-clones-readme>`_, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from `here <https://go.microsoft.com/fwlink/?LinkId=691126>`_.
 
     .. tab:: Linux
-    
-        Download `cocoapi <https://github.com/cocodataset/cocoapi>`_ to a directory of your choice, then ``make`` and copy the pycocotools subfolder to the ``Tensorflow/models/research`` directory, as such: 
+
+        Download `cocoapi <https://github.com/cocodataset/cocoapi>`_ to a directory of your choice, then ``make`` and copy the pycocotools subfolder to the ``Tensorflow/models/research`` directory, as such:
 
         .. code-block:: bash
 
@@ -485,49 +380,96 @@ The ``pycocotools`` package should be installed if you are interested in using C
     - To use the COCO instance segmentation metrics add ``metrics_set: "coco_mask_metrics"`` to the ``eval_config`` message in the config file.
 
 
+.. _tf_models_install_object_detection:
+
+Install the Object Detection API
+********************************
+Installation of the Object Detection API is achieved by installing the ``object_detection`` package. This is done by running the following commands from within ``Tensorflow\models\research``:
+
+.. code-block::
+
+    # From within TensorFlow/models/research/
+    cp object_detection/packages/tf2/setup.py .
+    python -m pip install .
+
+.. note::
+
+    During the above installation, you may observe the following error:
+
+        .. code-block::
+
+            ERROR: Command errored out with exit status 1:
+                 command: 'C:\Users\sglvladi\Anaconda3\envs\tf2\python.exe' -u -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"'; __file__='"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record 'C:\Users\sglvladi\AppData\Local\Temp\pip-record-wpn7b6qo\install-record.txt' --single-version-externally-managed --compile --install-headers 'C:\Users\sglvladi\Anaconda3\envs\tf2\Include\pycocotools'
+                     cwd: C:\Users\sglvladi\AppData\Local\Temp\pip-install-yn46ecei\pycocotools\
+                Complete output (14 lines):
+                running install
+                running build
+                running build_py
+                creating build
+                creating build\lib.win-amd64-3.8
+                creating build\lib.win-amd64-3.8\pycocotools
+                copying pycocotools\coco.py -> build\lib.win-amd64-3.8\pycocotools
+                copying pycocotools\cocoeval.py -> build\lib.win-amd64-3.8\pycocotools
+                copying pycocotools\mask.py -> build\lib.win-amd64-3.8\pycocotools
+                copying pycocotools\__init__.py -> build\lib.win-amd64-3.8\pycocotools
+                running build_ext
+                skipping 'pycocotools\_mask.c' Cython extension (up-to-date)
+                building 'pycocotools._mask' extension
+                error: Microsoft Visual C++ 14.0 is required. Get it with "Build Tools for Visual Studio": https://visualstudio.microsoft.com/downloads/
+                ----------------------------------------
+            ERROR: Command errored out with exit status 1: 'C:\Users\sglvladi\Anaconda3\envs\tf2\python.exe' -u -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"'; __file__='"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record 'C:\Users\sglvladi\AppData\Local\Temp\pip-record-wpn7b6qo\install-record.txt' --single-version-externally-managed --compile --install-headers 'C:\Users\sglvladi\Anaconda3\envs\tf2\Include\pycocotools' Check the logs for full command output.
+
+    This is caused because installation of the ``pycocotools`` package has failed. To fix this have a look at the :ref:`tf_models_install_coco` section and rerun the above commands.
+
+
 .. _test_tf_models:
 
 Test your Installation
-~~~~~~~~~~~~~~~~~~~~~~
+**********************
 
-- Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-- ``cd`` into ``TensorFlow\models\research\object_detection`` and run the following command:
+To test the installation, run the following command from within ``Tensorflow\models\research``:
 
-    .. code-block:: posh
+.. code-block::
 
-        # From within TensorFlow/models/research/object_detection
-        jupyter notebook
+    # From within TensorFlow/models/research/
+    python object_detection/builders/model_builder_tf2_test.py
 
-- This should start a new ``jupyter notebook`` server on your machine and you should be redirected to a new tab of your default browser.
+Once the above is run, allow some time for the test to complete and once done you should observe a
+printout similar to the one below:
 
-- Once there, simply follow `sentdex's Youtube video <https://youtu.be/COlbP62-B-U?t=7m23s>`_ to ensure that everything is running smoothly.
+.. code-block::
 
-- When done, your notebook should look similar to the image bellow:
+    ...
+    [       OK ] ModelBuilderTF2Test.test_create_ssd_models_from_config
+    [ RUN      ] ModelBuilderTF2Test.test_invalid_faster_rcnn_batchnorm_update
+    [       OK ] ModelBuilderTF2Test.test_invalid_faster_rcnn_batchnorm_update
+    [ RUN      ] ModelBuilderTF2Test.test_invalid_first_stage_nms_iou_threshold
+    [       OK ] ModelBuilderTF2Test.test_invalid_first_stage_nms_iou_threshold
+    [ RUN      ] ModelBuilderTF2Test.test_invalid_model_config_proto
+    [       OK ] ModelBuilderTF2Test.test_invalid_model_config_proto
+    [ RUN      ] ModelBuilderTF2Test.test_invalid_second_stage_batch_size
+    [       OK ] ModelBuilderTF2Test.test_invalid_second_stage_batch_size
+    [ RUN      ] ModelBuilderTF2Test.test_session
+    [  SKIPPED ] ModelBuilderTF2Test.test_session
+    [ RUN      ] ModelBuilderTF2Test.test_unknown_faster_rcnn_feature_extractor
+    [       OK ] ModelBuilderTF2Test.test_unknown_faster_rcnn_feature_extractor
+    [ RUN      ] ModelBuilderTF2Test.test_unknown_meta_architecture
+    [       OK ] ModelBuilderTF2Test.test_unknown_meta_architecture
+    [ RUN      ] ModelBuilderTF2Test.test_unknown_ssd_feature_extractor
+    [       OK ] ModelBuilderTF2Test.test_unknown_ssd_feature_extractor
+    ----------------------------------------------------------------------
+    Ran 20 tests in 68.510s
 
-    .. image:: ./_static/object_detection_tutorial_output.png
-       :width: 90%
-       :alt: alternate text
-       :align: center
+    OK (skipped=1)
 
-.. important::
-    1. If no errors appear, but also no images are shown in the notebook, try adding ``%matplotlib inline`` at the start of the last cell, as shown by the highlighted text in the image bellow:
+Try out the examples
+********************
+If the previous step completed successfully it means you have successfully installed all the
+components necessary to perform object detection using pre-trained models.
 
-    .. image:: ./_static/object_detection_tutorial_err.png
-       :width: 90%
-       :alt: alternate text
-       :align: center
+If you want to play around with some examples to see how this can be done, now would be a good
+time to have a look at the :ref:`examples` section.
 
-
-    2. If Python crashes when running the last cell, have a look at the `Terminal` window you used to run ``jupyter notebook`` and check for an error similar (maybe identical) to the one below:
-
-        .. code-block:: python
-
-            2018-03-22 03:07:54.623130: E C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\stream_executor\cuda\cuda_dnn.cc:378] Loaded runtime CuDNN library: 7101 (compatibility version 7100) but source was compiled with 7003 (compatibility version 7000).  If using a binary install, upgrade your CuDNN library to match.  If building from sources, make sure the library loaded at runtime matches a compatible version specified during compile configuration.
-
-        - If the above line is present in the printed debugging, it means that you have not installed the correct version of the cuDNN libraries. In this case make sure you re-do the :ref:`cudnn_install` step, making sure you instal cuDNN v7.6.5.
-
-
-.. n
 
 .. _labelImg_install:
 
@@ -537,7 +479,7 @@ LabelImg Installation
 There exist several ways to install ``labelImg``. Below are 3 of the most common.
 
 Get from PyPI (Recommended)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+***************************
 1. Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
 2. Run the following command to install ``labelImg``:
 
@@ -554,7 +496,7 @@ Get from PyPI (Recommended)
     labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
 
 Use precompiled binaries (Easy)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*******************************
 Precompiled binaries for both Windows and Linux can be found `here <http://tzutalin.github.io/labelImg/>`_ .
 
 Installation is the done in three simple steps:
@@ -563,18 +505,19 @@ Installation is the done in three simple steps:
 
 2. Download the latest binary for your OS from `here <http://tzutalin.github.io/labelImg/>`_. and extract its contents under ``Tensorflow/addons/labelImg``.
 
-3. You should now have a single folder named ``addons\labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
+3. You should now have a single folder named ``addons/labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
 .. code-block:: bash
 
-    TensorFlow
-    ├─ addons
-    │   └── labelImg
-    └─ models
-        ├── official
-        ├── research
-        ├── samples
-        └── tutorials
+    TensorFlow/
+    ├─ addons/
+    │  └─ labelImg/
+    └─ models/
+       ├─ community/
+       ├─ official/
+       ├─ orbit/
+       ├─ research/
+       └─ ...
 
 4. ``labelImg`` can then be run as follows:
 
@@ -586,7 +529,7 @@ Installation is the done in three simple steps:
     labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
 
 Build from source (Hard)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+************************
 The steps for installing from source follow below.
 
 **1. Download labelImg**
@@ -597,21 +540,22 @@ The steps for installing from source follow below.
 
 .. code-block:: bash
 
-    TensorFlow
+    TensorFlow/
     ├─ addons
-    │   └── labelImg
-    └─ models
-        ├── official
-        ├── research
-        ├── samples
-        └── tutorials
+    │  └─ labelImg/
+    └─ models/
+       ├─ community/
+       ├─ official/
+       ├─ orbit/
+       ├─ research/
+       └─ ...
 
 .. [#] The latest repo commit when writing this tutorial is `8d1bd68 <https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b>`_.
 
 **2. Install dependencies and compiling package**
 
 - Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-- ``cd`` into ``TensorFlow\addons\labelImg`` and run the following commands:
+- ``cd`` into ``TensorFlow/addons/labelImg`` and run the following commands:
 
     .. tabs:: 
 
@@ -634,7 +578,7 @@ The steps for installing from source follow below.
 **3. Test your installation**
 
 - Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-- ``cd`` into ``TensorFlow\addons\labelImg`` and run the following command:
+- ``cd`` into ``TensorFlow/addons/labelImg`` and run the following command:
 
     .. code-block:: posh
 

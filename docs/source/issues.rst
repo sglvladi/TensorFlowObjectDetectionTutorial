@@ -38,13 +38,6 @@ To solve such issues in Windows, open a `Task Manager` windows, look for Tasks w
 
 If the issue persists, then you're probably running out of memory. Try closing down anything else that might be eating up your GPU memory (e.g. Youtube videos, webpages etc.)
 
-labelImg saves annotation files with ``.xml.xml`` extension
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-At the time of writing up this document, I haven't managed to identify why this might be happening. I have joined a `GitHub issue <https://github.com/tzutalin/labelImg/issues/252>`_, at which you can refer in case there are any updates.
-
-One way I managed to fix the issue was by clicking on the "Change Save Dir" button and selecting the directory where the annotations files should be stores. By doing so, you should not longer get a pop-up dialog when you click "Save" (or Ctrl+s), but you can always check if the file was saved by looking at the bottom left corner of ``labelImg``.
-
 "WARNING:tensorflow:Entity ``<bound method X of <Y>>`` could not be transformed ..."
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -59,8 +52,69 @@ In some versions of Tensorflow, you may see errors that look similar to the ones
 
 These warnings appear to be harmless form my experience, however they can saturate the console with unnecessary messages, which makes it hard to scroll through the output of the training/evaluation process.
 
-As reported `here <https://github.com/tensorflow/tensorflow/issues/34551>`_, this issue seems to be caused by a mismatched version of `gast <https://github.com/serge-sans-paille/gast/>`_. Simply downgrading gast to version ``0.2.2`` seems to remove the warnings. This can be done by running:
+As reported `here <https://github.com/tensorflow/tensorflow/issues/34551>`_, this issue seems to
+be caused by a mismatched version of `gast <https://github.com/serge-sans-paille/gast/>`_. Simply
+downgrading gast to version ``0.2.2`` seems to remove the warnings. This can be done by running:
 
 .. code-block:: bash
 
     pip install gast==0.2.2
+
+"AttributeError: module 'google.protobuf.descriptor' has no attribute '_internal_create_key"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+It is possible that when executing ``from object_detection.utils import label_map_util`` you may
+get the above error. As per the discussion is in `this Stack Overflow thread <https://stackoverflow.com/a/61961016/3474873>`_,
+upgrading the Python protobuf version seems to solve this issue:
+
+.. code-block::
+
+    pip install --upgrade protobuf
+
+.. _export_error:
+
+"TypeError: Expected Operation, Variable, or Tensor, got level_5"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When trying to export oyu trained model using the ``exporter_main_v2.py`` script, you may come
+across an error that looks like this:
+
+.. code-block::
+    :linenos:
+    :emphasize-lines: 9
+
+    Traceback (most recent call last):
+      File ".\exporter_main_v2.py", line 126, in <module>
+        app.run(main)
+      File "C:\Users\sglvladi\Anaconda3\envs\tf2\lib\site-packages\absl\app.py", line 299, in run
+        _run_main(main, args)
+      ...
+      File "C:\Users\sglvladi\Anaconda3\envs\tf2\lib\site-packages\tensorflow\python\keras\engine\base_layer.py", line 1627, in get_losses_for
+        reachable = tf_utils.get_reachable_from_inputs(inputs, losses)
+      File "C:\Users\sglvladi\Anaconda3\envs\tf2\lib\site-packages\tensorflow\python\keras\utils\tf_utils.py", line 140, in get_reachable_from_inputs
+        raise TypeError('Expected Operation, Variable, or Tensor, got ' + str(x))
+    TypeError: Expected Operation, Variable, or Tensor, got level_5
+
+This error seems to come from TensorFlow itself and a discussion on the issue can be found
+`here <https://github.com/tensorflow/models/issues/8841>`_. As discussed there, a fix to the above
+issue can be achieved by opening the ``tf_utils.py`` file and adding a line of code. Below is a
+summary of how this can be done:
+
+- Look at the line that corresponds to line 9 (highlighted) in the above error print out.
+- Copy the path to the ``tf_utils.py`` file; in my case this was ``C:\Users\sglvladi\Anaconda3\envs\tf2\lib\site-packages\tensorflow\python\keras\utils\tf_utils.py``
+- Open the file and replace line 140 of the file as follows:
+
+  - Change:
+
+    .. code-block:: python
+
+        raise TypeError('Expected Operation, Variable, or Tensor, got ' + str(x))
+
+    to:
+
+    .. code-block:: python
+
+        if not isinstance(x, str):
+            raise TypeError('Expected Operation, Variable, or Tensor, got ' + str(x))
+
+At the time of writting this tutorial, a fix to the issue had not been implemented in the version
+of TensorFlow installed using ``pip``. It is possible that this will get incorporated at some later
+point.

@@ -1,42 +1,46 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Common issues &mdash; TensorFlow Object Detection API tutorial  documentation</title>
+  <title>Common issues &mdash; TensorFlow 2 Object Detection API tutorial  documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Training Custom Object Detector" href="training.html" /> 
+    <link rel="prev" title="Object Detection Test" href="auto_examples/plot_object_detection_simple.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -50,7 +54,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> TensorFlow Object Detection API tutorial
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> TensorFlow 2 Object Detection API tutorial
           
 
           
@@ -73,6 +77,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,13 +88,14 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="camera.html">Detect Objects Using Your Webcam</a></li>
 <li class="toctree-l1"><a class="reference internal" href="training.html">Training Custom Object Detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Common issues</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#python-crashes-tensorflow-gpu">Python crashes - TensorFlow GPU</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cleaning-up-nvidia-containers-tensorflow-gpu">Cleaning up Nvidia containers (TensorFlow GPU)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#labelimg-saves-annotation-files-with-xml-xml-extension">labelImg saves annotation files with <code class="docutils literal notranslate"><span class="pre">.xml.xml</span></code> extension</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#warning-tensorflow-entity-bound-method-x-of-y-could-not-be-transformed">“WARNING:tensorflow:Entity <code class="docutils literal notranslate"><span class="pre">&lt;bound</span> <span class="pre">method</span> <span class="pre">X</span> <span class="pre">of</span> <span class="pre">&lt;Y&gt;&gt;</span></code> could not be transformed …”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#attributeerror-module-google-protobuf-descriptor-has-no-attribute-internal-create-key">“AttributeError: module ‘google.protobuf.descriptor’ has no attribute ‘_internal_create_key”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#typeerror-expected-operation-variable-or-tensor-got-level-5">“TypeError: Expected Operation, Variable, or Tensor, got level_5”</a></li>
 </ul>
 </li>
 </ul>
@@ -97,6 +103,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -106,7 +113,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">TensorFlow Object Detection API tutorial</a>
+          <a href="index.html">TensorFlow 2 Object Detection API tutorial</a>
         
       </nav>
 
@@ -135,7 +142,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Common issues</li>
     
@@ -161,9 +168,9 @@
 <p>Below is a list of common issues encountered while using TensorFlow for objects detection.</p>
 <div class="section" id="python-crashes-tensorflow-gpu">
 <h2>Python crashes - TensorFlow GPU<a class="headerlink" href="#python-crashes-tensorflow-gpu" title="Permalink to this headline">¶</a></h2>
-<p>If you are using <a class="reference internal" href="install.html#tensorflow-gpu"><span class="std std-ref">TensorFlow GPU</span></a> and when you try to run some Python object detection script (e.g. <a class="reference internal" href="install.html#test-tf-models"><span class="std std-ref">Test your Installation</span></a>), after a few seconds, Windows reports that Python has crashed then have a look at the <cite>Anaconda/Command Prompt</cite> window you used to run the script and check for a line similar (maybe identical) to the one below:</p>
+<p>If you are using <a class="reference internal" href="install.html#tensorflow-gpu"><span class="std std-ref">GPU Support (Optional)</span></a> and when you try to run some Python object detection script (e.g. <a class="reference internal" href="install.html#test-tf-models"><span class="std std-ref">Test your Installation</span></a>), after a few seconds, Windows reports that Python has crashed then have a look at the <cite>Anaconda/Command Prompt</cite> window you used to run the script and check for a line similar (maybe identical) to the one below:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">22</span> <span class="mo">03</span><span class="p">:</span><span class="mo">07</span><span class="p">:</span><span class="mf">54.623130</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">378</span><span class="p">]</span> <span class="n">Loaded</span> <span class="n">runtime</span> <span class="n">CuDNN</span> <span class="n">library</span><span class="p">:</span> <span class="mi">7101</span> <span class="p">(</span><span class="n">compatibility</span> <span class="n">version</span> <span class="mi">7100</span><span class="p">)</span> <span class="n">but</span> <span class="n">source</span> <span class="n">was</span> <span class="n">compiled</span> <span class="k">with</span> <span class="mi">7003</span> <span class="p">(</span><span class="n">compatibility</span> <span class="n">version</span> <span class="mi">7000</span><span class="p">)</span><span class="o">.</span>  <span class="n">If</span> <span class="n">using</span> <span class="n">a</span> <span class="n">binary</span> <span class="n">install</span><span class="p">,</span> <span class="n">upgrade</span> <span class="n">your</span> <span class="n">CuDNN</span> <span class="n">library</span> <span class="n">to</span> <span class="n">match</span><span class="o">.</span>  <span class="n">If</span> <span class="n">building</span> <span class="kn">from</span> <span class="nn">sources</span><span class="p">,</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">library</span> <span class="n">loaded</span> <span class="n">at</span> <span class="n">runtime</span> <span class="n">matches</span> <span class="n">a</span> <span class="n">compatible</span> <span class="n">version</span> <span class="n">specified</span> <span class="n">during</span> <span class="nb">compile</span> <span class="n">configuration</span><span class="o">.</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">03</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mf">54.623130</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">378</span><span class="p">]</span> <span class="n">Loaded</span> <span class="n">runtime</span> <span class="n">CuDNN</span> <span class="n">library</span><span class="p">:</span> <span class="mi">7101</span> <span class="p">(</span><span class="n">compatibility</span> <span class="n">version</span> <span class="mi">7100</span><span class="p">)</span> <span class="n">but</span> <span class="n">source</span> <span class="n">was</span> <span class="n">compiled</span> <span class="k">with</span> <span class="mi">7003</span> <span class="p">(</span><span class="n">compatibility</span> <span class="n">version</span> <span class="mi">7000</span><span class="p">)</span><span class="o">.</span>  <span class="n">If</span> <span class="n">using</span> <span class="n">a</span> <span class="n">binary</span> <span class="n">install</span><span class="p">,</span> <span class="n">upgrade</span> <span class="n">your</span> <span class="n">CuDNN</span> <span class="n">library</span> <span class="n">to</span> <span class="n">match</span><span class="o">.</span>  <span class="n">If</span> <span class="n">building</span> <span class="kn">from</span> <span class="nn">sources</span><span class="p">,</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">library</span> <span class="n">loaded</span> <span class="n">at</span> <span class="n">runtime</span> <span class="n">matches</span> <span class="n">a</span> <span class="n">compatible</span> <span class="n">version</span> <span class="n">specified</span> <span class="n">during</span> <span class="nb">compile</span> <span class="n">configuration</span><span class="o">.</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -176,12 +183,12 @@
 <ul>
 <li><p>Failure to restart training of a model. Look for the following errors in the debugging:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.326902</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">385</span><span class="p">]</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">create</span> <span class="n">cudnn</span> <span class="n">handle</span><span class="p">:</span> <span class="n">CUDNN_STATUS_ALLOC_FAILED</span>
-<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.330475</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">352</span><span class="p">]</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">destroy</span> <span class="n">cudnn</span> <span class="n">handle</span><span class="p">:</span> <span class="n">CUDNN_STATUS_BAD_PARAM</span>
-<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.333797</span><span class="p">:</span> <span class="n">W</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">stream</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">1983</span><span class="p">]</span> <span class="n">attempting</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">DNN</span> <span class="n">operation</span> <span class="n">using</span> <span class="n">StreamExecutor</span> <span class="n">without</span> <span class="n">DNN</span> <span class="n">support</span>
-<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.333807</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">stream</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1851</span><span class="p">]</span> <span class="n">stream</span> <span class="mo">00000216</span><span class="n">F05CB660</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">stream</span><span class="p">:</span> <span class="mo">00000216</span><span class="n">F05CA6E0</span>
-<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.340765</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">stream</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">4637</span><span class="p">]</span> <span class="n">stream</span> <span class="mo">00000216</span><span class="n">F05CB660</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">memcpy</span> <span class="n">host</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">device</span><span class="p">;</span> <span class="n">source</span><span class="p">:</span> <span class="mo">000000020</span><span class="n">DB37B00</span>
-<span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">23</span> <span class="mo">03</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mf">10.343752</span><span class="p">:</span> <span class="n">F</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_util</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">343</span><span class="p">]</span> <span class="n">CPU</span><span class="o">-&gt;</span><span class="n">GPU</span> <span class="n">Memcpy</span> <span class="n">failed</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">23</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">10.326902</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">385</span><span class="p">]</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">create</span> <span class="n">cudnn</span> <span class="n">handle</span><span class="p">:</span> <span class="n">CUDNN_STATUS_ALLOC_FAILED</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">23</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">10.330475</span><span class="p">:</span> <span class="n">E</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">cuda</span>\<span class="n">cuda_dnn</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">352</span><span class="p">]</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">destroy</span> <span class="n">cudnn</span> <span class="n">handle</span><span class="p">:</span> <span class="n">CUDNN_STATUS_BAD_PARAM</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">23</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">10.333797</span><span class="p">:</span> <span class="n">W</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">stream</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">1983</span><span class="p">]</span> <span class="n">attempting</span> <span class="n">to</span> <span class="n">perform</span> <span class="n">DNN</span> <span class="n">operation</span> <span class="n">using</span> <span class="n">StreamExecutor</span> <span class="n">without</span> <span class="n">DNN</span> <span class="n">support</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">23</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">10.333807</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">stream</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">1851</span><span class="p">]</span> <span class="n">stream</span> <span class="mi">00000216</span><span class="n">F05CB660</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">stream</span><span class="p">:</span> <span class="mi">00000216</span><span class="n">F05CA6E0</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">23</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">10.340765</span><span class="p">:</span> <span class="n">I</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">stream_executor</span>\<span class="n">stream</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">4637</span><span class="p">]</span> <span class="n">stream</span> <span class="mi">00000216</span><span class="n">F05CB660</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">memcpy</span> <span class="n">host</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">device</span><span class="p">;</span> <span class="n">source</span><span class="p">:</span> <span class="mi">000000020</span><span class="n">DB37B00</span>
+<span class="mi">2018</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">23</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">10.343752</span><span class="p">:</span> <span class="n">F</span> <span class="n">C</span><span class="p">:</span>\<span class="n">tf_jenkins</span>\<span class="n">workspace</span>\<span class="n">rel</span><span class="o">-</span><span class="n">win</span>\<span class="n">M</span>\<span class="n">windows</span><span class="o">-</span><span class="n">gpu</span>\<span class="n">PY</span>\<span class="mi">36</span>\<span class="n">tensorflow</span>\<span class="n">core</span>\<span class="n">common_runtime</span>\<span class="n">gpu</span>\<span class="n">gpu_util</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">343</span><span class="p">]</span> <span class="n">CPU</span><span class="o">-&gt;</span><span class="n">GPU</span> <span class="n">Memcpy</span> <span class="n">failed</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -190,25 +197,84 @@
 <p>To solve such issues in Windows, open a <cite>Task Manager</cite> windows, look for Tasks with name <code class="docutils literal notranslate"><span class="pre">NVIDIA</span> <span class="pre">Container</span></code> and kill them by selecting them and clicking the <cite>End Task</cite> button at the bottom left corner of the window.</p>
 <p>If the issue persists, then you’re probably running out of memory. Try closing down anything else that might be eating up your GPU memory (e.g. Youtube videos, webpages etc.)</p>
 </div>
-<div class="section" id="labelimg-saves-annotation-files-with-xml-xml-extension">
-<h2>labelImg saves annotation files with <code class="docutils literal notranslate"><span class="pre">.xml.xml</span></code> extension<a class="headerlink" href="#labelimg-saves-annotation-files-with-xml-xml-extension" title="Permalink to this headline">¶</a></h2>
-<p>At the time of writing up this document, I haven’t managed to identify why this might be happening. I have joined a <a class="reference external" href="https://github.com/tzutalin/labelImg/issues/252">GitHub issue</a>, at which you can refer in case there are any updates.</p>
-<p>One way I managed to fix the issue was by clicking on the “Change Save Dir” button and selecting the directory where the annotations files should be stores. By doing so, you should not longer get a pop-up dialog when you click “Save” (or Ctrl+s), but you can always check if the file was saved by looking at the bottom left corner of <code class="docutils literal notranslate"><span class="pre">labelImg</span></code>.</p>
-</div>
 <div class="section" id="warning-tensorflow-entity-bound-method-x-of-y-could-not-be-transformed">
 <h2>“WARNING:tensorflow:Entity <code class="docutils literal notranslate"><span class="pre">&lt;bound</span> <span class="pre">method</span> <span class="pre">X</span> <span class="pre">of</span> <span class="pre">&lt;Y&gt;&gt;</span></code> could not be transformed …”<a class="headerlink" href="#warning-tensorflow-entity-bound-method-x-of-y-could-not-be-transformed" title="Permalink to this headline">¶</a></h2>
 <p>In some versions of Tensorflow, you may see errors that look similar to the ones below:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
-<span class="n">WARNING</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Entity</span> <span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">Conv</span><span class="o">.</span><span class="n">call</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">convolutional</span><span class="o">.</span><span class="n">Conv2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001E92103EDD8</span><span class="o">&gt;&gt;</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">transformed</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">executed</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">.</span> <span class="n">Please</span> <span class="n">report</span> <span class="n">this</span> <span class="n">to</span> <span class="n">the</span> <span class="n">AutgoGraph</span> <span class="n">team</span><span class="o">.</span> <span class="n">When</span> <span class="n">filing</span> <span class="n">the</span> <span class="n">bug</span><span class="p">,</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">verbosity</span> <span class="n">to</span> <span class="mi">10</span> <span class="p">(</span><span class="n">on</span> <span class="n">Linux</span><span class="p">,</span> <span class="sb">`export AUTOGRAPH_VERBOSITY=10`</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attach</span> <span class="n">the</span> <span class="n">full</span> <span class="n">output</span><span class="o">.</span> <span class="n">Cause</span><span class="p">:</span> <span class="n">converting</span> <span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">Conv</span><span class="o">.</span><span class="n">call</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">convolutional</span><span class="o">.</span><span class="n">Conv2D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001E92103EDD8</span><span class="o">&gt;&gt;</span><span class="p">:</span> <span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Bad</span> <span class="n">argument</span> <span class="n">number</span> <span class="k">for</span> <span class="n">Name</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">expecting</span> <span class="mi">4</span>
-<span class="n">WARNING</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Entity</span> <span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">BatchNormalization</span><span class="o">.</span><span class="n">call</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">normalization</span><span class="o">.</span><span class="n">BatchNormalization</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001E9225EBA90</span><span class="o">&gt;&gt;</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">transformed</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">executed</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">.</span> <span class="n">Please</span> <span class="n">report</span> <span class="n">this</span> <span class="n">to</span> <span class="n">the</span> <span class="n">AutgoGraph</span> <span class="n">team</span><span class="o">.</span> <span class="n">When</span> <span class="n">filing</span> <span class="n">the</span> <span class="n">bug</span><span class="p">,</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">verbosity</span> <span class="n">to</span> <span class="mi">10</span> <span class="p">(</span><span class="n">on</span> <span class="n">Linux</span><span class="p">,</span> <span class="sb">`export AUTOGRAPH_VERBOSITY=10`</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attach</span> <span class="n">the</span> <span class="n">full</span> <span class="n">output</span><span class="o">.</span> <span class="n">Cause</span><span class="p">:</span> <span class="n">converting</span> <span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">BatchNormalization</span><span class="o">.</span><span class="n">call</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">normalization</span><span class="o">.</span><span class="n">BatchNormalization</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001E9225EBA90</span><span class="o">&gt;&gt;</span><span class="p">:</span> <span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Bad</span> <span class="n">argument</span> <span class="n">number</span> <span class="k">for</span> <span class="n">Name</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">expecting</span> <span class="mi">4</span>
-<span class="o">...</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>...
+WARNING:tensorflow:Entity &lt;bound method Conv.call of &lt;tensorflow.python.layers.convolutional.Conv2D object at 0x000001E92103EDD8&gt;&gt; could not be transformed and will be executed as-is. Please report this to the AutgoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: converting &lt;bound method Conv.call of &lt;tensorflow.python.layers.convolutional.Conv2D object at 0x000001E92103EDD8&gt;&gt;: AssertionError: Bad argument number for Name: 3, expecting 4
+WARNING:tensorflow:Entity &lt;bound method BatchNormalization.call of &lt;tensorflow.python.layers.normalization.BatchNormalization object at 0x000001E9225EBA90&gt;&gt; could not be transformed and will be executed as-is. Please report this to the AutgoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: converting &lt;bound method BatchNormalization.call of &lt;tensorflow.python.layers.normalization.BatchNormalization object at 0x000001E9225EBA90&gt;&gt;: AssertionError: Bad argument number for Name: 3, expecting 4
+...
 </pre></div>
 </div>
 <p>These warnings appear to be harmless form my experience, however they can saturate the console with unnecessary messages, which makes it hard to scroll through the output of the training/evaluation process.</p>
-<p>As reported <a class="reference external" href="https://github.com/tensorflow/tensorflow/issues/34551">here</a>, this issue seems to be caused by a mismatched version of <a class="reference external" href="https://github.com/serge-sans-paille/gast/">gast</a>. Simply downgrading gast to version <code class="docutils literal notranslate"><span class="pre">0.2.2</span></code> seems to remove the warnings. This can be done by running:</p>
+<p>As reported <a class="reference external" href="https://github.com/tensorflow/tensorflow/issues/34551">here</a>, this issue seems to
+be caused by a mismatched version of <a class="reference external" href="https://github.com/serge-sans-paille/gast/">gast</a>. Simply
+downgrading gast to version <code class="docutils literal notranslate"><span class="pre">0.2.2</span></code> seems to remove the warnings. This can be done by running:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">gast</span><span class="o">==</span><span class="m">0</span>.2.2
 </pre></div>
 </div>
+</div>
+<div class="section" id="attributeerror-module-google-protobuf-descriptor-has-no-attribute-internal-create-key">
+<h2>“AttributeError: module ‘google.protobuf.descriptor’ has no attribute ‘_internal_create_key”<a class="headerlink" href="#attributeerror-module-google-protobuf-descriptor-has-no-attribute-internal-create-key" title="Permalink to this headline">¶</a></h2>
+<p>It is possible that when executing <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">object_detection.utils</span> <span class="pre">import</span> <span class="pre">label_map_util</span></code> you may
+get the above error. As per the discussion is in <a class="reference external" href="https://stackoverflow.com/a/61961016/3474873">this Stack Overflow thread</a>,
+upgrading the Python protobuf version seems to solve this issue:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">protobuf</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="typeerror-expected-operation-variable-or-tensor-got-level-5">
+<span id="export-error"></span><h2>“TypeError: Expected Operation, Variable, or Tensor, got level_5”<a class="headerlink" href="#typeerror-expected-operation-variable-or-tensor-got-level-5" title="Permalink to this headline">¶</a></h2>
+<p>When trying to export oyu trained model using the <code class="docutils literal notranslate"><span class="pre">exporter_main_v2.py</span></code> script, you may come
+across an error that looks like this:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;.\exporter_main_v2.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">126</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;C:\Users\sglvladi\Anaconda3\envs</span><span class="se">\t</span><span class="s2">f2\lib\site-packages</span><span class="se">\a</span><span class="s2">bsl</span><span class="se">\a</span><span class="s2">pp.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">299</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run</span>
+    <span class="n">_run_main</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+  <span class="o">...</span>
+  <span class="n">File</span> <span class="s2">&quot;C:\Users\sglvladi\Anaconda3\envs</span><span class="se">\t</span><span class="s2">f2\lib\site-packages</span><span class="se">\t</span><span class="s2">ensorflow\python\keras\engine</span><span class="se">\b</span><span class="s2">ase_layer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1627</span><span class="p">,</span> <span class="ow">in</span> <span class="n">get_losses_for</span>
+    <span class="n">reachable</span> <span class="o">=</span> <span class="n">tf_utils</span><span class="o">.</span><span class="n">get_reachable_from_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">losses</span><span class="p">)</span>
+<span class="hll">  <span class="n">File</span> <span class="s2">&quot;C:\Users\sglvladi\Anaconda3\envs</span><span class="se">\t</span><span class="s2">f2\lib\site-packages</span><span class="se">\t</span><span class="s2">ensorflow\python\keras\utils</span><span class="se">\t</span><span class="s2">f_utils.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">140</span><span class="p">,</span> <span class="ow">in</span> <span class="n">get_reachable_from_inputs</span>
+</span>    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Expected Operation, Variable, or Tensor, got &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Variable</span><span class="p">,</span> <span class="ow">or</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">got</span> <span class="n">level_5</span>
+</pre></div>
+</td></tr></table></div>
+<p>This error seems to come from TensorFlow itself and a discussion on the issue can be found
+<a class="reference external" href="https://github.com/tensorflow/models/issues/8841">here</a>. As discussed there, a fix to the above
+issue can be achieved by opening the <code class="docutils literal notranslate"><span class="pre">tf_utils.py</span></code> file and adding a line of code. Below is a
+summary of how this can be done:</p>
+<ul>
+<li><p>Look at the line that corresponds to line 9 (highlighted) in the above error print out.</p></li>
+<li><p>Copy the path to the <code class="docutils literal notranslate"><span class="pre">tf_utils.py</span></code> file; in my case this was <code class="docutils literal notranslate"><span class="pre">C:\Users\sglvladi\Anaconda3\envs\tf2\lib\site-packages\tensorflow\python\keras\utils\tf_utils.py</span></code></p></li>
+<li><p>Open the file and replace line 140 of the file as follows:</p>
+<ul>
+<li><p>Change:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Expected Operation, Variable, or Tensor, got &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Expected Operation, Variable, or Tensor, got &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<p>At the time of writting this tutorial, a fix to the issue had not been implemented in the version
+of TensorFlow installed using <code class="docutils literal notranslate"><span class="pre">pip</span></code>. It is possible that this will get incorporated at some later
+point.</p>
 </div>
 </div>
 
@@ -221,7 +287,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="training.html" class="btn btn-neutral float-left" title="Training Custom Object Detector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="auto_examples/plot_object_detection_simple.html" class="btn btn-neutral float-left" title="Object Detection Test" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -230,11 +296,19 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Lyudmil Vladimirov
+        
+        &copy; Copyright 2020, Lyudmil Vladimirov
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -245,7 +319,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
