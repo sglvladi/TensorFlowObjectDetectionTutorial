@@ -1,0 +1,6 @@
+# Sphinx documentation
+/docs/build/
+
+# Editors
+.vscode/
+.idea/
