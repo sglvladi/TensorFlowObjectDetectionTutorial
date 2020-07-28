@@ -244,7 +244,7 @@ For lazy people like myself, who cannot be bothered to do the above, I have put 
 - Click :download:`here <scripts/partition_dataset.py>` to download the above script and save it inside ``TensorFlow/scripts/preprocessing``.
 - Then,  ``cd`` into ``TensorFlow/scripts/preprocessing`` and run:
 
-    .. code-block::
+    .. code-block:: bash
 
         python partition_dataset.py -x -i [PATH_TO_IMAGES_FOLDER] -r 0.1
 
@@ -321,7 +321,7 @@ Here is an example script that allows us to do just that:
 - Click :download:`here <scripts/generate_tfrecord.py>` to download the above script and save it inside ``TensorFlow/scripts/preprocessing``.
 - Install the ``pandas`` package:
 
-    .. code-block::
+    .. code-block:: bash
 
         conda install pandas # Anaconda
                              # or
@@ -329,7 +329,7 @@ Here is an example script that allows us to do just that:
 
 - Finally, ``cd`` into ``TensorFlow/scripts/preprocessing`` and run:
 
-    .. code-block::
+    .. code-block:: bash
         
         # Create train data:
         python generate_tfrecord.py -x [PATH_TO_IMAGES_FOLDER]/train -l [PATH_TO_ANNOTATIONS_FOLDER]/label_map.pbtxt -o [PATH_TO_ANNOTATIONS_FOLDER]/train.record
@@ -441,14 +441,14 @@ to train our model.
 Now, to initiate a new training job, open a new `Terminal`,  ``cd`` inside the ``training_demo``
 folder and run the following command:
 
-.. code-block::
+.. code-block:: bash
 
     python model_main_tf2.py --model_dir=models/my_ssd_resnet50_v1_fpn --pipeline_config_path=models/my_ssd_resnet50_v1_fpn/pipeline.config
 
 Once the training process has been initiated, you should see a series of print outs similar to the
 one below (plus/minus some warnings):
 
-.. code-block::
+.. code-block:: bash
 
     ...
     WARNING:tensorflow:Unresolved object in checkpoint: (root).model._box_predictor._base_tower_layers_for_heads.class_predictions_with_background.4.10.gamma
@@ -529,13 +529,13 @@ The steps to run the evaluation are outlined below:
   - See lines 178 and 181 of the script in :ref:`config_training_pipeline_sec`.
 3. The third step is to actually run the evaluation. To do so, open a new `Terminal`,  ``cd`` inside the ``training_demo`` folder and run the following command:
 
-    .. code-block::
+    .. code-block:: bash
 
         python model_main_tf2.py --model_dir=models/my_ssd_resnet50_v1_fpn --pipeline_config_path=models/my_ssd_resnet50_v1_fpn/pipeline.config --checkpoint_dir=models/my_ssd_resnet50_v1_fpn
 
     Once the above is run, you should see a checkpoint similar to the one below  (plus/minus some warnings):
 
-    .. code-block::
+    .. code-block:: bash
 
         ...
         WARNING:tensorflow:From C:\Users\sglvladi\Anaconda3\envs\tf2\lib\site-packages\object_detection\inputs.py:79: sparse_to_dense (from tensorflow.python.ops.sparse_ops) is deprecated and will be removed in a future version.
