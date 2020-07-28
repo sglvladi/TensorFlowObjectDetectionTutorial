@@ -21,14 +21,14 @@ Install Anaconda Python 3.7
 
         - Go to `<https://www.anaconda.com/products/individual>`_ and click the "Download" button
         - Download the `Python 3.7 64-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86_64.exe>`_ or the `32-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86.exe>`_ installer, per your system requirements
-        - Run the downloaded executable (``.exe``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/windows/>`_ for more details
+        - Run the downloaded executable (``.exe``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/windows/>`__ for more details
         - (Optional) In the next step, check the box "Add Anaconda3 to my PATH environment variable". This will make Anaconda your default Python distribution, which should ensure that you have the same default Python distribution across all editors.
 
     .. tab:: Linux
 
         - Go to `<https://www.anaconda.com/products/individual>`_ and click the "Download" button
         - Download the `Python 3.7 64-Bit (x86) Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh>`_
-        - Run the downloaded bash script (``.sh``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/linux/>`_ for more details.
+        - Run the downloaded bash script (``.sh``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/linux/>`__ for more details.
         - When prompted with the question "Do you wish the installer to prepend the Anaconda<2 or 3> install location to PATH in your /home/<user>/.bashrc ?", answer "Yes". If you enter "No", you must manually add the path to Anaconda or conda will not work.
 
 Create a new Anaconda virtual environment
@@ -36,7 +36,7 @@ Create a new Anaconda virtual environment
 - Open a new `Terminal` window
 - Type the following command:
 
-    .. code-block:: posh
+    .. code-block:: default
 
         conda create -n tensorflow pip python=3.8
 
@@ -48,7 +48,7 @@ Activate the Anaconda virtual environment
 *****************************************
 - Activating the newly created virtual environment is achieved by running the following in the `Terminal` window:
 
-    .. code-block:: posh
+    .. code-block:: default
 
         conda activate tensorflow
 
@@ -73,7 +73,7 @@ Install the TensorFlow PIP package
 **********************************
 - Run the following command in a `Terminal` window:
 
-    .. code-block:: posh
+    .. code-block:: default
 
         pip install --ignore-installed --upgrade tensorflow==2.2.0
 
@@ -81,13 +81,13 @@ Verify your Installation
 ************************
 - Run the following command in a `Terminal` window:
 
-    .. code-block:: posh
+    .. code-block:: default
 
         python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 
 - Once the above is run, you should see a print-out similar to the one bellow:
 
-    .. code-block:: posh
+    .. code-block:: default
 
         2020-06-22 19:20:32.614181: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.dll not found
         2020-06-22 19:20:32.620571: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
@@ -147,13 +147,13 @@ Install CUDA Toolkit
 
     .. tab:: Windows
 
-        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`_ to download and install CUDA Toolkit 10.1
-        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-microsoft-windows/index.html>`_
+        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`__ to download and install CUDA Toolkit 10.1
+        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-microsoft-windows/index.html>`__
 
     .. tab:: Linux
 
-        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Linux&target_arch=x86_64>`_ to download and install CUDA Toolkit 10.1 for your Linux distribution.
-        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-linux/index.html>`_
+        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Linux&target_arch=x86_64>`__ to download and install CUDA Toolkit 10.1 for your Linux distribution.
+        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-linux/index.html>`__
 
 
 .. _cudnn_install:
@@ -201,7 +201,7 @@ Environment Setup
 
         As per Section 7.1.1 of the `CUDA Installation Guide for Linux <https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#install-linux>`_, append the following lines to ``~/.bashrc``:
 
-        .. code-block:: bash
+        .. code-block:: default
 
             # CUDA related exports
             export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
@@ -220,7 +220,7 @@ Verify the installation
 
 - Run the following command in a **NEW** `Terminal` window:
 
-    .. code-block:: bash
+    .. code-block:: default
 
         python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 
@@ -230,7 +230,7 @@ Verify the installation
 
 - Once the above is run, you should see a print-out similar to the one bellow:
 
-    .. code-block:: bash
+    .. code-block:: default
         :emphasize-lines: 1,2,6,7,8,9,10,11,12,20,21,22,23,24,25,26,31
 
         2020-06-22 20:24:31.355541: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
@@ -286,7 +286,7 @@ Downloading the TensorFlow Model Garden
 - To download the models you can either use `Git <https://git-scm.com/downloads>`_ to clone the `TensorFlow Models repository <https://github.com/tensorflow/models>`_ inside the ``TensorFlow`` folder, or you can simply download it as a `ZIP <https://github.com/tensorflow/models/archive/master.zip>`_ and extract its contents inside the ``TensorFlow`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``models-master`` to ``models``.
 - You should now have a single folder named ``models`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
 
-.. code-block:: bash
+.. code-block:: default
 
     TensorFlow/
     └─ models/
@@ -311,7 +311,7 @@ This should be done as follows:
 - Add ``<PATH_TO_PB>`` to your ``Path`` environment variable (see :ref:`set_env`)
 - In a new `Terminal` [#]_, ``cd`` into ``TensorFlow/models/research/`` directory and run the following command:
 
-    .. code-block:: bash
+    .. code-block:: default
 
         # From within TensorFlow/models/research/
         protoc object_detection/protos/*.proto --python_out=.
@@ -324,7 +324,7 @@ This should be done as follows:
 
         .. tab:: Windows Powershell
 
-            .. code-block:: bash
+            .. code-block:: default
 
                 # From within TensorFlow/models/research/
                 Get-ChildItem object_detection/protos/*.proto | foreach {protoc "object_detection/protos/$($_.Name)" --python_out=.}
@@ -332,7 +332,7 @@ This should be done as follows:
 
         .. tab:: Command Prompt
 
-            .. code-block:: bash
+            .. code-block:: default
 
                     # From within TensorFlow/models/research/
                     for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
@@ -354,19 +354,19 @@ As of TensorFlow 2.x, the ``pycocotools`` package is listed as `a dependency of 
 
         Run the following command to install ``pycocotools`` with Windows support:
 
-        .. code-block:: bash
+        .. code-block:: default
 
             pip install cython
             pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 
 
-        Note that, according to the `package's instructions <https://github.com/philferriere/cocoapi#this-clones-readme>`_, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from `here <https://go.microsoft.com/fwlink/?LinkId=691126>`_.
+        Note that, according to the `package's instructions <https://github.com/philferriere/cocoapi#this-clones-readme>`_, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from `here <https://go.microsoft.com/fwlink/?LinkId=691126>`__.
 
     .. tab:: Linux
 
         Download `cocoapi <https://github.com/cocodataset/cocoapi>`_ to a directory of your choice, then ``make`` and copy the pycocotools subfolder to the ``Tensorflow/models/research`` directory, as such:
 
-        .. code-block:: bash
+        .. code-block:: default
 
             git clone https://github.com/cocodataset/cocoapi.git
             cd cocoapi/PythonAPI
@@ -386,7 +386,7 @@ Install the Object Detection API
 ********************************
 Installation of the Object Detection API is achieved by installing the ``object_detection`` package. This is done by running the following commands from within ``Tensorflow\models\research``:
 
-.. code-block:: bash
+.. code-block:: default
 
     # From within TensorFlow/models/research/
     cp object_detection/packages/tf2/setup.py .
@@ -396,7 +396,7 @@ Installation of the Object Detection API is achieved by installing the ``object_
 
     During the above installation, you may observe the following error:
 
-        .. code-block:: bash
+        .. code-block:: default
 
             ERROR: Command errored out with exit status 1:
                  command: 'C:\Users\sglvladi\Anaconda3\envs\tf2\python.exe' -u -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"'; __file__='"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record 'C:\Users\sglvladi\AppData\Local\Temp\pip-record-wpn7b6qo\install-record.txt' --single-version-externally-managed --compile --install-headers 'C:\Users\sglvladi\Anaconda3\envs\tf2\Include\pycocotools'
@@ -429,7 +429,7 @@ Test your Installation
 
 To test the installation, run the following command from within ``Tensorflow\models\research``:
 
-.. code-block:: bash
+.. code-block:: default
 
     # From within TensorFlow/models/research/
     python object_detection/builders/model_builder_tf2_test.py
@@ -437,7 +437,7 @@ To test the installation, run the following command from within ``Tensorflow\mod
 Once the above is run, allow some time for the test to complete and once done you should observe a
 printout similar to the one below:
 
-.. code-block:: bash
+.. code-block:: default
 
     ...
     [       OK ] ModelBuilderTF2Test.test_create_ssd_models_from_config

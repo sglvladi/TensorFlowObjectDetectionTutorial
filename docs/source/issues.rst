@@ -10,7 +10,7 @@ Python crashes - TensorFlow GPU
 
 If you are using :ref:`tensorflow_gpu` and when you try to run some Python object detection script (e.g. :ref:`test_tf_models`), after a few seconds, Windows reports that Python has crashed then have a look at the `Anaconda/Command Prompt` window you used to run the script and check for a line similar (maybe identical) to the one below:
 
-    .. code-block:: python
+    .. code-block:: default
 
         2018-03-22 03:07:54.623130: E C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\stream_executor\cuda\cuda_dnn.cc:378] Loaded runtime CuDNN library: 7101 (compatibility version 7100) but source was compiled with 7003 (compatibility version 7000).  If using a binary install, upgrade your CuDNN library to match.  If building from sources, make sure the library loaded at runtime matches a compatible version specified during compile configuration.
 
@@ -25,7 +25,7 @@ Some known issues caused by the above are presented below:
 
 - Failure to restart training of a model. Look for the following errors in the debugging:
 
-    .. code-block:: python
+    .. code-block:: default
 
         2018-03-23 03:03:10.326902: E C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\stream_executor\cuda\cuda_dnn.cc:385] could not create cudnn handle: CUDNN_STATUS_ALLOC_FAILED
         2018-03-23 03:03:10.330475: E C:\tf_jenkins\workspace\rel-win\M\windows-gpu\PY\36\tensorflow\stream_executor\cuda\cuda_dnn.cc:352] could not destroy cudnn handle: CUDNN_STATUS_BAD_PARAM
@@ -43,7 +43,7 @@ If the issue persists, then you're probably running out of memory. Try closing d
 
 In some versions of Tensorflow, you may see errors that look similar to the ones below:
 
-.. code-block:: python
+.. code-block:: default
 
     ...
     WARNING:tensorflow:Entity <bound method Conv.call of <tensorflow.python.layers.convolutional.Conv2D object at 0x000001E92103EDD8>> could not be transformed and will be executed as-is. Please report this to the AutgoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: converting <bound method Conv.call of <tensorflow.python.layers.convolutional.Conv2D object at 0x000001E92103EDD8>>: AssertionError: Bad argument number for Name: 3, expecting 4
@@ -52,11 +52,11 @@ In some versions of Tensorflow, you may see errors that look similar to the ones
 
 These warnings appear to be harmless form my experience, however they can saturate the console with unnecessary messages, which makes it hard to scroll through the output of the training/evaluation process.
 
-As reported `here <https://github.com/tensorflow/tensorflow/issues/34551>`_, this issue seems to
+As reported `here <https://github.com/tensorflow/tensorflow/issues/34551>`__, this issue seems to
 be caused by a mismatched version of `gast <https://github.com/serge-sans-paille/gast/>`_. Simply
 downgrading gast to version ``0.2.2`` seems to remove the warnings. This can be done by running:
 
-.. code-block:: bash
+.. code-block:: default
 
     pip install gast==0.2.2
 
@@ -66,7 +66,7 @@ It is possible that when executing ``from object_detection.utils import label_ma
 get the above error. As per the discussion is in `this Stack Overflow thread <https://stackoverflow.com/a/61961016/3474873>`_,
 upgrading the Python protobuf version seems to solve this issue:
 
-.. code-block:: bash
+.. code-block:: default
 
     pip install --upgrade protobuf
 
@@ -77,7 +77,7 @@ upgrading the Python protobuf version seems to solve this issue:
 When trying to export oyu trained model using the ``exporter_main_v2.py`` script, you may come
 across an error that looks like this:
 
-.. code-block:: bash
+.. code-block:: default
     :linenos:
     :emphasize-lines: 9
 
@@ -104,13 +104,13 @@ summary of how this can be done:
 
   - Change:
 
-    .. code-block:: python
+    .. code-block:: default
 
         raise TypeError('Expected Operation, Variable, or Tensor, got ' + str(x))
 
     to:
 
-    .. code-block:: python
+    .. code-block:: default
 
         if not isinstance(x, str):
             raise TypeError('Expected Operation, Variable, or Tensor, got ' + str(x))
