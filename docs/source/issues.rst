@@ -66,7 +66,7 @@ It is possible that when executing ``from object_detection.utils import label_ma
 get the above error. As per the discussion is in `this Stack Overflow thread <https://stackoverflow.com/a/61961016/3474873>`_,
 upgrading the Python protobuf version seems to solve this issue:
 
-.. code-block::
+.. code-block:: bash
 
     pip install --upgrade protobuf
 
@@ -77,7 +77,7 @@ upgrading the Python protobuf version seems to solve this issue:
 When trying to export oyu trained model using the ``exporter_main_v2.py`` script, you may come
 across an error that looks like this:
 
-.. code-block::
+.. code-block:: bash
     :linenos:
     :emphasize-lines: 9
 

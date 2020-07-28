@@ -220,7 +220,7 @@ Verify the installation
 
 - Run the following command in a **NEW** `Terminal` window:
 
-    .. code-block:: posh
+    .. code-block:: bash
 
         python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 
@@ -230,7 +230,7 @@ Verify the installation
 
 - Once the above is run, you should see a print-out similar to the one bellow:
 
-    .. code-block:: posh
+    .. code-block:: bash
         :emphasize-lines: 1,2,6,7,8,9,10,11,12,20,21,22,23,24,25,26,31
 
         2020-06-22 20:24:31.355541: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
@@ -311,7 +311,7 @@ This should be done as follows:
 - Add ``<PATH_TO_PB>`` to your ``Path`` environment variable (see :ref:`set_env`)
 - In a new `Terminal` [#]_, ``cd`` into ``TensorFlow/models/research/`` directory and run the following command:
 
-    .. code-block:: python
+    .. code-block:: bash
 
         # From within TensorFlow/models/research/
         protoc object_detection/protos/*.proto --python_out=.
@@ -324,7 +324,7 @@ This should be done as follows:
 
         .. tab:: Windows Powershell
 
-            .. code-block::
+            .. code-block:: bash
 
                 # From within TensorFlow/models/research/
                 Get-ChildItem object_detection/protos/*.proto | foreach {protoc "object_detection/protos/$($_.Name)" --python_out=.}
@@ -332,7 +332,7 @@ This should be done as follows:
 
         .. tab:: Command Prompt
 
-            .. code-block::
+            .. code-block:: bash
 
                     # From within TensorFlow/models/research/
                     for /f %i in ('dir /b object_detection\protos\*.proto') do protoc object_detection\protos\%i --python_out=.
@@ -386,7 +386,7 @@ Install the Object Detection API
 ********************************
 Installation of the Object Detection API is achieved by installing the ``object_detection`` package. This is done by running the following commands from within ``Tensorflow\models\research``:
 
-.. code-block::
+.. code-block:: bash
 
     # From within TensorFlow/models/research/
     cp object_detection/packages/tf2/setup.py .
@@ -396,7 +396,7 @@ Installation of the Object Detection API is achieved by installing the ``object_
 
     During the above installation, you may observe the following error:
 
-        .. code-block::
+        .. code-block:: bash
 
             ERROR: Command errored out with exit status 1:
                  command: 'C:\Users\sglvladi\Anaconda3\envs\tf2\python.exe' -u -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"'; __file__='"'"'C:\\Users\\sglvladi\\AppData\\Local\\Temp\\pip-install-yn46ecei\\pycocotools\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record 'C:\Users\sglvladi\AppData\Local\Temp\pip-record-wpn7b6qo\install-record.txt' --single-version-externally-managed --compile --install-headers 'C:\Users\sglvladi\Anaconda3\envs\tf2\Include\pycocotools'
@@ -429,7 +429,7 @@ Test your Installation
 
 To test the installation, run the following command from within ``Tensorflow\models\research``:
 
-.. code-block::
+.. code-block:: bash
 
     # From within TensorFlow/models/research/
     python object_detection/builders/model_builder_tf2_test.py
@@ -437,7 +437,7 @@ To test the installation, run the following command from within ``Tensorflow\mod
 Once the above is run, allow some time for the test to complete and once done you should observe a
 printout similar to the one below:
 
-.. code-block::
+.. code-block:: bash
 
     ...
     [       OK ] ModelBuilderTF2Test.test_create_ssd_models_from_config
@@ -469,123 +469,6 @@ components necessary to perform object detection using pre-trained models.
 
 If you want to play around with some examples to see how this can be done, now would be a good
 time to have a look at the :ref:`examples` section.
-
-
-.. _labelImg_install:
-
-LabelImg Installation
----------------------
-
-There exist several ways to install ``labelImg``. Below are 3 of the most common.
-
-Get from PyPI (Recommended)
-***************************
-1. Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-2. Run the following command to install ``labelImg``:
-
-.. code-block:: bash
-
-    pip install labelImg
-
-3. ``labelImg`` can then be run as follows:
-
-.. code-block:: bash
-
-    labelImg
-    # or
-    labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
-
-Use precompiled binaries (Easy)
-*******************************
-Precompiled binaries for both Windows and Linux can be found `here <http://tzutalin.github.io/labelImg/>`_ .
-
-Installation is the done in three simple steps:
-
-1. Inside you ``TensorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
-
-2. Download the latest binary for your OS from `here <http://tzutalin.github.io/labelImg/>`_. and extract its contents under ``Tensorflow/addons/labelImg``.
-
-3. You should now have a single folder named ``addons/labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
-
-.. code-block:: bash
-
-    TensorFlow/
-    ├─ addons/
-    │  └─ labelImg/
-    └─ models/
-       ├─ community/
-       ├─ official/
-       ├─ orbit/
-       ├─ research/
-       └─ ...
-
-4. ``labelImg`` can then be run as follows:
-
-.. code-block:: bash
-
-    # From within Tensorflow/addons/labelImg
-    labelImg
-    # or
-    labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
-
-Build from source (Hard)
-************************
-The steps for installing from source follow below.
-
-**1. Download labelImg**
-
-- Inside you ``TensorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
-- To download the package you can either use `Git <https://git-scm.com/downloads>`_ to clone the `labelImg repo <https://github.com/tzutalin/labelImg>`_ inside the ``TensorFlow\addons`` folder, or you can simply download it as a `ZIP <https://github.com/tzutalin/labelImg/archive/master.zip>`_ and extract it's contents inside the ``TensorFlow\addons`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``labelImg-master`` to ``labelImg``. [#]_
-- You should now have a single folder named ``addons\labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
-
-.. code-block:: bash
-
-    TensorFlow/
-    ├─ addons
-    │  └─ labelImg/
-    └─ models/
-       ├─ community/
-       ├─ official/
-       ├─ orbit/
-       ├─ research/
-       └─ ...
-
-.. [#] The latest repo commit when writing this tutorial is `8d1bd68 <https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b>`_.
-
-**2. Install dependencies and compiling package**
-
-- Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-- ``cd`` into ``TensorFlow/addons/labelImg`` and run the following commands:
-
-    .. tabs:: 
-
-        .. tab:: Windows
-
-            .. code-block:: bash
-                
-                conda install pyqt=5
-                pyrcc5 -o libs/resources.py resources.qrc
-            
-        .. tab:: Linux 
-
-            .. code-block:: bash
-
-                sudo apt-get install pyqt5-dev-tools
-                sudo pip install -r requirements/requirements-linux-python3.txt
-                make qt5py3
-
-
-**3. Test your installation**
-
-- Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
-- ``cd`` into ``TensorFlow/addons/labelImg`` and run the following command:
-
-    .. code-block:: posh
-
-        # From within Tensorflow/addons/labelImg
-        python labelImg.py
-        # or       
-        python  labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
 
 
 

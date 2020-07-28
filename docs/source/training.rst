@@ -5,7 +5,6 @@ So, up to now you should have done the following:
 
 - Installed TensorFlow (See :ref:`tf_install`)
 - Installed TensorFlow Object Detection API (See :ref:`tf_models_install`)
-- Installed labelImg (See :ref:`labelImg_install`)
 
 Now that we have done all the above, we can start doing some cool stuff. Here we will see how you can train your own object detector, and since it is not as simple as it sounds, we will have a look at:
 
@@ -80,8 +79,124 @@ If you do not understand most of the things mentioned above, no need to worry, a
 Preparing the Dataset
 ---------------------
 
+.. _labelImg_install:
+
+Install LabelImg
+****************
+
+There exist several ways to install ``labelImg``. Below are 3 of the most common.
+
+Get from PyPI (Recommended)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
+2. Run the following command to install ``labelImg``:
+
+.. code-block:: bash
+
+    pip install labelImg
+
+3. ``labelImg`` can then be run as follows:
+
+.. code-block:: bash
+
+    labelImg
+    # or
+    labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
+Use precompiled binaries (Easy)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Precompiled binaries for both Windows and Linux can be found `here <http://tzutalin.github.io/labelImg/>`_ .
+
+Installation is the done in three simple steps:
+
+1. Inside you ``TensorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
+
+2. Download the latest binary for your OS from `here <http://tzutalin.github.io/labelImg/>`_. and extract its contents under ``Tensorflow/addons/labelImg``.
+
+3. You should now have a single folder named ``addons/labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
+
+.. code-block:: bash
+
+    TensorFlow/
+    ├─ addons/
+    │  └─ labelImg/
+    └─ models/
+       ├─ community/
+       ├─ official/
+       ├─ orbit/
+       ├─ research/
+       └─ ...
+
+4. ``labelImg`` can then be run as follows:
+
+.. code-block:: bash
+
+    # From within Tensorflow/addons/labelImg
+    labelImg
+    # or
+    labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
+Build from source (Hard)
+~~~~~~~~~~~~~~~~~~~~~~~~
+The steps for installing from source follow below.
+
+**1. Download labelImg**
+
+- Inside you ``TensorFlow`` folder, create a new directory, name it ``addons`` and then ``cd`` into it.
+- To download the package you can either use `Git <https://git-scm.com/downloads>`_ to clone the `labelImg repo <https://github.com/tzutalin/labelImg>`_ inside the ``TensorFlow\addons`` folder, or you can simply download it as a `ZIP <https://github.com/tzutalin/labelImg/archive/master.zip>`_ and extract it's contents inside the ``TensorFlow\addons`` folder. To keep things consistent, in the latter case you will have to rename the extracted folder ``labelImg-master`` to ``labelImg``. [#]_
+- You should now have a single folder named ``addons\labelImg`` under your ``TensorFlow`` folder, which contains another 4 folders as such:
+
+.. code-block:: bash
+
+    TensorFlow/
+    ├─ addons
+    │  └─ labelImg/
+    └─ models/
+       ├─ community/
+       ├─ official/
+       ├─ orbit/
+       ├─ research/
+       └─ ...
+
+.. [#] The latest repo commit when writing this tutorial is `8d1bd68 <https://github.com/tzutalin/labelImg/commit/8d1bd68ab66e8c311f2f45154729bba301a81f0b>`_.
+
+**2. Install dependencies and compiling package**
+
+- Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
+- ``cd`` into ``TensorFlow/addons/labelImg`` and run the following commands:
+
+    .. tabs::
+
+        .. tab:: Windows
+
+            .. code-block:: bash
+
+                conda install pyqt=5
+                pyrcc5 -o libs/resources.py resources.qrc
+
+        .. tab:: Linux
+
+            .. code-block:: bash
+
+                sudo apt-get install pyqt5-dev-tools
+                sudo pip install -r requirements/requirements-linux-python3.txt
+                make qt5py3
+
+
+**3. Test your installation**
+
+- Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
+- ``cd`` into ``TensorFlow/addons/labelImg`` and run the following command:
+
+    .. code-block:: bash
+
+        # From within Tensorflow/addons/labelImg
+        python labelImg.py
+        # or
+        python  labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
 Annotate Images
-~~~~~~~~~~~~~~~
+***************
 
 To annotate images we will be using the `labelImg <https://github.com/tzutalin/labelImg>`_ package. If you haven't installed the package yet, then have a look at :ref:`labelImg_install`. 
 
@@ -114,7 +229,7 @@ I won't be covering a tutorial on how to use ``labelImg``, but you can have a lo
 .. _image_partitioning_sec:
 
 Partition the Dataset
-~~~~~~~~~~~~~~~~~~~~~
+*********************
 
 Once you have finished annotating your image dataset, it is a general convention to use only part of it for training, and the rest is used for evaluation purposes (e.g. as discussed in :ref:`evaluation_sec`).
 
@@ -144,7 +259,7 @@ safely copied over, you can delete the images under ``training_demo/images`` man
 
 
 Create Label Map
-~~~~~~~~~~~~~~~~
+****************
 
 TensorFlow requires a label map, which namely maps each of the used labels to an integer values. This label map is used both by the training and detection processes.
 
@@ -165,7 +280,7 @@ Below we show an example label map (e.g ``label_map.pbtxt``), assuming that our 
 Label map files have the extention ``.pbtxt`` and should be placed inside the ``training_demo/annotations`` folder.
 
 Create TensorFlow Records
-~~~~~~~~~~~~~~~~~~~~~~~~~
+*************************
 
 Now that we have generated our annotations and split our dataset into the desired training and
 testing subsets, it is time to convert our annotations into the so called ``TFRecord`` format.
@@ -194,7 +309,7 @@ our training inputs. Below is out ``TensorFlow`` directory tree structure, up to
 
 
 Convert ``*.xml`` to ``*.record``
-*********************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To do this we can write a simple script that iterates through all ``*.xml`` files in the ``training_demo/images/train`` and ``training_demo/images/test`` folders, and generates a ``*.record`` file for each of the two.
 
@@ -243,7 +358,7 @@ model, since it provides a relatively good trade-off between performance and spe
 exist a number of other models you can use, all of which are listed in `TensorFlow 2 Detection Model Zoo <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md>`_.
 
 Download Pre-Trained Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+**************************
 To begin with, we need to download the latest pre-trained network for the model we wish to use.
 This can be done by simply clicking on the name of the desired model in the table found in
 `TensorFlow 2 Detection Model Zoo <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md>`_.
@@ -286,7 +401,7 @@ model, you can download the model and after extracting its context the demo dire
         └─ ...
 
 Configure the Training Pipeline
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*******************************
 Now that we have downloaded and extracted our pre-trained model, let's create a directory for our
 training job. Under the ``training_demo/models`` create a new directory named ``my_ssd_resnet50_v1_fpn``
 and copy the ``training_demo/pre-trained-models/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/pipeline.config``
@@ -508,7 +623,7 @@ will be later used to perform the object detection. This can be done as follows:
 
     You may get the following error when trying to export your model:
 
-    .. code-block::
+    .. code-block:: bash
 
         Traceback (most recent call last):
           File ".\exporter_main_v2.py", line 126, in <module>

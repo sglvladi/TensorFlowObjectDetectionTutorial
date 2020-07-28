@@ -32,7 +32,7 @@ The software tools which we shall use throughout this tutorial are listed in the
 
 .. toctree::
    :maxdepth: 4
-   :caption: Contents:
+   :caption: Contents
 
    install
    training
