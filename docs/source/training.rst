@@ -389,10 +389,10 @@ model, our ``training_demo`` directory should now look as follows:
         training_demo/
         ├─ ...
         ├─ pre-trained-models/
-        |  └─ ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/
-        |     ├─ checkpoint/
+        │  └─ ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/
+        │     ├─ checkpoint/
         │     ├─ saved_model/
-        |     └─ pipeline.config
+        │     └─ pipeline.config
         └─ ...
 
 Note that the above process can be repeated for all other pre-trained models you wish to experiment
@@ -407,11 +407,11 @@ model, you can download the model and after extracting its context the demo dire
         │  ├─ efficientdet_d1_coco17_tpu-32/
         │  │  ├─ checkpoint/
         │  │  ├─ saved_model/
-        |  │  └─ pipeline.config
+        │  │  └─ pipeline.config
         │  └─ ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/
-        |     ├─ checkpoint/
+        │     ├─ checkpoint/
         │     ├─ saved_model/
-        |     └─ pipeline.config
+        │     └─ pipeline.config
         └─ ...
 
 .. _training_pipeline_conf:
@@ -430,7 +430,7 @@ like this:
         ├─ ...
         ├─ models/
         │  └─ my_ssd_resnet50_v1_fpn/
-        |     └─ pipeline.config
+        │     └─ pipeline.config
         └─ ...
 
 Now, let's have a look at the changes that we shall need to apply to the ``pipeline.config`` file
@@ -648,9 +648,9 @@ After the above process has completed, you should find a new folder ``my_model``
         ├─ ...
         ├─ exported-models/
         │  └─ my_model/
-        |     ├─ checkpoint/
-        |     ├─ saved_model/
-        |     └─ pipeline.config
+        │     ├─ checkpoint/
+        │     ├─ saved_model/
+        │     └─ pipeline.config
         └─ ...
 
 This model can then be used to perform inference.
