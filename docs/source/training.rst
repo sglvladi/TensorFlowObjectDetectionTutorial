@@ -48,12 +48,13 @@ Preparing the Workspace
         └─ workspace/
            └─ training_demo/
 
-3. The ``training_demo`` folder shall be our `training folder`, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train a different model. The typical structure for training folders is shown below.
+3. The ``training_demo`` folder shall be our `training folder`, which will contain all files related to our model training. It is advisable to create a separate training folder each time we wish to train on a different dataset. The typical structure for training folders is shown below.
 
     .. code-block:: default
     
         training_demo/
         ├─ annotations/
+        ├─ exported-models/
         ├─ images/
         │  ├─ test/
         │  └─ train/
@@ -64,6 +65,7 @@ Preparing the Workspace
 Here's an explanation for each of the folders/filer shown in the above tree:
 
 - ``annotations``: This folder will be used to store all ``*.csv`` files and the respective TensorFlow ``*.record`` files, which contain the list of annotations for our dataset images. 
+- ``exported-models``: This folder will be used to store exported versions of our trained model(s).
 - ``images``: This folder contains a copy of all the images in our dataset, as well as the respective ``*.xml`` files produced for each one, once ``labelImg`` is used to annotate objects.
 
     * ``images/train``: This folder contains a copy of all images, and the respective ``*.xml`` files, which will be used to train our model.
@@ -79,15 +81,20 @@ If you do not understand most of the things mentioned above, no need to worry, a
 Preparing the Dataset
 ---------------------
 
+Annotate the Dataset
+********************
+
 .. _labelImg_install:
 
 Install LabelImg
-****************
+~~~~~~~~~~~~~~~~
 
 There exist several ways to install ``labelImg``. Below are 3 of the most common.
 
-Get from PyPI (Recommended)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _labelImg_install_pip:
+
+Using PIP (Recommended)
+#######################
 1. Open a new `Terminal` window and activate the `tensorflow_gpu` environment (if you have not done so already)
 2. Run the following command to install ``labelImg``:
 
@@ -104,7 +111,7 @@ Get from PyPI (Recommended)
     labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
 
 Use precompiled binaries (Easy)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+###############################
 Precompiled binaries for both Windows and Linux can be found `here <http://tzutalin.github.io/labelImg/>`__ .
 
 Installation is the done in three simple steps:
@@ -137,7 +144,7 @@ Installation is the done in three simple steps:
     labelImg [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
 
 Build from source (Hard)
-~~~~~~~~~~~~~~~~~~~~~~~~
+########################
 The steps for installing from source follow below.
 
 **1. Download labelImg**
@@ -193,25 +200,27 @@ The steps for installing from source follow below.
         # From within Tensorflow/addons/labelImg
         python labelImg.py
         # or
-        python  labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+        python labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+
 
 Annotate Images
-***************
-
-To annotate images we will be using the `labelImg <https://github.com/tzutalin/labelImg>`_ package. If you haven't installed the package yet, then have a look at :ref:`labelImg_install`. 
+~~~~~~~~~~~~~~~
 
 - Once you have collected all the images to be used to test your model (ideally more than 100 per class), place them inside the folder ``training_demo/images``.
-- Open a new `Anaconda/Command Prompt` window and ``cd`` into ``Tensorflow/addons/labelImg``.
-- If (as suggested in :ref:`labelImg_install`) you created a separate Conda environment for ``labelImg`` then go ahead and activate it by running:
-
-    .. code-block:: default
-
-        activate labelImg
-
+- Open a new `Terminal` window.
 - Next go ahead and start ``labelImg``, pointing it to your ``training_demo/images`` folder.
 
+   - If you installed ``labelImg`` :ref:`labelImg_install_pip`:
+
     .. code-block:: default
 
+        labelImg <PATH_TO_TF>/TensorFlow/workspace/training_demo/images
+
+   - Othewise, ``cd`` into ``Tensorflow/addons/labelImg`` and run:
+
+    .. code-block:: default
+
+        # From within Tensorflow/addons/labelImg
         python labelImg.py ../../workspace/training_demo/images
 
 - A File Explorer Dialog windows should open, which points to the ``training_demo/images`` folder.
@@ -232,15 +241,41 @@ I won't be covering a tutorial on how to use ``labelImg``, but you can have a lo
 Partition the Dataset
 *********************
 
-Once you have finished annotating your image dataset, it is a general convention to use only part of it for training, and the rest is used for evaluation purposes (e.g. as discussed in :ref:`evaluation_sec`).
+Once you have finished annotating your image dataset, it is a general convention to use only part
+of it for training, and the rest is used for evaluation purposes (e.g. as discussed in
+:ref:`evaluation_sec`).
 
-Typically, the ratio is 90%/10%, i.e. 90% of the images are used for training and the rest 10% is maintained for testing, but you can chose whatever ratio suits your needs.
+Typically, the ratio is 90%/10%, i.e. 90% of the images are used for training and the rest 10% is
+maintained for testing, but you can chose whatever ratio suits your needs.
 
-Once you have decided how you will be splitting your dataset, copy all training images, together with their corresponding ``*.xml`` files, and place them inside the ``training_demo/images/train`` folder. Similarly, copy all testing images, with their ``*.xml`` files, and paste them inside ``training_demo/images/test``.
+Once you have decided how you will be splitting your dataset, copy all training images, together
+with their corresponding ``*.xml`` files, and place them inside the ``training_demo/images/train``
+folder. Similarly, copy all testing images, with their ``*.xml`` files, and paste them inside
+``training_demo/images/test``.
 
-For lazy people like myself, who cannot be bothered to do the above, I have put tugether a simple script that automates the above process:
+For lazy people like myself, who cannot be bothered to do the above, I have put together a simple
+script that automates the above process:
 
 .. literalinclude:: scripts/partition_dataset.py
+
+- Under the ``TensorFlow`` folder, create a new folder ``TensorFlow/scripts``, which we can use to store some useful scripts.
+- To make things even tidier, let's create a new folder ``TensorFlow/scripts/preprocessing``, where we shall store scripts that we can use to preprocess our training inputs. Below is out ``TensorFlow`` directory tree structure, up to now:
+
+    .. code-block:: default
+
+        TensorFlow/
+        ├─ addons/ (Optional)
+        │  └─ labelImg/
+        ├─ models/
+        │  ├─ community/
+        │  ├─ official/
+        │  ├─ orbit/
+        │  ├─ research/
+        │  └─ ...
+        ├─ scripts/
+        │  └─ preprocessing/
+        └─ workspace/
+           └─ training_demo/
 
 - Click :download:`here <scripts/partition_dataset.py>` to download the above script and save it inside ``TensorFlow/scripts/preprocessing``.
 - Then,  ``cd`` into ``TensorFlow/scripts/preprocessing`` and run:
@@ -286,35 +321,13 @@ Create TensorFlow Records
 Now that we have generated our annotations and split our dataset into the desired training and
 testing subsets, it is time to convert our annotations into the so called ``TFRecord`` format.
 
-Before we proceed to describe the above steps, let's create a directory where we can store some
-scripts. Under the ``TensorFlow`` folder, create a new folder ``TensorFlow/scripts``, which we can
-use to store some useful scripts. To make things even tidier, let's create a new folder
-``TensorFlow/scripts/preprocessing``, where we shall store scripts that we can use to preprocess
-our training inputs. Below is out ``TensorFlow`` directory tree structure, up to now:
-
-.. code-block:: default
-
-    TensorFlow/
-    ├─ addons/ (Optional)
-    │  └─ labelImg/
-    ├─ models/
-    │  ├─ community/
-    │  ├─ official/
-    │  ├─ orbit/
-    │  ├─ research/
-    │  └─ ...
-    ├─ scripts/
-    │  └─ preprocessing/
-    └─ workspace/
-       └─ training_demo/
-
 
 Convert ``*.xml`` to ``*.record``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To do this we can write a simple script that iterates through all ``*.xml`` files in the ``training_demo/images/train`` and ``training_demo/images/test`` folders, and generates a ``*.record`` file for each of the two.
-
-Here is an example script that allows us to do just that:
+To do this we can write a simple script that iterates through all ``*.xml`` files in the
+``training_demo/images/train`` and ``training_demo/images/test`` folders, and generates a
+``*.record`` file for each of the two. Here is an example script that allows us to do just that:
 
 .. literalinclude:: scripts/generate_tfrecord.py
 
@@ -400,6 +413,8 @@ model, you can download the model and after extracting its context the demo dire
         │     ├─ saved_model/
         |     └─ pipeline.config
         └─ ...
+
+.. _training_pipeline_conf:
 
 Configure the Training Pipeline
 *******************************
@@ -530,7 +545,7 @@ The steps to run the evaluation are outlined below:
 
 #. Secondly, we must modify the configuration pipeline (``*.config`` script).
 
-   - See lines 178 and 181 of the script in :ref:`config_training_pipeline_sec`.
+   - See lines 178-179 of the script in :ref:`training_pipeline_conf`.
 
 #. The third step is to actually run the evaluation. To do so, open a new `Terminal`,  ``cd`` inside the ``training_demo`` folder and run the following command:
 
@@ -611,8 +626,8 @@ following which you should be presented with a dashboard similar to the one show
 
 
 
-Exporting a Trained Inference Graph
------------------------------------
+Exporting a Trained Model
+-------------------------
 
 Once your training job is complete, you need to extract the newly trained inference graph, which
 will be later used to perform the object detection. This can be done as follows:
@@ -622,7 +637,23 @@ will be later used to perform the object detection. This can be done as follows:
 
 .. code-block:: default
     
-    python .\exporter_main_v2.py --input_type image_tensor --pipeline_config_path .\models\my_efficientdet_d1\pipeline.config --trained_checkpoint_dir .\models\my_efficientdet_d1\ --output_directory .\trained-inference-graphs\output
+    python .\exporter_main_v2.py --input_type image_tensor --pipeline_config_path .\models\my_efficientdet_d1\pipeline.config --trained_checkpoint_dir .\models\my_efficientdet_d1\ --output_directory .\exported-models\my_model
+
+After the above process has completed, you should find a new folder ``my_model`` under the
+``training_demo/exported-models``, that has the following structure:
+
+    .. code-block:: default
+
+        training_demo/
+        ├─ ...
+        ├─ exported-models/
+        │  └─ my_model/
+        |     ├─ checkpoint/
+        |     ├─ saved_model/
+        |     └─ pipeline.config
+        └─ ...
+
+This model can then be used to perform inference.
 
 .. note::
 
