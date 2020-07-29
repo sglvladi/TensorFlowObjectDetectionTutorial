@@ -38,12 +38,3 @@ The software tools which we shall use throughout this tutorial are listed in the
    training
    auto_examples/index
    issues
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
