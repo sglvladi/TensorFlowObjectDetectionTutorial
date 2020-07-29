@@ -1,36 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 """
-Object Detection Test
-=====================
+Object Detection From TF2 Checkpoint
+====================================
 """
 
 # %%
-# This demo will take you through the steps of running an "out-of-the-box" detection model on a
-# collection of images.
-
-# %%
-# Create the data directory
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-# The snippet shown below will create the ``data`` directory where all our data will be stored. The
-# code will create a directory structure as shown bellow:
-#
-# .. code-block:: bash
-#
-#     data
-#     ├── images
-#     └── models
-#
-# where the ``images`` folder will contain the downlaoded test images, while ``models`` will
-# contain the downloaded models.
-import os
-
-DATA_DIR = os.path.join(os.getcwd(), 'data')
-IMAGES_DIR = os.path.join(DATA_DIR, 'images')
-MODELS_DIR = os.path.join(DATA_DIR, 'models')
-for dir in [DATA_DIR, IMAGES_DIR, MODELS_DIR]:
-    if not os.path.exists(dir):
-        os.mkdir(dir)
+# This demo will take you through the steps of running an "out-of-the-box" TensorFlow 2 compatible
+# detection model on a collection of images. More specifically, in this example we will be using
+# the `Checkpoint Format <https://www.tensorflow.org/guide/checkpoint>`__ to load the model.
 
 # %%
 # Download the test images
@@ -38,33 +16,39 @@ for dir in [DATA_DIR, IMAGES_DIR, MODELS_DIR]:
 # First we will download the images that we will use throughout this tutorial. The code snippet
 # shown bellow will download the test images from the `TensorFlow Model Garden <https://github.com/tensorflow/models/tree/master/research/object_detection/test_images>`_
 # and save them inside the ``data/images`` folder.
-import urllib.request
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'    # Suppress TensorFlow logging (1)
+import pathlib
+import tensorflow as tf
 
-IMAGE_FILENAMES = ['image1.jpg', 'image2.jpg']
-IMAGES_DOWNLOAD_BASE = \
-    'https://raw.githubusercontent.com/tensorflow/models/master/research/object_detection/test_images/'
+tf.get_logger().setLevel('ERROR')           # Suppress TensorFlow logging (2)
 
-for image_filename in IMAGE_FILENAMES:
+# Enable GPU dynamic memory allocation
+gpus = tf.config.experimental.list_physical_devices('GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
 
-    image_path = os.path.join(IMAGES_DIR, image_filename)
+def download_images():
+    base_url = 'https://raw.githubusercontent.com/tensorflow/models/master/research/object_detection/test_images/'
+    filenames = ['image1.jpg', 'image2.jpg']
+    image_paths = []
+    for filename in filenames:
+        image_path = tf.keras.utils.get_file(fname=filename,
+                                            origin=base_url + filename,
+                                            untar=False)
+        image_path = pathlib.Path(image_path)
+        image_paths.append(str(image_path))
+    return image_paths
 
-    # Download image
-    if not os.path.exists(image_path):
-        print('Downloading {}... '.format(image_filename), end='')
-        urllib.request.urlretrieve(IMAGES_DOWNLOAD_BASE + image_filename, image_path)
-        print('Done')
+IMAGE_PATHS = download_images()
 
 
 # %%
 # Download the model
 # ~~~~~~~~~~~~~~~~~~
-# The code snippet shown below is used to download the object detection model checkpoint file,
-# as well as the labels file (.pbtxt) which contains a list of strings used to add the correct
-# label to each detection (e.g. person). Once downloaded the files will be stored under the
-# ``data/models`` folder.
-#
-# The particular detection algorithm we will use is the `CenterNet HourGlass104 1024x1024`. More
-# models can be found in the `TensorFlow 2 Detection Model Zoo <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md>`_.
+# The code snippet shown below is used to download the pre-trained object detection model we shall
+# use to perform inference. The particular detection algorithm we will use is the
+# `CenterNet HourGlass104 1024x1024`. More models can be found in the `TensorFlow 2 Detection Model Zoo <https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md>`_.
 # To use a different model you will need the URL name of the specific model. This can be done as
 # follows:
 #
@@ -76,53 +60,55 @@ for image_filename in IMAGE_FILENAMES:
 #
 # For example, the download link for the model used below is: ``download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_1024x1024_coco17_tpu-32.tar.gz``
 
-import tarfile
-
 # Download and extract model
+def download_model(model_name, model_date):
+    base_url = 'http://download.tensorflow.org/models/object_detection/tf2/'
+    model_file = model_name + '.tar.gz'
+    model_dir = tf.keras.utils.get_file(fname=model_name,
+                                        origin=base_url + model_date + '/' + model_file,
+                                        untar=True)
+    return str(model_dir)
+
 MODEL_DATE = '20200711'
 MODEL_NAME = 'centernet_hg104_1024x1024_coco17_tpu-32'
-MODEL_TAR_FILENAME = MODEL_NAME + '.tar.gz'
-MODELS_DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/tf2/'
-MODEL_DOWNLOAD_LINK = MODELS_DOWNLOAD_BASE + MODEL_DATE + '/' + MODEL_TAR_FILENAME
-PATH_TO_MODEL_TAR = os.path.join(MODELS_DIR, MODEL_TAR_FILENAME)
-PATH_TO_CKPT = os.path.join(MODELS_DIR, os.path.join(MODEL_NAME, 'checkpoint/'))
-PATH_TO_CFG = os.path.join(MODELS_DIR, os.path.join(MODEL_NAME, 'pipeline.config'))
-if not os.path.exists(PATH_TO_CKPT):
-    print('Downloading model. This may take a while... ', end='')
-    urllib.request.urlretrieve(MODEL_DOWNLOAD_LINK, PATH_TO_MODEL_TAR)
-    tar_file = tarfile.open(PATH_TO_MODEL_TAR)
-    tar_file.extractall(MODELS_DIR)
-    tar_file.close()
-    os.remove(PATH_TO_MODEL_TAR)
-    print('Done')
+PATH_TO_MODEL_DIR = download_model(MODEL_NAME, MODEL_DATE)
+
+# %%
+# Download the labels
+# ~~~~~~~~~~~~~~~~~~~
+# The coode snippet shown below is used to download the labels file (.pbtxt) which contains a list
+# of strings used to add the correct label to each detection (e.g. person). Since the pre-trained
+# model we will use has been trained on the COCO dataset, we will need to download the labels file
+# corresponding to this dataset, named ``mscoco_label_map.pbtxt``. A full list of the labels files
+# included in the TensorFlow Models Garden can be found `here <https://github.com/tensorflow/models/tree/master/research/object_detection/data>`__.
 
 # Download labels file
+def download_labels(filename):
+    base_url = 'https://raw.githubusercontent.com/tensorflow/models/master/research/object_detection/data/'
+    label_dir = tf.keras.utils.get_file(fname=filename,
+                                        origin=base_url + filename,
+                                        untar=False)
+    label_dir = pathlib.Path(label_dir)
+    return str(label_dir)
+
 LABEL_FILENAME = 'mscoco_label_map.pbtxt'
-LABELS_DOWNLOAD_BASE = \
-    'https://raw.githubusercontent.com/tensorflow/models/master/research/object_detection/data/'
-PATH_TO_LABELS = os.path.join(MODELS_DIR, os.path.join(MODEL_NAME, LABEL_FILENAME))
-if not os.path.exists(PATH_TO_LABELS):
-    print('Downloading label file... ', end='')
-    urllib.request.urlretrieve(LABELS_DOWNLOAD_BASE + LABEL_FILENAME, PATH_TO_LABELS)
-    print('Done')
+PATH_TO_LABELS = download_labels(LABEL_FILENAME)
 
 # %%
 # Load the model
 # ~~~~~~~~~~~~~~
 # Next we load the downloaded model
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'    # Suppress TensorFlow logging (1)
-import tensorflow as tf
+import time
 from object_detection.utils import label_map_util
 from object_detection.utils import config_util
 from object_detection.utils import visualization_utils as viz_utils
 from object_detection.builders import model_builder
 
-tf.get_logger().setLevel('ERROR')           # Suppress TensorFlow logging (2)
+PATH_TO_CFG = PATH_TO_MODEL_DIR + "/pipeline.config"
+PATH_TO_CKPT = PATH_TO_MODEL_DIR + "/checkpoint"
 
-# Enable GPU dynamic memory allocation
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
+print('Loading model... ', end='')
+start_time = time.time()
 
 # Load pipeline config and build a detection model
 configs = config_util.get_configs_from_pipeline_file(PATH_TO_CFG)
@@ -130,8 +116,7 @@ model_config = configs['model']
 detection_model = model_builder.build(model_config=model_config, is_training=False)
 
 # Restore checkpoint
-ckpt = tf.compat.v2.train.Checkpoint(
-      model=detection_model)
+ckpt = tf.compat.v2.train.Checkpoint(model=detection_model)
 ckpt.restore(os.path.join(PATH_TO_CKPT, 'ckpt-0')).expect_partial()
 
 @tf.function
@@ -142,8 +127,11 @@ def detect_fn(image):
     prediction_dict = detection_model.predict(image, shapes)
     detections = detection_model.postprocess(prediction_dict, shapes)
 
-    return detections, prediction_dict, tf.reshape(shapes, [-1])
+    return detections
 
+end_time = time.time()
+elapsed_time = end_time - start_time
+print('Done! Took {} seconds'.format(elapsed_time))
 
 # %%
 # Load label map data (for plotting)
@@ -172,7 +160,6 @@ category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABE
 # * Print out `detections['detection_boxes']` and try to match the box locations to the boxes in the image.  Notice that coordinates are given in normalized form (i.e., in the interval [0, 1]).
 # * Set ``min_score_thresh`` to other values (between 0 and 1) to allow more detections in or to filter out more detections.
 import numpy as np
-from six import BytesIO
 from PIL import Image
 import matplotlib.pyplot as plt
 import warnings
@@ -191,18 +178,13 @@ def load_image_into_numpy_array(path):
     Returns:
       uint8 numpy array with shape (img_height, img_width, 3)
     """
-    img_data = tf.io.gfile.GFile(path, 'rb').read()
-    image = Image.open(BytesIO(img_data))
-    (im_width, im_height) = image.size
-    return np.array(image.getdata()).reshape(
-        (im_height, im_width, 3)).astype(np.uint8)
+    return np.array(Image.open(path))
 
 
-for image_filename in IMAGE_FILENAMES:
+for image_path in IMAGE_PATHS:
 
-    print('Running inference for {}... '.format(image_filename), end='')
+    print('Running inference for {}... '.format(image_path), end='')
 
-    image_path = os.path.join(IMAGES_DIR, image_filename)
     image_np = load_image_into_numpy_array(image_path)
 
     # Things to try:
@@ -213,23 +195,34 @@ for image_filename in IMAGE_FILENAMES:
     # image_np = np.tile(
     #     np.mean(image_np, 2, keepdims=True), (1, 1, 3)).astype(np.uint8)
 
-    input_tensor = tf.convert_to_tensor(
-        np.expand_dims(image_np, 0), dtype=tf.float32)
-    detections, predictions_dict, shapes = detect_fn(input_tensor)
+    input_tensor = tf.convert_to_tensor(np.expand_dims(image_np, 0), dtype=tf.float32)
+
+    detections = detect_fn(input_tensor)
+
+    # All outputs are batches tensors.
+    # Convert to numpy arrays, and take index [0] to remove the batch dimension.
+    # We're only interested in the first num_detections.
+    num_detections = int(detections.pop('num_detections'))
+    detections = {key: value[0, :num_detections].numpy()
+                  for key, value in detections.items()}
+    detections['num_detections'] = num_detections
+
+    # detection_classes should be ints.
+    detections['detection_classes'] = detections['detection_classes'].astype(np.int64)
 
     label_id_offset = 1
     image_np_with_detections = image_np.copy()
 
     viz_utils.visualize_boxes_and_labels_on_image_array(
-          image_np_with_detections,
-          detections['detection_boxes'][0].numpy(),
-          (detections['detection_classes'][0].numpy() + label_id_offset).astype(int),
-          detections['detection_scores'][0].numpy(),
-          category_index,
-          use_normalized_coordinates=True,
-          max_boxes_to_draw=200,
-          min_score_thresh=.30,
-          agnostic_mode=False)
+            image_np_with_detections,
+            detections['detection_boxes'],
+            detections['detection_classes']+label_id_offset,
+            detections['detection_scores'],
+            category_index,
+            use_normalized_coordinates=True,
+            max_boxes_to_draw=200,
+            min_score_thresh=.30,
+            agnostic_mode=False)
 
     plt.figure()
     plt.imshow(image_np_with_detections)
