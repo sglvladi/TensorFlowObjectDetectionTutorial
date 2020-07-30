@@ -209,7 +209,7 @@ Environment Setup
 
 Update your GPU drivers (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If during the installation of the CUDA Toolkit (see :ref:`cuda_install`) you selected the `Express Installation` option, then your GPU drivers will have been overwritten by those that come bundled with the CUDA toolkit. These drivers are typically NOT the latest drivers and, thus, you may wish to updte your drivers.
+If during the installation of the CUDA Toolkit (see :ref:`cuda_install`) you selected the `Express Installation` option, then your GPU drivers will have been overwritten by those that come bundled with the CUDA toolkit. These drivers are typically NOT the latest drivers and, thus, you may wish to update your drivers.
 
 - Go to `<http://www.nvidia.com/Download/index.aspx>`_
 - Select your GPU version to download
