@@ -386,11 +386,29 @@ Install the Object Detection API
 ********************************
 Installation of the Object Detection API is achieved by installing the ``object_detection`` package. This is done by running the following commands from within ``Tensorflow\models\research``:
 
-.. code-block:: default
+.. tabs::
 
-    # From within TensorFlow/models/research/
-    cp object_detection/packages/tf2/setup.py .
-    python -m pip install .
+    .. tab:: Windows
+
+        Run the following command to install ``object_detection`` package on Windows:
+
+        .. code-block:: default
+
+            # From within TensorFlow/models/research/
+            copy object_detection/packages/tf2/setup.py .
+            python -m pip install .
+
+        You will get a message saying ``Overwrite .\setup.py?``, enter Yes.
+
+    .. tab:: Linux
+
+        Run the following command to install ``object_detection`` package on Linux:
+
+        .. code-block:: default
+
+            # From within TensorFlow/models/research/
+            cp object_detection/packages/tf2/setup.py .
+            python -m pip install .
 
 .. note::
 
