@@ -245,7 +245,7 @@ Once you have finished annotating your image dataset, it is a general convention
 of it for training, and the rest is used for evaluation purposes (e.g. as discussed in
 :ref:`evaluation_sec`).
 
-Typically, the ratio is 90%/10%, i.e. 90% of the images are used for training and the rest 10% is
+Typically, the ratio is 9:1, i.e. 90% of the images are used for training and the rest 10% is
 maintained for testing, but you can chose whatever ratio suits your needs.
 
 Once you have decided how you will be splitting your dataset, copy all training images, together
