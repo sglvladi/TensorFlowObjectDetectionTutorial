@@ -15,4 +15,4 @@ To read the tutorial, visit [http://tensorflow-object-detection-api-tutorial.rea
 
 Originally, the tutorial was written with TensorFlow 1 in mind. Since it is possible that many users will still be interested in working with TensorFlow 1, a version of this tutorial will also be maintained for the foreseeable future.
 
-To read the tutorial, visit [https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/1.14.2/](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/1.14.2/).
+To read the tutorial, visit [https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/tensorflow-1.14/](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/tensorflow-1.14/).
