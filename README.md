@@ -11,7 +11,7 @@ Since July 10, 2020 TensorFlow [announced that the Object Detection API official
 
 To read the tutorial, visit [http://tensorflow-object-detection-api-tutorial.readthedocs.io](http://tensorflow-object-detection-api-tutorial.readthedocs.io).
 
-## TensorFlow Object Detection API tutorial [![Documentation Status](https://readthedocs.org/projects/tensorflow-object-detection-api-tutorial/badge/?version=1.14.2)](http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/1.14.2/?badge=1.14.2)
+## TensorFlow Object Detection API tutorial [![Documentation Status](https://readthedocs.org/projects/tensorflow-object-detection-api-tutorial/badge/?version=tensorflow-1.14)](http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/1.14.2/?badge=tensorflow-1.14)
 
 Originally, the tutorial was written with TensorFlow 1 in mind. Since it is possible that many users will still be interested in working with TensorFlow 1, a version of this tutorial will also be maintained for the foreseeable future.
 
