@@ -389,6 +389,7 @@ Installation of the Object Detection API is achieved by installing the ``object_
 .. code-block::
 
     # From within TensorFlow/models/research/
+    # Use copy insted of cp if you're using Command Prompt
     cp object_detection/packages/tf2/setup.py .
     python -m pip install .
 
