@@ -101,7 +101,7 @@ For example, the download link for the model used below is: ``download.tensorflo
 
 Download the labels
 ~~~~~~~~~~~~~~~~~~~
-The coode snippet shown below is used to download the labels file (.pbtxt) which contains a list
+The code snippet shown below is used to download the labels file (.pbtxt) which contains a list
 of strings used to add the correct label to each detection (e.g. person). Since the pre-trained
 model we will use has been trained on the COCO dataset, we will need to download the labels file
 corresponding to this dataset, named ``mscoco_label_map.pbtxt``. A full list of the labels files
