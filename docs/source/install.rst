@@ -357,7 +357,7 @@ As of TensorFlow 2.x, the ``pycocotools`` package is listed as `a dependency of 
         .. code-block:: default
 
             pip install cython
-            pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+            pip install "git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI"
 
 
         Note that, according to the `package's instructions <https://github.com/philferriere/cocoapi#this-clones-readme>`_, Visual C++ 2015 build tools must be installed and on your path. If they are not, make sure to install them from `here <https://go.microsoft.com/fwlink/?LinkId=691126>`__.
