@@ -7,7 +7,7 @@ There currently exist several versions of the tutorial, corresponding to the var
 
 ## TensorFlow 2 Object Detection API tutorial 
 
-[![TensorFlow 2.2](https://img.shields.io/badge/TensorFlow-2.2-FF6F00?logo=tensorflow)](https://github.com/tensorflow/tensorflow/releases/tag/v2.2.0) [![Documentation Status](https://readthedocs.org/projects/tensorflow-object-detection-api-tutorial/badge/?version=latest)](http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/?badge=latest)
+[![TensorFlow 2.5](https://img.shields.io/badge/TensorFlow-2.5-FF6F00?logo=tensorflow)](https://github.com/tensorflow/tensorflow/releases/tag/v2.5.0) [![Documentation Status](https://readthedocs.org/projects/tensorflow-object-detection-api-tutorial/badge/?version=latest)](http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/?badge=latest)
 
 Since July 10, 2020 TensorFlow [announced that the Object Detection API officially supports TensorFlow 2](https://blog.tensorflow.org/2020/07/tensorflow-2-meets-object-detection-api.html). Therefore, an updated version of the tutorial was created to cover TensorFlow 2. 
 

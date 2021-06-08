@@ -6,7 +6,9 @@
 TensorFlow 2 Object Detection API tutorial
 ==========================================
 
-.. important:: This tutorial is intended for TensorFlow 2.2, which (at the time of writing this tutorial) is the latest stable version of TensorFlow 2.x.
+.. important:: This tutorial is intended for TensorFlow 2.5, which (at the time of writing this tutorial) is the latest stable version of TensorFlow 2.x.
+
+   A version for TensorFlow 2.2 can be found `here <https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/2.2.0/>`_.
 
    A version for TensorFlow 1.14 can be found `here <https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/tensorflow-1.14/>`_.
 
@@ -19,16 +21,19 @@ The software tools which we shall use throughout this tutorial are listed in the
 +==============+==============================+
 | OS           | Windows, Linux               |
 +--------------+------------------------------+
-| Python       | 3.8                          |
+| Python       | 3.9 [#]_                     |
 +--------------+------------------------------+
-| TensorFlow   | 2.2.0                        |
+| TensorFlow   | 2.5.0                        |
 +--------------+------------------------------+
-| CUDA Toolkit | 10.1                         |
+| CUDA Toolkit | 11.2                         |
 +--------------+------------------------------+
-| CuDNN        | 7.6.5                        |
+| CuDNN        | 8.1.0                        |
 +--------------+------------------------------+ 
-| Anaconda     | Python 3.7 (Optional)        |
+| Anaconda     | Python 3.8 (Optional)        |
 +--------------+------------------------------+
+
+.. [#] Python 3.9 is not a strict requirement. Any Python 3.x version should work, although this has not been tested.
+
 
 .. toctree::
    :maxdepth: 4
