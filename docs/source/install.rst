@@ -4,15 +4,15 @@ Installation
 General Remarks
 ---------------
 
-- In contrast to TensorFlow 1.x, where different Python packages needed to be installed for one to run TensorFlow on either their CPU or GPU (namely ``tensorflow`` and ``tensorflow-gpu``), TensorFlow 2.x only requires that the ``tensorflow`` package is installed and automatically checks to see if a GPU can be successfully registered.
+In contrast to TensorFlow 1.x, where different Python packages needed to be installed for one to run TensorFlow on either their CPU or GPU (namely ``tensorflow`` and ``tensorflow-gpu``), TensorFlow 2.x only requires that the ``tensorflow`` package is installed and automatically checks to see if a GPU can be successfully registered.
 
 
-Anaconda Python 3.7 (Optional)
+Anaconda Python 3.8 (Optional)
 ------------------------------
 
 Although having Anaconda is not a requirement in order to install and use TensorFlow, I suggest doing so, due to it's intuitive way of managing packages and setting up new virtual environments. Anaconda is a pretty useful tool, not only for working with TensorFlow, but in general for anyone working in Python, so if you haven't had a chance to work with it, now is a good chance.
 
-Install Anaconda Python 3.7
+Install Anaconda Python 3.8
 ***************************
 
 .. tabs::
@@ -20,14 +20,14 @@ Install Anaconda Python 3.7
     .. tab:: Windows
 
         - Go to `<https://www.anaconda.com/products/individual>`_ and click the "Download" button
-        - Download the `Python 3.7 64-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86_64.exe>`_ or the `32-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86.exe>`_ installer, per your system requirements
+        - Download the `Python 3.8 64-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2021.05-Windows-x86_64.exe>`_ or the `32-Bit Graphical Installer <https://repo.anaconda.com/archive/Anaconda3-2021.05-Windows-x86.exe>`_ installer, per your system requirements
         - Run the downloaded executable (``.exe``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/windows/>`__ for more details
         - (Optional) In the next step, check the box "Add Anaconda3 to my PATH environment variable". This will make Anaconda your default Python distribution, which should ensure that you have the same default Python distribution across all editors.
 
     .. tab:: Linux
 
         - Go to `<https://www.anaconda.com/products/individual>`_ and click the "Download" button
-        - Download the `Python 3.7 64-Bit (x86) Installer <https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh>`_
+        - Download the `Python 3.8 64-Bit (x86) Installer <https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh>`_
         - Run the downloaded bash script (``.sh``) file to begin the installation. See `here <https://docs.anaconda.com/anaconda/install/linux/>`__ for more details.
         - When prompted with the question "Do you wish the installer to prepend the Anaconda<2 or 3> install location to PATH in your /home/<user>/.bashrc ?", answer "Yes". If you enter "No", you must manually add the path to Anaconda or conda will not work.
 
@@ -38,7 +38,7 @@ Create a new Anaconda virtual environment
 
     .. code-block:: default
 
-        conda create -n tensorflow pip python=3.8
+        conda create -n tensorflow pip python=3.9
 
 - The above will create a new virtual environment with name ``tensorflow``
 
@@ -75,7 +75,7 @@ Install the TensorFlow PIP package
 
     .. code-block:: default
 
-        pip install --ignore-installed --upgrade tensorflow==2.2.0
+        pip install --ignore-installed --upgrade tensorflow==2.5.0
 
 Verify your Installation
 ************************
@@ -134,9 +134,9 @@ In order for TensorFlow to run on your GPU, the following requirements must be m
 +=====================================+
 | Nvidia GPU (GTX 650 or newer)       |
 +-------------------------------------+
-| CUDA Toolkit v10.1                  |
+| CUDA Toolkit v11.2                  |
 +-------------------------------------+
-| CuDNN 7.6.5                         |
+| CuDNN 8.1.0                         |
 +-------------------------------------+
 
 .. _cuda_install:
@@ -147,13 +147,13 @@ Install CUDA Toolkit
 
     .. tab:: Windows
 
-        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`__ to download and install CUDA Toolkit 10.1
-        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-microsoft-windows/index.html>`__
+        - Follow this `link <https://developer.nvidia.com/cuda-11.2.2-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exenetwork>`__ to download and install CUDA Toolkit 11.2
+        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/11.2.2/cuda-installation-guide-microsoft-windows/index.html>`__
 
     .. tab:: Linux
 
-        - Follow this `link <https://developer.nvidia.com/cuda-10.1-download-archive-update2?target_os=Linux&target_arch=x86_64>`__ to download and install CUDA Toolkit 10.1 for your Linux distribution.
-        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/10.1/cuda-installation-guide-linux/index.html>`__
+        - Follow this `link <https://developer.nvidia.com/cuda-11.2.2-download-archive?target_os=Linux&target_arch=x86_64>`__ to download and install CUDA Toolkit 11.2 for your Linux distribution.
+        - Installation instructions can be found `here <https://docs.nvidia.com/cuda/archive/11.2.2/cuda-installation-guide-linux/index.html>`__
 
 
 .. _cudnn_install:
@@ -166,16 +166,16 @@ Install CUDNN
 
         - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
         - Create a user profile if needed and log in
-        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.1 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-101>`_
-        - Download `cuDNN v7.6.5 Library for Windows 10 <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.1_20191031/cudnn-10.1-windows10-x64-v7.6.5.32.zip>`_
-        - Extract the contents of the zip file (i.e. the folder named ``cuda``) inside ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\``, where ``<INSTALL_PATH>`` points to the installation directory specified during the installation of the CUDA Toolkit. By default ``<INSTALL_PATH>`` = ``C:\Program Files``.
+        - Select `Download cuDNN v8.1.0 (January 26th, 2021), for CUDA 11.0,11.1 and 11.2 <https://developer.nvidia.com/rdp/cudnn-archive#a-collapse810-111>`_
+        - Download `cuDNN Library for Windows (x86) <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.1.0.77/11.2_20210127/cudnn-11.2-windows-x64-v8.1.0.77.zip>`_
+        - Extract the contents of the zip file (i.e. the folder named ``cuda``) inside ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v11.2\``, where ``<INSTALL_PATH>`` points to the installation directory specified during the installation of the CUDA Toolkit. By default ``<INSTALL_PATH>`` = ``C:\Program Files``.
 
     .. tab:: Linux
 
         - Go to `<https://developer.nvidia.com/rdp/cudnn-download>`_
         - Create a user profile if needed and log in
-        - Select `cuDNN v7.6.5 (Nov 5, 2019), for CUDA 10.1 <https://developer.nvidia.com/rdp/cudnn-download#a-collapse765-101>`_
-        - Download `cuDNN v7.6.5 Library for Linux <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.1_20191031/cudnn-10.1-linux-x64-v7.6.5.32.tgz>`_
+        - Select `Download cuDNN v8.1.0 (January 26th, 2021), for CUDA 11.0,11.1 and 11.2 <https://developer.nvidia.com/rdp/cudnn-archive#a-collapse810-111>`_
+        - Download `cuDNN Library for Linux (x86_64) <https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.1.0.77/11.2_20210127/cudnn-11.2-linux-x64-v8.1.0.77.tgz>`_
         - Follow the instructions under Section 2.3.1 of the `CuDNN Installation Guide <https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#install-linux>`_ to install CuDNN.
 
 .. _set_env:
@@ -192,10 +192,11 @@ Environment Setup
         - Under "System variables", search for and click on the ``Path`` system variable, then click "Edit..."
         - Add the following paths, then click "OK" to save the changes:
 
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin``
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\libnvvp``
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\extras\CUPTI\libx64``
-            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v10.1\cuda\bin``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v11.2\libnvvp``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v11.2\extras\CUPTI\lib64``
+            - ``<INSTALL_PATH>\NVIDIA GPU Computing Toolkit\CUDA\v11.2\cuda\bin``
 
     .. tab:: Linux
 
@@ -204,8 +205,8 @@ Environment Setup
         .. code-block:: default
 
             # CUDA related exports
-            export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
-            export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+            export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH}}
+            export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 Update your GPU drivers (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -231,42 +232,33 @@ Verify the installation
 - Once the above is run, you should see a print-out similar to the one bellow:
 
     .. code-block:: default
-        :emphasize-lines: 1,2,6,7,8,9,10,11,12,20,21,22,23,24,25,26,31
+        :emphasize-lines: 1,2,6,7,8,9,10,11,12,13,24
 
-        2020-06-22 20:24:31.355541: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
-        2020-06-22 20:24:33.650692: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library nvcuda.dll
-        2020-06-22 20:24:33.686846: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1561] Found device 0 with properties:
+        2021-06-08 18:28:38.452128: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cudart64_110.dll
+        2021-06-08 18:28:40.948968: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+        2021-06-08 18:28:40.973992: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties:
         pciBusID: 0000:02:00.0 name: GeForce GTX 1070 Ti computeCapability: 6.1
         coreClock: 1.683GHz coreCount: 19 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
-        2020-06-22 20:24:33.697234: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
-        2020-06-22 20:24:33.747540: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_10.dll
-        2020-06-22 20:24:33.787573: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cufft64_10.dll
-        2020-06-22 20:24:33.810063: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library curand64_10.dll
-        2020-06-22 20:24:33.841474: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusolver64_10.dll
-        2020-06-22 20:24:33.862787: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusparse64_10.dll
-        2020-06-22 20:24:33.907318: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
-        2020-06-22 20:24:33.913612: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1703] Adding visible gpu devices: 0
-        2020-06-22 20:24:33.918093: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
-        2020-06-22 20:24:33.932784: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x2382acc1c40 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
-        2020-06-22 20:24:33.939473: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
-        2020-06-22 20:24:33.944570: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1561] Found device 0 with properties:
+        2021-06-08 18:28:40.974115: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cudart64_110.dll
+        2021-06-08 18:28:40.982483: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cublas64_11.dll
+        2021-06-08 18:28:40.982588: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cublasLt64_11.dll
+        2021-06-08 18:28:40.986795: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cufft64_10.dll
+        2021-06-08 18:28:40.988451: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library curand64_10.dll
+        2021-06-08 18:28:40.994115: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cusolver64_11.dll
+        2021-06-08 18:28:40.998408: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cusparse64_11.dll
+        2021-06-08 18:28:41.000573: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cudnn64_8.dll
+        2021-06-08 18:28:41.001094: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1871] Adding visible gpu devices: 0
+        2021-06-08 18:28:41.001651: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+        To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+        2021-06-08 18:28:41.003095: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties:
         pciBusID: 0000:02:00.0 name: GeForce GTX 1070 Ti computeCapability: 6.1
         coreClock: 1.683GHz coreCount: 19 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
-        2020-06-22 20:24:33.953910: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
-        2020-06-22 20:24:33.958772: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_10.dll
-        2020-06-22 20:24:33.963656: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cufft64_10.dll
-        2020-06-22 20:24:33.968210: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library curand64_10.dll
-        2020-06-22 20:24:33.973389: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusolver64_10.dll
-        2020-06-22 20:24:33.978058: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusparse64_10.dll
-        2020-06-22 20:24:33.983547: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
-        2020-06-22 20:24:33.990380: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1703] Adding visible gpu devices: 0
-        2020-06-22 20:24:35.338596: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1102] Device interconnect StreamExecutor with strength 1 edge matrix:
-        2020-06-22 20:24:35.344643: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1108]      0
-        2020-06-22 20:24:35.348795: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1121] 0:   N
-        2020-06-22 20:24:35.353853: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1247] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6284 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1070 Ti, pci bus id: 0000:02:00.0, compute capability: 6.1)
-        2020-06-22 20:24:35.369758: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x2384aa9f820 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
-        2020-06-22 20:24:35.376320: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce GTX 1070 Ti, Compute Capability 6.1
-        tf.Tensor(122.478485, shape=(), dtype=float32)
+        2021-06-08 18:28:41.003244: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1871] Adding visible gpu devices: 0
+        2021-06-08 18:28:42.072538: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+        2021-06-08 18:28:42.072630: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      0
+        2021-06-08 18:28:42.072886: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1277] 0:   N
+        2021-06-08 18:28:42.075566: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1418] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6613 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1070 Ti, pci bus id: 0000:02:00.0, compute capability: 6.1)
+        tf.Tensor(641.5694, shape=(), dtype=float32)
 
 - Notice from the lines highlighted above that the library files are now ``Successfully opened`` and a debugging message is presented to confirm that TensorFlow has successfully ``Created TensorFlow device``.
 
@@ -308,7 +300,7 @@ This should be done as follows:
 - Head to the `protoc releases page <https://github.com/google/protobuf/releases>`_
 - Download the latest ``protoc-*-*.zip`` release (e.g. ``protoc-3.12.3-win64.zip`` for 64-bit Windows)
 - Extract the contents of the downloaded ``protoc-*-*.zip`` in a directory ``<PATH_TO_PB>`` of your choice (e.g. ``C:\Program Files\Google Protobuf``)
-- Add ``<PATH_TO_PB>`` to your ``Path`` environment variable (see :ref:`set_env`)
+- Add ``<PATH_TO_PB>\bin`` to your ``Path`` environment variable (see :ref:`set_env`)
 - In a new `Terminal` [#]_, ``cd`` into ``TensorFlow/models/research/`` directory and run the following command:
 
     .. code-block:: default
@@ -390,7 +382,7 @@ Installation of the Object Detection API is achieved by installing the ``object_
 
     # From within TensorFlow/models/research/
     cp object_detection/packages/tf2/setup.py .
-    python -m pip install .
+    python -m pip install --use-feature=2020-resolver .
 
 .. note::
 
@@ -442,23 +434,37 @@ printout similar to the one below:
     ...
     [       OK ] ModelBuilderTF2Test.test_create_ssd_models_from_config
     [ RUN      ] ModelBuilderTF2Test.test_invalid_faster_rcnn_batchnorm_update
+    INFO:tensorflow:time(__main__.ModelBuilderTF2Test.test_invalid_faster_rcnn_batchnorm_update): 0.0s
+    I0608 18:49:13.183754 29296 test_util.py:2102] time(__main__.ModelBuilderTF2Test.test_invalid_faster_rcnn_batchnorm_update): 0.0s
     [       OK ] ModelBuilderTF2Test.test_invalid_faster_rcnn_batchnorm_update
     [ RUN      ] ModelBuilderTF2Test.test_invalid_first_stage_nms_iou_threshold
+    INFO:tensorflow:time(__main__.ModelBuilderTF2Test.test_invalid_first_stage_nms_iou_threshold): 0.0s
+    I0608 18:49:13.186750 29296 test_util.py:2102] time(__main__.ModelBuilderTF2Test.test_invalid_first_stage_nms_iou_threshold): 0.0s
     [       OK ] ModelBuilderTF2Test.test_invalid_first_stage_nms_iou_threshold
     [ RUN      ] ModelBuilderTF2Test.test_invalid_model_config_proto
+    INFO:tensorflow:time(__main__.ModelBuilderTF2Test.test_invalid_model_config_proto): 0.0s
+    I0608 18:49:13.188250 29296 test_util.py:2102] time(__main__.ModelBuilderTF2Test.test_invalid_model_config_proto): 0.0s
     [       OK ] ModelBuilderTF2Test.test_invalid_model_config_proto
     [ RUN      ] ModelBuilderTF2Test.test_invalid_second_stage_batch_size
+    INFO:tensorflow:time(__main__.ModelBuilderTF2Test.test_invalid_second_stage_batch_size): 0.0s
+    I0608 18:49:13.190746 29296 test_util.py:2102] time(__main__.ModelBuilderTF2Test.test_invalid_second_stage_batch_size): 0.0s
     [       OK ] ModelBuilderTF2Test.test_invalid_second_stage_batch_size
     [ RUN      ] ModelBuilderTF2Test.test_session
     [  SKIPPED ] ModelBuilderTF2Test.test_session
     [ RUN      ] ModelBuilderTF2Test.test_unknown_faster_rcnn_feature_extractor
+    INFO:tensorflow:time(__main__.ModelBuilderTF2Test.test_unknown_faster_rcnn_feature_extractor): 0.0s
+    I0608 18:49:13.193742 29296 test_util.py:2102] time(__main__.ModelBuilderTF2Test.test_unknown_faster_rcnn_feature_extractor): 0.0s
     [       OK ] ModelBuilderTF2Test.test_unknown_faster_rcnn_feature_extractor
     [ RUN      ] ModelBuilderTF2Test.test_unknown_meta_architecture
+    INFO:tensorflow:time(__main__.ModelBuilderTF2Test.test_unknown_meta_architecture): 0.0s
+    I0608 18:49:13.195241 29296 test_util.py:2102] time(__main__.ModelBuilderTF2Test.test_unknown_meta_architecture): 0.0s
     [       OK ] ModelBuilderTF2Test.test_unknown_meta_architecture
     [ RUN      ] ModelBuilderTF2Test.test_unknown_ssd_feature_extractor
+    INFO:tensorflow:time(__main__.ModelBuilderTF2Test.test_unknown_ssd_feature_extractor): 0.0s
+    I0608 18:49:13.197239 29296 test_util.py:2102] time(__main__.ModelBuilderTF2Test.test_unknown_ssd_feature_extractor): 0.0s
     [       OK ] ModelBuilderTF2Test.test_unknown_ssd_feature_extractor
     ----------------------------------------------------------------------
-    Ran 20 tests in 68.510s
+    Ran 24 tests in 29.980s
 
     OK (skipped=1)
 
