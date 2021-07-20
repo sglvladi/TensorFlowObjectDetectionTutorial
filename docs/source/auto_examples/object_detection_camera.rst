@@ -78,6 +78,7 @@ For example, the download link for the model used below is: ``download.tensorflo
 
 .. code-block:: default
 
+    import os
     import tarfile
     import urllib.request
 
