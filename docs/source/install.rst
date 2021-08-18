@@ -413,6 +413,31 @@ Installation of the Object Detection API is achieved by installing the ``object_
 
     This is caused because installation of the ``pycocotools`` package has failed. To fix this have a look at the :ref:`tf_models_install_coco` section and rerun the above commands.
 
+.. _install_corresponding_tf_version:
+
+Checking the appropriate version of TensorFlow
+**********************************************
+
+.. Important::
+
+        This step is very crucial for the training part of the custom object detection model. Tensorflow ecosystem being fragile requires appropriate corresponding versions of its dependencies. The correct version of TensorFlow to be installed after the previous step should be the version with which your desired pre-trained model is compatible. As far as this tutorial is concerned, We will be using `SSD ResNet50 V1 FPN 640X640 <http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz>`_, which is compatible with tf 2.2.0. Hence we will install this version for further use!
+
+.. code-block::
+
+        pip install tensorflow==2.2.0
+
+.. caution::
+        This step will uninstall the current version of TensorFlow and will install the above-mentioned version.
+
+.. Important::
+        As we have changed our TensorFlow version, we must change the version of ``tensorflow-addons``. For tf 2.2.0 we require tensorflow-addons 0.10.0
+
+.. code-block::
+
+        pip install tensorflow-addons==0.10.0
+
+.. note::
+        For other TensorFlow versions and its compatible addon versions refer `here <https://stackoverflow.com/questions/65464463/importerror-cannot-import-name-keras-tensor-from-tensorflow-python-keras-eng>`_.
 
 .. _test_tf_models:
 
