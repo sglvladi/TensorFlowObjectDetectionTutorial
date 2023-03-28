@@ -382,7 +382,7 @@ Installation of the Object Detection API is achieved by installing the ``object_
 
     # From within TensorFlow/models/research/
     cp object_detection/packages/tf2/setup.py .
-    python -m pip install --use-feature=2020-resolver .
+    python -m pip install .
 
 .. note::
 
